@@ -1,0 +1,153 @@
+{
+  "manifest_version": 1,
+  "generated_at": "2026-10-06T14:53:37.208973+00:00",
+  "tool": "ml/data/download.py",
+  "approved": {
+    "mage": {
+      "hf_id": "yaful/MAGE",
+      "license": "Apache-2.0",
+      "role": "primary-training-corpus",
+      "homepage": "https://huggingface.co/datasets/yaful/MAGE",
+      "revision_sha": "342663f0a2b775455c023f5d36a1341ff0ec5402",
+      "files": [
+        {
+          "name": "train.csv",
+          "relative_path": "ml/data/raw/mage/train.csv",
+          "url": "https://huggingface.co/datasets/yaful/MAGE/resolve/main/train.csv",
+          "bytes": 403744528,
+          "sha256": "07b95008964d6be412aa764aa1e515d652c345305cebc522a7612c6015ba373a",
+          "rows": 319071,
+          "downloaded_at": "2026-10-06T14:53:38.603156+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "valid.csv",
+          "relative_path": "ml/data/raw/mage/valid.csv",
+          "url": "https://huggingface.co/datasets/yaful/MAGE/resolve/main/valid.csv",
+          "bytes": 72276577,
+          "sha256": "005e200957a4da551c8ac37079f43811db9c32f5141e3bdabb1caa257588691f",
+          "rows": 56792,
+          "downloaded_at": "2026-10-06T14:53:38.728820+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "test.csv",
+          "relative_path": "ml/data/raw/mage/test.csv",
+          "url": "https://huggingface.co/datasets/yaful/MAGE/resolve/main/test.csv",
+          "bytes": 71739623,
+          "sha256": "dcb8a8a8de1459d382ac2da5e0f1c39452e8bc47d186d7393f3ed4308f762ac7",
+          "rows": 56819,
+          "downloaded_at": "2026-10-06T14:53:38.843971+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "test_ood_set_gpt.csv",
+          "relative_path": "ml/data/raw/mage/test_ood_set_gpt.csv",
+          "url": "https://huggingface.co/datasets/yaful/MAGE/resolve/main/test_ood_set_gpt.csv",
+          "bytes": 2191864,
+          "sha256": "b9fe1faaa45fbbad446f527da12d42e3e9e3bbd207f7ea054e81ec8e922016d2",
+          "rows": 1562,
+          "downloaded_at": "2026-10-06T14:53:38.851556+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "test_ood_set_gpt_para.csv",
+          "relative_path": "ml/data/raw/mage/test_ood_set_gpt_para.csv",
+          "url": "https://huggingface.co/datasets/yaful/MAGE/resolve/main/test_ood_set_gpt_para.csv",
+          "bytes": 3614100,
+          "sha256": "a587909d155447ea2768cbd8f695a7febb65cdd7414da5c3b5ff6d6397463725",
+          "rows": 2362,
+          "downloaded_at": "2026-10-06T14:53:38.861155+00:00",
+          "status": "already-present"
+        }
+      ]
+    },
+    "hc3": {
+      "hf_id": "Hello-SimpleAI/HC3",
+      "license": "CC-BY-SA-4.0 (source-specific licenses may be stricter, see dataset card)",
+      "role": "unseen-generator-unseen-domain-eval-only-never-trained-on",
+      "homepage": "https://huggingface.co/datasets/Hello-SimpleAI/HC3",
+      "revision_sha": "4d0ff18143b5a7e1b1e79beb540c04549d1e59d3",
+      "files": [
+        {
+          "name": "reddit_eli5.jsonl",
+          "relative_path": "ml/data/raw/hc3/reddit_eli5.jsonl",
+          "url": "https://huggingface.co/datasets/Hello-SimpleAI/HC3/resolve/main/reddit_eli5.jsonl",
+          "bytes": 55448695,
+          "sha256": "448cebaf7fdf27560daf6cc87cc1464be4988cf8110c0ec40c40b21c2c0193db",
+          "rows": 17112,
+          "downloaded_at": "2026-10-06T14:53:39.566608+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "finance.jsonl",
+          "relative_path": "ml/data/raw/hc3/finance.jsonl",
+          "url": "https://huggingface.co/datasets/Hello-SimpleAI/HC3/resolve/main/finance.jsonl",
+          "bytes": 9889186,
+          "sha256": "72e3a439714c4693e115f8ad0b917988688abc07acba8de812198cb13cd5d72e",
+          "rows": 3933,
+          "downloaded_at": "2026-10-06T14:53:39.582590+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "medicine.jsonl",
+          "relative_path": "ml/data/raw/hc3/medicine.jsonl",
+          "url": "https://huggingface.co/datasets/Hello-SimpleAI/HC3/resolve/main/medicine.jsonl",
+          "bytes": 2683640,
+          "sha256": "7141b0f5b3477543e95e24a2b268f46c375b08703a390e9a04ff69f5193caa28",
+          "rows": 1248,
+          "downloaded_at": "2026-10-06T14:53:39.587810+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "open_qa.jsonl",
+          "relative_path": "ml/data/raw/hc3/open_qa.jsonl",
+          "url": "https://huggingface.co/datasets/Hello-SimpleAI/HC3/resolve/main/open_qa.jsonl",
+          "bytes": 2910828,
+          "sha256": "4d968e1e1473cbdf5978024872768f0c6f27dacf681f35166dc191733dccd664",
+          "rows": 1187,
+          "downloaded_at": "2026-10-06T14:53:39.593216+00:00",
+          "status": "already-present"
+        },
+        {
+          "name": "wiki_csai.jsonl",
+          "relative_path": "ml/data/raw/hc3/wiki_csai.jsonl",
+          "url": "https://huggingface.co/datasets/Hello-SimpleAI/HC3/resolve/main/wiki_csai.jsonl",
+          "bytes": 2198039,
+          "sha256": "4f78105c72e7edd3b619b3b44abac1e6f8bdb42211f22e43191d4dae889e1968",
+          "rows": 842,
+          "downloaded_at": "2026-10-06T14:53:39.597466+00:00",
+          "status": "already-present"
+        }
+      ]
+    },
+    "raid": {
+      "hf_id": "liamdugan/raid",
+      "license": "MIT",
+      "role": "held-out-robustness-eval-only-never-trained-on",
+      "homepage": "https://huggingface.co/datasets/liamdugan/raid",
+      "optional": true,
+      "not_downloaded": {
+        "train.csv": "11779491051 bytes; RAID is never used for training (Phase 0 decision)",
+        "extra.csv": "3707337095 bytes; not required for Phase 1"
+      },
+      "revision_sha": "865cac74188466cb0c3b7574a10204007b57a459",
+      "files": [
+        {
+          "name": "test.csv",
+          "relative_path": "ml/data/raw/raid/test.csv",
+          "url": "https://huggingface.co/datasets/liamdugan/raid/resolve/main/test.csv",
+          "bytes": 1221088550,
+          "sha256": "96867bb0cebf4c49f412f78c35bdeb638494547165ca397b056f2734bb702c90",
+          "rows": 672000,
+          "downloaded_at": "2026-10-06T14:53:42.748468+00:00",
+          "status": "already-present"
+        }
+      ]
+    }
+  },
+  "excluded_never_downloaded": {
+    "m4": "No LICENSE file upstream; mixed provenance (Phase 0: excluded pending license review).",
+    "llm-detectaive": "No confirmed upstream data license (Phase 0: reference only)."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-10-07T10:59:53.600412+00:00",
+  "source": {
+    "hf_id": "liamdugan/raid",
+    "file": "train.csv",
+    "url": "https://huggingface.co/datasets/liamdugan/raid/resolve/main/train.csv",
+    "hf_revision": "865cac74188466cb0c3b7574a10204007b57a459",
+    "license": "MIT",
+    "bytes": 11779491051,
+    "sha256": "52f04ceebc126064e68fbd22d8b736964065745464f4bfd52e488150b49f84e4",
+    "rows_seen": 5615820
+  },
+  "policy": "EVALUATION-ONLY (Phase 2). RAID-train rows are never used to fit a model, calibrator, threshold or vocabulary. RAID remains held out from all training per Phase 0.",
+  "acquired_for": [
+    "E2 paraphrase/adversarial evaluation",
+    "E5 cross-corpus supervised evaluation",
+    "E1 per-generator recall on unseen generators"
+  ],
+  "sampling": {
+    "method": "deterministic per-(stratum, domain) reservoir sampling",
+    "seed": 42,
+    "caps_per_stratum_domain": {
+      "human_clean": 1000,
+      "machine_clean": 1000,
+      "machine_paraphrase": 1000,
+      "human_paraphrase": 500,
+      "machine_other_attack": 500
+    }
+  },
+  "stratum_counts": {
+    "human_clean": 7943,
+    "human_paraphrase": 4000,
+    "machine_clean": 8000,
+    "machine_other_attack": 4000,
+    "machine_paraphrase": 8000
+  },
+  "domain_counts": {
+    "abstracts": 4000,
+    "books": 4000,
+    "news": 4000,
+    "poetry": 4000,
+    "recipes": 4000,
+    "reddit": 4000,
+    "reviews": 3943,
+    "wiki": 4000
+  },
+  "asset": {
+    "path": "ml/data/raw/raid/raid_eval_subset.csv",
+    "bytes": 56101918,
+    "sha256": "595e0dd648ba0a91d6fcedca4102cd5e50e60e20d2685114527c60c72b7bcc09",
+    "rows": 31943
+  }
+}

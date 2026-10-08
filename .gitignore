@@ -1,0 +1,44 @@
+# --- OS / editor ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Data & artifacts (large / license-restricted; reproducible via scripts) ---
+ml/data/raw/
+ml/data/processed/
+ml/data/manifests/*.parquet
+ml/models/*.joblib
+ml/models/*.pkl
+ml/models/*.onnx
+ml/models/calibrators/
+ml/evaluation/runs/
+*.log
+
+# --- Node / Astro ---
+node_modules/
+dist/
+.astro/
+.frontend/.astro/
+
+# --- Local secrets / env ---
+.env
+.env.*
+
+# WriteTrace generated/runtime artifacts
+logs/
+ml/experiments/phase2/cache/
+ml/experiments/phase3/cache/
+ml/experiments/phase2/models/
+ml/experiments/phase3/models/

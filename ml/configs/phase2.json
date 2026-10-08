@@ -1,0 +1,75 @@
+{
+  "pipeline_version": "phase2_v2",
+  "seed": 42,
+  "rare_frac": 0.001,
+  "feature_workers": 4,
+  "score_workers": 0,
+  "label_orientation": {
+    "note": "Canonical convention: label 1 = MACHINE, label 0 = HUMAN. Raw-file encodings differ per corpus and are mapped here; the phase-2 target is ALWAYS canonical 1=machine. SCORES are always 1 - calibrated stored score (the locked model learned p(stored-1)=p(human-like) on MAGE, corpus-agnostic).",
+    "mage": {"source": "raw CSV label column (verified: *_human -> stored 1)", "map": "canonical = 1 - raw_mage_label"},
+    "hc3": {"source": "human_answers -> 0, chatgpt_answers -> 1 (labels already canonical)", "score_map": "p(machine) = 1 - calibrated stored score"},
+    "raid": {"source": "model != 'human' -> 1 (machine), model == 'human' -> 0", "score_map": "p(machine) = 1 - calibrated stored score"},
+    "mage_ood1": {"source": "test_ood_set_gpt.csv", "map": "canonical = 1 - raw label; generator=GPT family (unseen)"},
+    "mage_ood2": {"source": "test_ood_set_gpt_para.csv", "map": "canonical = 1 - raw label; includes *_para rows (machine) + *_human (TRUE human)"}
+  },
+  "artifacts": {
+    "run_dir": "ml/models/baseline-v1",
+    "model_file": "model_hist_gradient_boosting.joblib",
+    "calibrator_file": "calibrator.joblib",
+    "feature_names_file": null
+  },
+  "primary_model": "hist_gradient_boosting",
+  "experimental_training": {
+    "note": "EXPERIMENTAL models only (E1 single-generator gap, E5 LODO). Fixed to the Phase-1 selected HGB hyperparameters; never tuned on evaluation data; never presented as the baseline.",
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 63,
+    "max_iter": 300,
+    "random_state": 42
+  },
+  "e1": {
+    "heldout_generators": ["t0_3b", "flan_t5_xl", "30B", "t0_11b", "flan_t5_base"],
+    "single_gen_families": ["gpt-3.5-trubo", "text-davinci-003"],
+    "ood_files": ["ml/data/raw/mage/test_ood_set_gpt.csv", "ml/data/raw/mage/test_ood_set_gpt_para.csv"],
+    "raid_file": "ml/data/raw/raid/test.csv",
+    "raid_sample_n": 5000,
+    "max_rows_per_generator": 500
+  },
+  "e2": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "system": "You are a careful rewriting assistant. You always obey the user's instructions exactly and output only the requested text.",
+    "prompt_template": "Rewrite the text below using different wording throughout. Keep the same meaning, the same information, and approximately the same length. Do not summarize. Do not add new events. Output only the rewritten text.\n\nText:\n{text}",
+    "greedy": true,
+    "max_new_tokens": 200,
+    "max_new_tokens_cap": 800,
+    "max_input_chars": 1500,
+    "sample_n": 64,
+    "human_control_n": 64,
+    "seed": 42,
+    "timeout_minutes": 90
+  },
+  "e3": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "system": "You are a careful editor. You always obey the user's instructions exactly and output only the requested text.",
+    "sample_n": 32,
+    "max_new_tokens": 400,
+    "max_new_tokens_cap": 800,
+    "max_input_chars": 1500,
+    "temperature": 0.3,
+    "top_p": 0.9,
+    "prompt_template": "Edit this so it reads like it was written by a person: vary sentence lengths, add contractions and personal asides, keep all the original information, and avoid list-like parallelism. Output only the edited text.\n\nText:\n{text}",
+    "timeout_minutes": 60
+  },
+  "e4": {
+    "ratios": [0.25, 0.5, 0.75],
+    "docs_per_ratio": 60,
+    "paragraphs_per_doc": 4
+  },
+  "e5": {
+    "hswag_focus": true,
+    "lodo": {"enabled": true, "refit_features": true, "save_models": true}
+  },
+  "e6": {"gate_candidates": [25, 50, 75, 100, 150, 200]},
+  "e7": {"include_reproducibility": true},
+  "results_dir": "ml/experiments/phase2",
+  "report_path": "docs/experiments/phase2-report.md"
+}

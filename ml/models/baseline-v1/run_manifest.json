@@ -1,0 +1,80 @@
+{
+  "run_name": "baseline-v1",
+  "generated_at": "2026-10-07T06:55:22.313442+00:00",
+  "duration_seconds": 46.9,
+  "seed": 42,
+  "config": {
+    "pipeline_version": "phase1_v1",
+    "seed": 42,
+    "dedup_seed": 13,
+    "target_sample_rows": 260000,
+    "min_words": 40,
+    "max_words": 5000,
+    "split_fractions": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "dedup": {
+      "shingle_size": 5,
+      "max_shingles": 4000,
+      "num_perm": 128,
+      "bands": 32,
+      "rows": 4,
+      "jaccard_threshold": 0.75,
+      "max_pairs_per_bucket": 5000
+    },
+    "dedup_workers": 4,
+    "feature_workers": 4,
+    "rare_frac": 0.001,
+    "val_tune_fraction": 0.6,
+    "models": {
+      "lr_C_grid": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "hgb_learning_rate_grid": [
+        0.06,
+        0.1
+      ],
+      "hgb_max_leaf_nodes_grid": [
+        31,
+        63
+      ],
+      "hgb_max_iter": 300
+    },
+    "feature_version": "features_v1",
+    "run_name": "baseline-v1",
+    "selection_metric": "pr_auc_val_tune",
+    "notes": "Phase 1 config. MAGE only for train/val/test. HC3 is eval-only. RAID is eval-only and never trained on. Seeds recorded in run manifests."
+  },
+  "feature_version": "features_v1",
+  "feature_names_sha256": "fc1539254b5abab65ed10c289eb2e849307c70eafd7cc8582b8545d046f8920f",
+  "data": {
+    "dataset_manifest_sha256": "d2cb15f255c38dde1e74a2492b5806d80de6a1c644cb13edc45ac66054f33b22",
+    "processing_report_sha256": "7d29e1b7ffa778e4b661773b57473e6197c52a186dec28e2c6ae06969029e14e",
+    "extraction_report_sha256": "e3c90b86c774dbf9555a89e3900ec7eda4f72535ad8cf969735ec4ee82440b19"
+  },
+  "rows": {
+    "train": 155988,
+    "val_total": 51996,
+    "val_tune": 31323,
+    "val_cal": 20673
+  },
+  "selected_model": "hist_gradient_boosting",
+  "versions": {
+    "python": "3.13.15",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scikit_learn": "1.9.0"
+  },
+  "artifacts": [
+    "calibrator.joblib",
+    "feature_state.joblib",
+    "model_dummy_prior.joblib",
+    "model_hist_gradient_boosting.joblib",
+    "model_logistic_regression.joblib",
+    "val_metrics.json"
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "generated_at": "2026-10-08T09:36:17.620839+00:00",
+  "pipeline_version": "phase3_v1",
+  "winner": "hgb_syn",
+  "ranking": [
+    "hgb_syn",
+    "hgb",
+    "lr",
+    "abl_minus_leakage_preregistered",
+    "extratrees"
+  ],
+  "calibrator": "platt",
+  "threshold": 0.5,
+  "selection_criteria_order": [
+    "robustness_generalization",
+    "calibration",
+    "false_positive_behavior",
+    "pr_auc",
+    "interpretability",
+    "computational_practicality",
+    "in_distribution_performance"
+  ],
+  "criteria_values": {
+    "hgb": {
+      "robustness_generalization": 0.7381,
+      "calibration": 0.1535,
+      "false_positive_behavior": 0.2902,
+      "pr_auc": 0.9782,
+      "interpretability": 0,
+      "computational_practicality": 11.7,
+      "in_distribution_performance": 0.9586
+    },
+    "lr": {
+      "robustness_generalization": 0.7381,
+      "calibration": 0.1641,
+      "false_positive_behavior": 0.3146,
+      "pr_auc": 0.9319,
+      "interpretability": 1,
+      "computational_practicality": 18.8,
+      "in_distribution_performance": 0.8737
+    },
+    "extratrees": {
+      "robustness_generalization": 0.728,
+      "calibration": 0.1687,
+      "false_positive_behavior": 0.3065,
+      "pr_auc": 0.9733,
+      "interpretability": 0,
+      "computational_practicality": 26.2,
+      "in_distribution_performance": 0.9495
+    },
+    "abl_minus_leakage_preregistered": {
+      "robustness_generalization": 0.7408,
+      "calibration": 0.174,
+      "false_positive_behavior": 0.3487,
+      "pr_auc": 0.9683,
+      "interpretability": 0,
+      "computational_practicality": 8.6,
+      "in_distribution_performance": 0.9401
+    },
+    "hgb_syn": {
+      "robustness_generalization": 0.7562,
+      "calibration": 0.144,
+      "false_positive_behavior": 0.2773,
+      "pr_auc": 0.9799,
+      "interpretability": 0,
+      "computational_practicality": 13.5,
+      "in_distribution_performance": 0.9618
+    }
+  },
+  "tie_bands": {
+    "robustness_generalization": 0.005,
+    "calibration": 0.005,
+    "false_positive_behavior": 0.01,
+    "pr_auc": 0.005,
+    "interpretability": 0,
+    "computational_practicality": 0,
+    "in_distribution_performance": 0.005
+  },
+  "lodo_override_applied": false,
+  "lodo_override_record": {
+    "rule": "supporting evidence: a robustness leader whose LODO mean PR-AUC is >0.02 below the runner-up's LODO mean PR-AUC triggers a documented manual override (swap) that is recorded in the selection trace",
+    "leader": "hgb_syn",
+    "runner_up": "abl_minus_leakage_preregistered",
+    "gap": 0.0268,
+    "triggered": false
+  },
+  "files": {
+    "model.joblib": {
+      "sha256": "55a10a397de29698779977371b1c8a13e8fbc09f89e2eade8418cecce1d13800",
+      "bytes": 2283992
+    },
+    "calibrator.joblib": {
+      "sha256": "e885c27bd79e4f9e5be8db8c2c9fcdbdace07d1d1309f0d3a604065ac3676fc9",
+      "bytes": 929
+    },
+    "feature_state.joblib": {
+      "sha256": "2500fbc1edcece4cbe4ef40e8b1ba5cb6467032d8d670bf5525ac5debf372e20",
+      "bytes": 3469467
+    },
+    "features.json": {
+      "sha256": "0c559a7a809986cfc9f818989f22c39cc9c0f0be1848e2e251978793062ad76c",
+      "bytes": 4930
+    },
+    "reference.json": {
+      "sha256": "2a388328bec4455401380bca1ce140d0ae889418a00bffe7eb6b133a7be95afb",
+      "bytes": 9565
+    },
+    "importance.json": {
+      "sha256": "22b2b675bdc050cd93da73617a7fe5bebd41b729ca0033a3e1c74e1f7126ef2d",
+      "bytes": 3403
+    },
+    "config.json": {
+      "sha256": "f5857be987fb198d5bcb8135185a5e88fde314de85fb2a0666f69f1aac5133f7",
+      "bytes": 591
+    },
+    "calibration.json": {
+      "sha256": "5347625dc1e947214270ea8a713bd8bda4cb728abf167d691aadb19c71ff1f48",
+      "bytes": 3448
+    },
+    "gate.json": {
+      "sha256": "7933e235136ef6cf557dc1e3a6ae6126240dceb7d453ff0fdd9ae777f6c288d8",
+      "bytes": 1505
+    }
+  },
+  "eval_summary": {
+    "test": {
+      "n": 51995,
+      "roc_auc": 0.9618,
+      "pr_auc": 0.9799,
+      "f1_macro": 0.8856,
+      "accuracy": 0.8965,
+      "brier": 0.0739,
+      "ece_10": 0.0058,
+      "human_fpr": 0.1523
+    },
+    "ood_gpt": {
+      "n": 1562,
+      "roc_auc": 0.6958,
+      "pr_auc": 0.6416,
+      "f1_macro": 0.6281,
+      "accuracy": 0.6287,
+      "brier": 0.2601,
+      "ece_10": 0.195,
+      "human_fpr": 0.3136
+    },
+    "ood_gpt_para": {
+      "n": 2362,
+      "roc_auc": 0.6165,
+      "pr_auc": 0.7223,
+      "f1_macro": 0.5111,
+      "accuracy": 0.5135,
+      "brier": 0.345,
+      "ece_10": 0.3339,
+      "human_fpr": 0.3136
+    },
+    "hc3": {
+      "n": 64952,
+      "roc_auc": 0.8633,
+      "pr_auc": 0.8271,
+      "f1_macro": 0.7222,
+      "accuracy": 0.7223,
+      "brier": 0.1886,
+      "ece_10": 0.1636,
+      "human_fpr": 0.3774
+    },
+    "raid_clean": {
+      "n": 15843,
+      "roc_auc": 0.849,
+      "pr_auc": 0.8678,
+      "f1_macro": 0.7616,
+      "accuracy": 0.7618,
+      "brier": 0.1694,
+      "ece_10": 0.0941,
+      "human_fpr": 0.2659
+    }
+  },
+  "data_policy": {
+    "trained_on": "MAGE-train only",
+    "selected_on": "MAGE-val_tune (+ E4 cal_fit/cal_eval inside val_cal)",
+    "calibrated_on": "MAGE-val_cal",
+    "eval_only": [
+      "MAGE-test",
+      "OOD-GPT",
+      "OOD-GPT-para",
+      "HC3",
+      "RAID"
+    ],
+    "threshold": "0.5 fixed from Phase 1, never tuned"
+  },
+  "gate": {
+    "min_words": 50,
+    "mixed_band": [
+      0.4,
+      0.6
+    ]
+  },
+  "artifact_complete": true
+}

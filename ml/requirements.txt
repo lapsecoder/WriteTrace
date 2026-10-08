@@ -1,0 +1,10 @@
+# WriteTrace ML pipeline — free/open-source only (₹0 stack)
+# Python 3.11+ (verified on 3.13.15)
+numpy>=2.0
+pandas>=2.2
+scikit-learn>=1.5
+pyarrow>=17
+scipy>=1.11        # pulled in by scikit-learn
+joblib>=1.4
+requests>=2.31
+pytest>=8.0

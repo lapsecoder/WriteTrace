@@ -1,0 +1,5968 @@
+{
+  "generated_at": "2026-10-07T13:47:51.721898+00:00",
+  "config_sha256": "0723c78104b4bdca54398d2940056ea484793a2bcc49a98b69805d0ff37bd6fa",
+  "canonical_convention": "y=1 MACHINE, y=0 HUMAN; scores always 1 - calibrated stored score",
+  "model": "hist_gradient_boosting",
+  "note": "Locked baseline. No training, no tuning, no threshold changes on eval data. Experimental models (E1 single-generator, E5 LODO) are trained only on MAGE-train/val and reported separately.",
+  "reference": {
+    "convention": "y=1 machine, y=0 human (canonical); Phase-1 positive class was HUMAN",
+    "n": 51995,
+    "machine_share": 0.6529,
+    "metrics": {
+      "n": 51995,
+      "positive_rate": 0.6529,
+      "threshold": 0.5,
+      "accuracy": 0.8919,
+      "precision_machine": 0.9185,
+      "recall_machine": 0.9156,
+      "f1_machine": 0.9171,
+      "precision_macro": 0.8804,
+      "recall_macro": 0.8814,
+      "f1_macro": 0.8809,
+      "roc_auc": 0.9586,
+      "pr_auc": 0.977,
+      "brier": 0.0772,
+      "ece_10": 0.0067,
+      "mean_abs_p_minus_y": 0.1521
+    },
+    "confusion_matrix": {
+      "tn": 15289,
+      "fp": 2757,
+      "fn": 2865,
+      "tp": 31084
+    },
+    "by_length": {
+      "<50w": {
+        "n": 4852,
+        "positive_rate": 0.7250618301731245,
+        "threshold": 0.5,
+        "accuracy": 0.8501648804616653,
+        "precision_machine": 0.8677206851119894,
+        "recall_machine": 0.9360432063672541,
+        "f1_machine": 0.9005879939833173,
+        "precision_macro": 0.8274270407584545,
+        "recall_macro": 0.7798656811446465,
+        "f1_macro": 0.7982655570083881,
+        "roc_auc": 0.8907397850250542,
+        "pr_auc": 0.9473255165470966,
+        "brier": 0.10872940614219784,
+        "ece_10": 0.019232177242649726,
+        "mean_abs_p_minus_y": 0.20864019035455017
+      },
+      "50-150w": {
+        "n": 22052,
+        "positive_rate": 0.6317340830763649,
+        "threshold": 0.5,
+        "accuracy": 0.8508071830219481,
+        "precision_machine": 0.8837913871456394,
+        "recall_machine": 0.8794774244490704,
+        "f1_machine": 0.8816291285889041,
+        "precision_macro": 0.8393801239061938,
+        "recall_macro": 0.8405514200191417,
+        "f1_macro": 0.8399561951957396,
+        "roc_auc": 0.9274553068211332,
+        "pr_auc": 0.9564223534103065,
+        "brier": 0.10478964795589643,
+        "ece_10": 0.008298393298989123,
+        "mean_abs_p_minus_y": 0.20420773841534556
+      },
+      "150-400w": {
+        "n": 15478,
+        "positive_rate": 0.6151311538958522,
+        "threshold": 0.5,
+        "accuracy": 0.9114226644269285,
+        "precision_machine": 0.9403501188675167,
+        "recall_machine": 0.9139796239890767,
+        "f1_machine": 0.9269773635153129,
+        "precision_macro": 0.9043813576342725,
+        "recall_macro": 0.910657765662492,
+        "f1_macro": 0.9072125139553413,
+        "roc_auc": 0.9720341560689898,
+        "pr_auc": 0.9824482243626624,
+        "brier": 0.0643438261304366,
+        "ece_10": 0.010171287373613204,
+        "mean_abs_p_minus_y": 0.13107337979599878
+      },
+      "400w+": {
+        "n": 9613,
+        "positive_rate": 0.7259960470196609,
+        "threshold": 0.5,
+        "accuracy": 0.9756579631748674,
+        "precision_machine": 0.9867224707750036,
+        "recall_machine": 0.9796532454506376,
+        "f1_machine": 0.9831751509922347,
+        "precision_macro": 0.9669081802459221,
+        "recall_macro": 0.9723626895438457,
+        "f1_macro": 0.9695868233336502,
+        "roc_auc": 0.9960357534258052,
+        "pr_auc": 0.998104471503491,
+        "brier": 0.01856734226423473,
+        "ece_10": 0.002855837312783846,
+        "mean_abs_p_minus_y": 0.037797769271881825
+      }
+    },
+    "by_domain": {
+      "cmv": {
+        "n": 4347,
+        "positive_rate": 0.7129054520358868,
+        "threshold": 0.5,
+        "accuracy": 0.9323671497584541,
+        "precision_machine": 0.9566916313904266,
+        "recall_machine": 0.9480477573410777,
+        "f1_machine": 0.9523500810372771,
+        "precision_macro": 0.9152580414005425,
+        "recall_macro": 0.9207386222602825,
+        "f1_macro": 0.9179341530384484,
+        "roc_auc": 0.979291164023134,
+        "pr_auc": 0.990752623289973,
+        "brier": 0.05011143960559219,
+        "ece_10": 0.022129442483690236,
+        "mean_abs_p_minus_y": 0.10427117517852634
+      },
+      "eli5": {
+        "n": 6654,
+        "positive_rate": 0.5610159302675083,
+        "threshold": 0.5,
+        "accuracy": 0.8724075743913435,
+        "precision_machine": 0.8634072580645161,
+        "recall_machine": 0.9177605143316367,
+        "f1_machine": 0.8897545773276198,
+        "precision_macro": 0.8745554533062715,
+        "recall_macro": 0.8661038107433603,
+        "f1_macro": 0.8691683534043129,
+        "roc_auc": 0.9489551767395968,
+        "pr_auc": 0.9572243093602184,
+        "brier": 0.09050987520263071,
+        "ece_10": 0.024996895118575536,
+        "mean_abs_p_minus_y": 0.17144141422320922
+      },
+      "hswag": {
+        "n": 3274,
+        "positive_rate": 0.9459376908979841,
+        "threshold": 0.5,
+        "accuracy": 0.9172266340867441,
+        "precision_machine": 0.9575777202072538,
+        "recall_machine": 0.9547949628672909,
+        "f1_machine": 0.9561843168957155,
+        "precision_macro": 0.6024447740821215,
+        "recall_macro": 0.6073409842585042,
+        "f1_macro": 0.6048139215332572,
+        "roc_auc": 0.875123365239552,
+        "pr_auc": 0.9917129909407411,
+        "brier": 0.05866876148599164,
+        "ece_10": 0.04821471473888416,
+        "mean_abs_p_minus_y": 0.11858780067716515
+      },
+      "roct": {
+        "n": 4689,
+        "positive_rate": 0.8063552996374493,
+        "threshold": 0.5,
+        "accuracy": 0.9579867775645127,
+        "precision_machine": 0.9885496183206107,
+        "recall_machine": 0.9590055540862206,
+        "f1_machine": 0.9735534971137065,
+        "precision_macro": 0.9183688346255355,
+        "recall_macro": 0.9563750237391455,
+        "f1_macro": 0.9357140217554017,
+        "roc_auc": 0.9898617828302188,
+        "pr_auc": 0.9973824084707842,
+        "brier": 0.03193332545594317,
+        "ece_10": 0.032155749888164234,
+        "mean_abs_p_minus_y": 0.07231365813275162
+      },
+      "sci_gen": {
+        "n": 4315,
+        "positive_rate": 0.6933951332560835,
+        "threshold": 0.5,
+        "accuracy": 0.884125144843569,
+        "precision_machine": 0.9308437067773168,
+        "recall_machine": 0.8997326203208557,
+        "f1_machine": 0.9150237933378654,
+        "precision_macro": 0.8600107500857772,
+        "recall_macro": 0.8742805202889237,
+        "f1_macro": 0.8664703817381243,
+        "roc_auc": 0.9505790952744734,
+        "pr_auc": 0.9778540050489378,
+        "brier": 0.08293956586488922,
+        "ece_10": 0.020656144805496327,
+        "mean_abs_p_minus_y": 0.16668680170515132
+      },
+      "squad": {
+        "n": 5911,
+        "positive_rate": 0.5214007782101168,
+        "threshold": 0.5,
+        "accuracy": 0.8795466080189477,
+        "precision_machine": 0.8771483131763208,
+        "recall_machine": 0.8942245295262816,
+        "f1_machine": 0.8856041131105399,
+        "precision_macro": 0.879708139975665,
+        "recall_macro": 0.8788902781954491,
+        "f1_macro": 0.8792079157907111,
+        "roc_auc": 0.9517809312054692,
+        "pr_auc": 0.9597631449226736,
+        "brier": 0.08721702389513648,
+        "ece_10": 0.035470130059705514,
+        "mean_abs_p_minus_y": 0.17275216309867553
+      },
+      "tldr": {
+        "n": 4162,
+        "positive_rate": 0.7599711677078328,
+        "threshold": 0.5,
+        "accuracy": 0.8483901970206631,
+        "precision_machine": 0.8998736576121289,
+        "recall_machine": 0.9007271577616187,
+        "f1_machine": 0.9003002054036973,
+        "precision_macro": 0.792306306717711,
+        "recall_macro": 0.7917049202221507,
+        "f1_macro": 0.7920047392933274,
+        "roc_auc": 0.9139631253131095,
+        "pr_auc": 0.9717899328743274,
+        "brier": 0.10219313631313776,
+        "ece_10": 0.02030118498021274,
+        "mean_abs_p_minus_y": 0.199354594022218
+      },
+      "wp": {
+        "n": 5494,
+        "positive_rate": 0.6791044776119403,
+        "threshold": 0.5,
+        "accuracy": 0.9302875864579542,
+        "precision_machine": 0.9566284779050737,
+        "recall_machine": 0.9399624765478424,
+        "f1_machine": 0.9482222522644316,
+        "precision_macro": 0.9170450923442217,
+        "recall_macro": 0.9248876478031327,
+        "f1_macro": 0.9207833622781361,
+        "roc_auc": 0.9779420115045366,
+        "pr_auc": 0.9873786544197216,
+        "brier": 0.05231470980293976,
+        "ece_10": 0.023975595665475035,
+        "mean_abs_p_minus_y": 0.10228710701113204
+      },
+      "xsum": {
+        "n": 5893,
+        "positive_rate": 0.7340912947564907,
+        "threshold": 0.5,
+        "accuracy": 0.8659426438146954,
+        "precision_machine": 0.9221585482330468,
+        "recall_machine": 0.8927415626444752,
+        "f1_machine": 0.9072116513976979,
+        "precision_macro": 0.8250088928848518,
+        "recall_macro": 0.8423503601352561,
+        "f1_macro": 0.8328845543052059,
+        "roc_auc": 0.9328225233749363,
+        "pr_auc": 0.9736901378320588,
+        "brier": 0.09357254170934413,
+        "ece_10": 0.03407983335422281,
+        "mean_abs_p_minus_y": 0.18278015966915656
+      },
+      "yelp": {
+        "n": 7256,
+        "positive_rate": 0.4058710033076075,
+        "threshold": 0.5,
+        "accuracy": 0.8628721058434399,
+        "precision_machine": 0.8258689839572193,
+        "recall_machine": 0.8390492359932088,
+        "f1_machine": 0.83240693953175,
+        "precision_macro": 0.857352878470167,
+        "recall_macro": 0.8590978028725033,
+        "f1_macro": 0.8581859770545048,
+        "roc_auc": 0.9375100770760941,
+        "pr_auc": 0.924428690328545,
+        "brier": 0.09830238139326702,
+        "ece_10": 0.04133209069982129,
+        "mean_abs_p_minus_y": 0.18978053416218002
+      }
+    },
+    "reliability_bins": [
+      {
+        "bin_lo": 0.0,
+        "bin_hi": 0.1,
+        "count": 8389,
+        "mean_p": 0.0203,
+        "frac_positive": 0.0281
+      },
+      {
+        "bin_lo": 0.1,
+        "bin_hi": 0.2,
+        "count": 4416,
+        "mean_p": 0.1464,
+        "frac_positive": 0.1454
+      },
+      {
+        "bin_lo": 0.2,
+        "bin_hi": 0.3,
+        "count": 2048,
+        "mean_p": 0.2575,
+        "frac_positive": 0.2822
+      },
+      {
+        "bin_lo": 0.3,
+        "bin_hi": 0.4,
+        "count": 1702,
+        "mean_p": 0.3799,
+        "frac_positive": 0.379
+      },
+      {
+        "bin_lo": 0.4,
+        "bin_hi": 0.5,
+        "count": 1599,
+        "mean_p": 0.4377,
+        "frac_positive": 0.4778
+      },
+      {
+        "bin_lo": 0.5,
+        "bin_hi": 0.6,
+        "count": 1176,
+        "mean_p": 0.5711,
+        "frac_positive": 0.5961
+      },
+      {
+        "bin_lo": 0.6,
+        "bin_hi": 0.7,
+        "count": 2173,
+        "mean_p": 0.6207,
+        "frac_positive": 0.6424
+      },
+      {
+        "bin_lo": 0.7,
+        "bin_hi": 0.8,
+        "count": 3131,
+        "mean_p": 0.7564,
+        "frac_positive": 0.7627
+      },
+      {
+        "bin_lo": 0.8,
+        "bin_hi": 0.9,
+        "count": 2372,
+        "mean_p": 0.8615,
+        "frac_positive": 0.86
+      },
+      {
+        "bin_lo": 0.9,
+        "bin_hi": 1.0,
+        "count": 24989,
+        "mean_p": 0.9853,
+        "frac_positive": 0.9828
+      }
+    ],
+    "brier": 0.0772,
+    "ece_10": 0.0067,
+    "threshold": 0.5,
+    "threshold_policy": "0.5 fixed from Phase 1; never tuned on evaluation data"
+  },
+  "E3": {
+    "name": "E3-human-edits",
+    "status": "ok",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_source": "local, free, CPU/GPU via transformers; no paid API",
+    "prompting": "native chat template (system + user); inputs cut at a sentence boundary <=1500 chars; decode sliced by token count",
+    "device": "cpu",
+    "n": 32,
+    "n_nonempty_edits": 32,
+    "prompt_template": "Edit this so it reads like it was written by a person: vary sentence lengths, add contractions and personal asides, keep all the original information, and avoid list-like parallelism. Output only the edited text.\n\nText:\n{text}",
+    "temperature": 0.3,
+    "top_p": 0.9,
+    "max_new_tokens": 400,
+    "seed": 42,
+    "pre_recall_machine": 1.0,
+    "post_recall_machine": 0.9062,
+    "mean_p_pre": 0.9226,
+    "mean_p_post": 0.8696,
+    "mean_delta_p": -0.053,
+    "frac_post_below_0_5": 0.0938,
+    "post": {
+      "n": 32,
+      "positive_rate": 1.0,
+      "threshold": 0.5,
+      "accuracy": 0.9062,
+      "precision_machine": 1.0,
+      "recall_machine": 0.9062,
+      "f1_machine": 0.9508,
+      "precision_macro": 0.5,
+      "recall_macro": 0.4531,
+      "f1_macro": 0.4754,
+      "roc_auc": null,
+      "pr_auc": null,
+      "brier": 0.0608,
+      "ece_10": 0.1304,
+      "mean_abs_p_minus_y": 0.1304
+    },
+    "confusion_post": {
+      "tn": 0,
+      "fp": 0,
+      "fn": 3,
+      "tp": 29
+    },
+    "label_views": {
+      "machine_origin": {
+        "y": 1,
+        "recall": 0.9062,
+        "meaning": "ground truth = authorship lineage (originally machine-written)"
+      },
+      "predominant_authorship": {
+        "y": 1,
+        "recall": 0.9062,
+        "meaning": "under LLM editing the predominant author of the final text is the editing model, so this view is ALSO machine; the views coincide by construction here (no human editors were available for this study) - stated, not hidden"
+      }
+    },
+    "edit_examples": [
+      {
+        "original": "As a baby, it was clear that there was something different about me. I was born without eyes or ears, which left my parents and doctors stumped. But as I grew older, it became clear that I was different in a way that would turn out to be a gift. You see, withi",
+        "edited": "As a baby, it was clear that there was something different about me. I was born without eyes or ears, which left my parents and doctors stumped. But as I grew older, it became clear that I was different in a way that would turn out to be a gift. Within 20 feet",
+        "p_pre": 0.9973,
+        "p_post": 0.9973
+      },
+      {
+        "original": "Steer clear of overripe vegetables which may go bad even when frozen. [substeps] Harvest your vegetables early in the morning and begin the freezing process immediately for best results. [substeps] Harvest your vegetables early in the morning and begin the fre",
+        "edited": "Steer clear of overripe vegetables that may go bad even when frozen. [Substeps] Harvest your vegetables early in the morning and begin the freezing process immediately for best results. [Substeps] Harvest your vegetables early in the morning and begin the free",
+        "p_pre": 0.9649,
+        "p_post": 0.9649
+      },
+      {
+        "original": "If you show respect and affection, your partner will return the same to you. Make decisions that are in the best interest of both. That's very true! It's important in any relationship to treat your partner with respect and affection, and to make decisions that",
+        "edited": "If you show respect and affection, your partner will return the same to you. Make decisions that are in the best interest of both. That's very true! It's important in any relationship to treat your partner with respect and affection, and to make decisions that",
+        "p_pre": 0.9973,
+        "p_post": 0.9973
+      },
+      {
+        "original": "see a man in a bright shirt mix plaster in a bucket and spread it on a wall. He worked with care, meticulously smoothing the white mixture until not even dust could be seen between his fingers as he trowelled out large squares of cement-like material onto each",
+        "edited": "See a man in a bright shirt mixing plaster in a bucket and spreading it on a wall. He worked with care, carefully smoothing the white mixture until no dust could be seen between his fingers as he trowelled out large squares of cement-like material onto each se",
+        "p_pre": 1.0,
+        "p_post": 1.0
+      },
+      {
+        "original": "Consider if the kids you are inviting to the wedding will be okay on their own without their parents at the same table. If so, a kids table may be the best solution. Kids' Menus As a general rule, a wedding menu for kids will be lighter and more kid-friendly t",
+        "edited": "Consider inviting kids to the wedding if they are okay without their parents at the same table. If so, a kids table might be the best solution. Kids' menus should be light and kid-friendly, focusing on flavors rather than size. Include a tasting menu with diff",
+        "p_pre": 1.0,
+        "p_post": 0.2512
+      },
+      {
+        "original": "For many years, Sudan had an Islamist regime under the leadership of Hassan al-Turabi. His National Islamic Front first gained influence when strongman General Gaafar al-Nimeiry invited members to serve Hassan al-Turabi, leader of the National Islamic Front (N",
+        "edited": "For many years, Sudan had an Islamist regime led by Hassan al-Turabi. His National Islamic Front first gained influence when strongman General Gaafar al-Nimeiry invited members to serve him, who is being investigated by the International Criminal Court in The ",
+        "p_pre": 0.7904,
+        "p_post": 0.8297
+      }
+    ],
+    "largest_drops": [
+      {
+        "original": "Consider if the kids you are inviting to the wedding will be okay on their own without their parents at the same table. If so, a kids table may be the best solution. Kids' Menus As a general rule, a wedding menu for kids will be lighter and more kid-friendly t",
+        "edited": "Consider inviting kids to the wedding if they are okay without their parents at the same table. If so, a kids table might be the best solution. Kids' menus should be light and kid-friendly, focusing on flavors rather than size. Include a tasting menu with diff",
+        "p_pre": 1.0,
+        "p_post": 0.2512
+      },
+      {
+        "original": "Both feature selection and hyperparameter tuning are key tasks in machine learning. Hyperparameter tuning is often useful to increase model performance, while feature selection is undertaken to attain sparse models. In this project, we aim to improve the speed",
+        "edited": "Both feature selection and hyperparameter tuning are crucial steps in machine learning. Hyperparameter tuning is particularly beneficial for enhancing model performance, whereas feature selection aims to achieve sparse models. This project seeks to optimize hy",
+        "p_pre": 1.0,
+        "p_post": 0.6077
+      },
+      {
+        "original": "This boutique was one of my absolute favorites! I used to always shop here when I was trying to find a cute outfit for a special night out. I was very excited when I walked the block from Barrow to this place. The location wasn't too far from the strip, and th",
+        "edited": "I absolutely loved this boutique! I used to go there every time I needed a cute outfit for a special night out. Walking from Barrow to this place was just right. It was located close to the strip and had good visibility. I think it's definitely worth it.",
+        "p_pre": 0.6077,
+        "p_post": 0.2512
+      },
+      {
+        "original": "Waxing kits often come with a nourishing mineral oil that is meant to be used for removing extra bits of wax. You can also buy a \" wax-off \" formula from the Home Depot or a hair salon, which you will need to use in your own home. This week's top 10 is in no p",
+        "edited": "Waxing kits often come with a nourishing mineral oil intended for removal of extra bits of wax. You can purchase a \"wax-off\" formula from the Home Depot or a hair salon, which you will need to use at home. The top ten for this week is: Coconut Oil (Eating Heal",
+        "p_pre": 0.6759,
+        "p_post": 0.4
+      }
+    ],
+    "note": "ground truth stays MACHINE (authorship, not final form); recall drop = humanization gain",
+    "duration_s": 536.3
+  },
+  "E0": {
+    "name": "E0-label-orientation-audit",
+    "findings": {
+      "mage_stored": {
+        "n_human_src": 18046,
+        "stored1_rate_human_src": 1.0,
+        "n_machine_src": 33949,
+        "stored1_rate_machine_src": 0.0,
+        "conclusion": "stored-1 == HUMAN for MAGE (complement required for canonical)"
+      },
+      "hc3_stored": {
+        "n": 64952,
+        "stored1_rate": 0.3999260992733095,
+        "note": "HC3 build assigned human_answers=0, chatgpt_answers=1; labels canonical as-is; SCORES still complemented (model semantics are corpus-agnostic)"
+      },
+      "raid_schema": {
+        "columns": [
+          "id",
+          "generation"
+        ],
+        "n_columns_first_rows": [
+          2,
+          2,
+          2
+        ],
+        "conclusion": "UNLABELED (id+generation only): distribution diagnostics only"
+      },
+      "raid_labelled_subset": {
+        "rows": 31943,
+        "canonical_balance": {
+          "1": 20000,
+          "0": 11943
+        },
+        "policy_rows": 31601,
+        "note": "RAID-train derived subset; EVALUATION-ONLY, never trained on"
+      },
+      "score_orientation": {
+        "mean_p_machine_given_canonical_machine": 0.8805,
+        "mean_p_machine_given_canonical_human": 0.2134,
+        "sanity": "mean p(machine|y=1) must exceed mean p(machine|y=0)"
+      },
+      "determinism": {
+        "scores_bit_identical": true,
+        "config_sha256": "0723c78104b4bdca54398d2940056ea484793a2bcc49a98b69805d0ff37bd6fa",
+        "feature_names_sha256": "0fffe6bf4f79ae82232b06169c8e95a68ca5fb296175a8d43429a3f4990fbd12"
+      }
+    },
+    "status": "ok",
+    "duration_s": 6.1
+  },
+  "E1": {
+    "name": "E1-unseen-generators",
+    "status": "ok",
+    "parts": {
+      "t0_3b": {
+        "n": 740,
+        "tag": "heldout-generator-family",
+        "positive_rate": 1.0,
+        "threshold": 0.5,
+        "accuracy": 0.9459,
+        "precision_machine": 1.0,
+        "recall_machine": 0.9459,
+        "f1_machine": 0.9722,
+        "precision_macro": 0.5,
+        "recall_macro": 0.473,
+        "f1_macro": 0.4861,
+        "roc_auc": null,
+        "pr_auc": null,
+        "brier": 0.0435,
+        "ece_10": 0.1203,
+        "mean_abs_p_minus_y": 0.1203,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 0,
+          "fn": 40,
+          "tp": 700
+        }
+      },
+      "flan_t5_xl": {
+        "n": 819,
+        "tag": "heldout-generator-family",
+        "positive_rate": 1.0,
+        "threshold": 0.5,
+        "accuracy": 0.9072,
+        "precision_machine": 1.0,
+        "recall_machine": 0.9072,
+        "f1_machine": 0.9513,
+        "precision_macro": 0.5,
+        "recall_macro": 0.4536,
+        "f1_macro": 0.4757,
+        "roc_auc": null,
+        "pr_auc": null,
+        "brier": 0.0773,
+        "ece_10": 0.1834,
+        "mean_abs_p_minus_y": 0.1834,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 0,
+          "fn": 76,
+          "tp": 743
+        }
+      },
+      "30B": {
+        "n": 1289,
+        "tag": "heldout-generator-family",
+        "positive_rate": 1.0,
+        "threshold": 0.5,
+        "accuracy": 0.8487,
+        "precision_machine": 1.0,
+        "recall_machine": 0.8487,
+        "f1_machine": 0.9182,
+        "precision_macro": 0.5,
+        "recall_macro": 0.4244,
+        "f1_macro": 0.4591,
+        "roc_auc": null,
+        "pr_auc": null,
+        "brier": 0.1046,
+        "ece_10": 0.1751,
+        "mean_abs_p_minus_y": 0.1751,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 0,
+          "fn": 195,
+          "tp": 1094
+        }
+      },
+      "t0_11b": {
+        "n": 645,
+        "tag": "heldout-generator-family",
+        "positive_rate": 1.0,
+        "threshold": 0.5,
+        "accuracy": 0.9442,
+        "precision_machine": 1.0,
+        "recall_machine": 0.9442,
+        "f1_machine": 0.9713,
+        "precision_macro": 0.5,
+        "recall_macro": 0.4721,
+        "f1_macro": 0.4856,
+        "roc_auc": null,
+        "pr_auc": null,
+        "brier": 0.0447,
+        "ece_10": 0.121,
+        "mean_abs_p_minus_y": 0.121,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 0,
+          "fn": 36,
+          "tp": 609
+        }
+      },
+      "flan_t5_base": {
+        "n": 593,
+        "tag": "heldout-generator-family",
+        "positive_rate": 1.0,
+        "threshold": 0.5,
+        "accuracy": 0.8938,
+        "precision_machine": 1.0,
+        "recall_machine": 0.8938,
+        "f1_machine": 0.9439,
+        "precision_macro": 0.5,
+        "recall_macro": 0.4469,
+        "f1_macro": 0.472,
+        "roc_auc": null,
+        "pr_auc": null,
+        "brier": 0.0767,
+        "ece_10": 0.1734,
+        "mean_abs_p_minus_y": 0.1734,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 0,
+          "fn": 63,
+          "tp": 530
+        }
+      }
+    },
+    "train_machine_family_tokens": [
+      "13B",
+      "30B",
+      "65B",
+      "7B",
+      "GLM130B",
+      "bloom_7b",
+      "flan_t5_base",
+      "flan_t5_large",
+      "flan_t5_small",
+      "flan_t5_xl",
+      "flan_t5_xxl",
+      "gpt-3.5-trubo",
+      "gpt_j",
+      "gpt_neox",
+      "opt_1.3b",
+      "opt_125m",
+      "opt_13b",
+      "opt_2.7b",
+      "opt_30b",
+      "opt_350m",
+      "opt_6.7b",
+      "opt_iml_30b",
+      "opt_iml_max_1.3b",
+      "t0_11b",
+      "t0_3b",
+      "text-davinci-002",
+      "text-davinci-003"
+    ],
+    "test_only_family_tokens": [],
+    "test_only_rollup": {
+      "n": 0,
+      "note": "no test-only generator families in MAGE test (train covers all test families); unseen-generator evidence comes from OOD/HC3/RAID parts below"
+    },
+    "seen_family_behavior": {
+      "13B": {
+        "n": 1284,
+        "recall_at_0.5": 0.8676,
+        "mean_p_machine": 0.8554,
+        "machine_share": 1.0
+      },
+      "30B": {
+        "n": 1289,
+        "recall_at_0.5": 0.8487,
+        "mean_p_machine": 0.8249,
+        "machine_share": 1.0
+      },
+      "65B": {
+        "n": 1291,
+        "recall_at_0.5": 0.8273,
+        "mean_p_machine": 0.8117,
+        "machine_share": 1.0
+      },
+      "7B": {
+        "n": 1289,
+        "recall_at_0.5": 0.9108,
+        "mean_p_machine": 0.8897,
+        "machine_share": 1.0
+      },
+      "GLM130B": {
+        "n": 1242,
+        "recall_at_0.5": 0.9122,
+        "mean_p_machine": 0.8975,
+        "machine_share": 1.0
+      },
+      "bloom_7b": {
+        "n": 1216,
+        "recall_at_0.5": 0.9926,
+        "mean_p_machine": 0.9857,
+        "machine_share": 1.0
+      },
+      "flan_t5_base": {
+        "n": 593,
+        "recall_at_0.5": 0.8938,
+        "mean_p_machine": 0.8266,
+        "machine_share": 1.0
+      },
+      "flan_t5_large": {
+        "n": 692,
+        "recall_at_0.5": 0.8829,
+        "mean_p_machine": 0.8087,
+        "machine_share": 1.0
+      },
+      "flan_t5_small": {
+        "n": 504,
+        "recall_at_0.5": 0.9524,
+        "mean_p_machine": 0.876,
+        "machine_share": 1.0
+      },
+      "flan_t5_xl": {
+        "n": 819,
+        "recall_at_0.5": 0.9072,
+        "mean_p_machine": 0.8166,
+        "machine_share": 1.0
+      },
+      "flan_t5_xxl": {
+        "n": 1002,
+        "recall_at_0.5": 0.9641,
+        "mean_p_machine": 0.9393,
+        "machine_share": 1.0
+      },
+      "gpt-3.5-trubo": {
+        "n": 3003,
+        "recall_at_0.5": 0.8735,
+        "mean_p_machine": 0.8182,
+        "machine_share": 1.0
+      },
+      "gpt_j": {
+        "n": 1055,
+        "recall_at_0.5": 0.9924,
+        "mean_p_machine": 0.9861,
+        "machine_share": 1.0
+      },
+      "gpt_neox": {
+        "n": 919,
+        "recall_at_0.5": 0.9989,
+        "mean_p_machine": 0.9821,
+        "machine_share": 1.0
+      },
+      "opt_1.3b": {
+        "n": 1257,
+        "recall_at_0.5": 0.969,
+        "mean_p_machine": 0.9379,
+        "machine_share": 1.0
+      },
+      "opt_125m": {
+        "n": 1205,
+        "recall_at_0.5": 0.9154,
+        "mean_p_machine": 0.8725,
+        "machine_share": 1.0
+      },
+      "opt_13b": {
+        "n": 1091,
+        "recall_at_0.5": 0.9963,
+        "mean_p_machine": 0.982,
+        "machine_share": 1.0
+      },
+      "opt_2.7b": {
+        "n": 1244,
+        "recall_at_0.5": 0.9887,
+        "mean_p_machine": 0.972,
+        "machine_share": 1.0
+      },
+      "opt_30b": {
+        "n": 1218,
+        "recall_at_0.5": 0.9877,
+        "mean_p_machine": 0.9757,
+        "machine_share": 1.0
+      },
+      "opt_350m": {
+        "n": 1194,
+        "recall_at_0.5": 0.9456,
+        "mean_p_machine": 0.9219,
+        "machine_share": 1.0
+      },
+      "opt_6.7b": {
+        "n": 1210,
+        "recall_at_0.5": 0.9636,
+        "mean_p_machine": 0.9372,
+        "machine_share": 1.0
+      },
+      "opt_iml_30b": {
+        "n": 1241,
+        "recall_at_0.5": 0.9758,
+        "mean_p_machine": 0.9532,
+        "machine_share": 1.0
+      },
+      "opt_iml_max_1.3b": {
+        "n": 1249,
+        "recall_at_0.5": 0.944,
+        "mean_p_machine": 0.8987,
+        "machine_share": 1.0
+      },
+      "t0_11b": {
+        "n": 645,
+        "recall_at_0.5": 0.9442,
+        "mean_p_machine": 0.879,
+        "machine_share": 1.0
+      },
+      "t0_3b": {
+        "n": 740,
+        "recall_at_0.5": 0.9459,
+        "mean_p_machine": 0.8797,
+        "machine_share": 1.0
+      },
+      "text-davinci-002": {
+        "n": 2594,
+        "recall_at_0.5": 0.8053,
+        "mean_p_machine": 0.7637,
+        "machine_share": 1.0
+      },
+      "text-davinci-003": {
+        "n": 2863,
+        "recall_at_0.5": 0.8564,
+        "mean_p_machine": 0.7974,
+        "machine_share": 1.0
+      }
+    },
+    "ood_test_ood_set_gpt": {
+      "n": 1562,
+      "class_balance": {
+        "1": 800,
+        "0": 762
+      },
+      "positive_rate": 0.5122,
+      "threshold": 0.5,
+      "accuracy": 0.63,
+      "precision_machine": 0.6613,
+      "recall_machine": 0.5687,
+      "f1_machine": 0.6116,
+      "precision_macro": 0.6333,
+      "recall_macro": 0.6315,
+      "f1_macro": 0.6291,
+      "roc_auc": 0.6907,
+      "pr_auc": 0.6278,
+      "brier": 0.2561,
+      "ece_10": 0.1772,
+      "mean_abs_p_minus_y": 0.3972,
+      "confusion_matrix": {
+        "tn": 529,
+        "fp": 233,
+        "fn": 345,
+        "tp": 455
+      },
+      "src_breakdown": {
+        "cnn_human": 200,
+        "cnn_gpt4": 200,
+        "dialogsum_gpt4": 200,
+        "imdb_human": 200,
+        "imdb_gpt4": 200,
+        "pubmed_human": 200,
+        "pubmed_gpt4": 200,
+        "dialogsum_human": 162
+      },
+      "generator_note": "unseen GPT-family generators not present in MAGE training"
+    },
+    "ood_test_ood_set_gpt_para": {
+      "n": 2362,
+      "class_balance": {
+        "1": 1600,
+        "0": 762
+      },
+      "positive_rate": 0.6774,
+      "threshold": 0.5,
+      "accuracy": 0.5127,
+      "precision_machine": 0.7454,
+      "recall_machine": 0.4263,
+      "f1_machine": 0.5423,
+      "precision_macro": 0.5555,
+      "recall_macro": 0.5602,
+      "f1_macro": 0.5106,
+      "roc_auc": 0.6026,
+      "pr_auc": 0.7114,
+      "brier": 0.3453,
+      "ece_10": 0.335,
+      "mean_abs_p_minus_y": 0.4882,
+      "confusion_matrix": {
+        "tn": 529,
+        "fp": 233,
+        "fn": 918,
+        "tp": 682
+      },
+      "src_breakdown": {
+        "cnn_human_para": 200,
+        "cnn_gpt4_para": 200,
+        "dialogsum_human_para": 200,
+        "dialogsum_gpt4_para": 200,
+        "imdb_human_para": 200,
+        "imdb_gpt4_para": 200,
+        "pubmed_human_para": 200,
+        "pubmed_gpt4_para": 200,
+        "cnn_human": 200,
+        "imdb_human": 200,
+        "pubmed_human": 200,
+        "dialogsum_human": 162
+      },
+      "generator_note": "unseen GPT-family generators not present in MAGE training"
+    },
+    "hc3": {
+      "n": 64952,
+      "class_balance_canonical": {
+        "0": 38976,
+        "1": 25976
+      },
+      "positive_rate": 0.3999,
+      "threshold": 0.5,
+      "accuracy": 0.6918,
+      "precision_machine": 0.5789,
+      "recall_machine": 0.8416,
+      "f1_machine": 0.6859,
+      "precision_macro": 0.7138,
+      "recall_macro": 0.7168,
+      "f1_macro": 0.6917,
+      "roc_auc": 0.8277,
+      "pr_auc": 0.7779,
+      "brier": 0.2085,
+      "ece_10": 0.1762,
+      "mean_abs_p_minus_y": 0.3392,
+      "confusion_matrix": {
+        "tn": 23073,
+        "fp": 15903,
+        "fn": 4115,
+        "tp": 21861
+      },
+      "score_map": "p(machine) = 1 - calibrated p_stored (corpus-agnostic model semantics)"
+    },
+    "raid_labelled": {
+      "n_policy_clean": 15843,
+      "n_human_clean": 7913,
+      "n_machine_clean": 7930,
+      "per_model": {
+        "chatgpt": {
+          "n": 487,
+          "recall_at_0.5": 0.7864,
+          "mean_p_machine": 0.7442
+        },
+        "cohere": {
+          "n": 446,
+          "recall_at_0.5": 0.4978,
+          "mean_p_machine": 0.5004
+        },
+        "cohere-chat": {
+          "n": 479,
+          "recall_at_0.5": 0.7056,
+          "mean_p_machine": 0.6881
+        },
+        "gpt2": {
+          "n": 909,
+          "recall_at_0.5": 0.8207,
+          "mean_p_machine": 0.807
+        },
+        "gpt3": {
+          "n": 429,
+          "recall_at_0.5": 0.6876,
+          "mean_p_machine": 0.6782
+        },
+        "gpt4": {
+          "n": 458,
+          "recall_at_0.5": 0.5939,
+          "mean_p_machine": 0.5877
+        },
+        "llama-chat": {
+          "n": 913,
+          "recall_at_0.5": 0.7788,
+          "mean_p_machine": 0.7348
+        },
+        "mistral": {
+          "n": 995,
+          "recall_at_0.5": 0.7849,
+          "mean_p_machine": 0.7917
+        },
+        "mistral-chat": {
+          "n": 945,
+          "recall_at_0.5": 0.8243,
+          "mean_p_machine": 0.7721
+        },
+        "mpt": {
+          "n": 909,
+          "recall_at_0.5": 0.8845,
+          "mean_p_machine": 0.8759
+        },
+        "mpt-chat": {
+          "n": 960,
+          "recall_at_0.5": 0.849,
+          "mean_p_machine": 0.8112
+        }
+      },
+      "overall_clean": {
+        "n": 15843,
+        "positive_rate": 0.5005,
+        "threshold": 0.5,
+        "accuracy": 0.7501,
+        "precision_machine": 0.7386,
+        "recall_machine": 0.775,
+        "f1_machine": 0.7564,
+        "precision_macro": 0.7507,
+        "recall_macro": 0.7501,
+        "f1_macro": 0.7499,
+        "roc_auc": 0.8386,
+        "pr_auc": 0.852,
+        "brier": 0.1747,
+        "ece_10": 0.0948,
+        "mean_abs_p_minus_y": 0.2867,
+        "confusion_matrix": {
+          "tn": 5738,
+          "fp": 2175,
+          "fn": 1784,
+          "tp": 6146
+        }
+      },
+      "human_fpr_at_0.5": 0.2749,
+      "human_mean_p_machine": 0.3266,
+      "source": "raid_eval_subset.csv (RAID-train derived, eval-only)"
+    },
+    "raid_distribution": {
+      "n_rows_in_file": 672000,
+      "n_sampled": 5000,
+      "p_machine_mean": 0.7317,
+      "p_machine_std": 0.3195,
+      "frac_p_machine_ge_0_5": 0.7474,
+      "frac_p_machine_ge_0_9": 0.5048,
+      "frac_p_machine_le_0_1": 0.0488,
+      "note": "UNLABELED test.csv: distribution diagnostics only, no supervised claims; p(machine) = 1 - calibrated stored score"
+    },
+    "single_vs_multi": {
+      "models": {
+        "gpt-3.5-trubo": {
+          "n_train_machine": 9017,
+          "n_train_human": 54141,
+          "n_eval": 48992,
+          "n_eval_machine_other_families": 30946,
+          "train_families_excluded_from_eval": "gpt-3.5-trubo",
+          "train_seconds": 3.3,
+          "single_generator": {
+            "n": 48992,
+            "positive_rate": 0.6317,
+            "threshold": 0.5,
+            "accuracy": 0.6317,
+            "precision_machine": 0.6317,
+            "recall_machine": 1.0,
+            "f1_machine": 0.7743,
+            "precision_macro": 0.3158,
+            "recall_macro": 0.5,
+            "f1_macro": 0.3871,
+            "roc_auc": 0.5847,
+            "pr_auc": 0.7188,
+            "brier": 0.2241,
+            "ece_10": 0.0065,
+            "mean_abs_p_minus_y": 0.4453,
+            "confusion_matrix": {
+              "tn": 0,
+              "fp": 18046,
+              "fn": 0,
+              "tp": 30946
+            }
+          },
+          "multi_generator_locked": {
+            "n": 48992,
+            "positive_rate": 0.6317,
+            "threshold": 0.5,
+            "accuracy": 0.893,
+            "precision_machine": 0.9117,
+            "recall_machine": 0.9197,
+            "f1_machine": 0.9157,
+            "precision_macro": 0.8859,
+            "recall_macro": 0.8835,
+            "f1_macro": 0.8847,
+            "roc_auc": 0.9606,
+            "pr_auc": 0.9764,
+            "brier": 0.0764,
+            "ece_10": 0.0091,
+            "mean_abs_p_minus_y": 0.1503,
+            "confusion_matrix": {
+              "tn": 15289,
+              "fp": 2757,
+              "fn": 2485,
+              "tp": 28461
+            }
+          },
+          "gap_pr_auc_multi_minus_single": 0.2576,
+          "gap_roc_multi_minus_single": 0.3759,
+          "gap_recall_machine_multi_minus_single": -0.0803
+        },
+        "text-davinci-003": {
+          "n_train_machine": 8591,
+          "n_train_human": 54141,
+          "n_eval": 49132,
+          "n_eval_machine_other_families": 31086,
+          "train_families_excluded_from_eval": "text-davinci-003",
+          "train_seconds": 2.2,
+          "single_generator": {
+            "n": 49132,
+            "positive_rate": 0.6327,
+            "threshold": 0.5,
+            "accuracy": 0.6413,
+            "precision_machine": 0.6432,
+            "recall_machine": 0.9725,
+            "f1_machine": 0.7743,
+            "precision_macro": 0.6212,
+            "recall_macro": 0.5217,
+            "f1_macro": 0.4506,
+            "roc_auc": 0.6414,
+            "pr_auc": 0.7618,
+            "brier": 0.2147,
+            "ece_10": 0.0058,
+            "mean_abs_p_minus_y": 0.4269,
+            "confusion_matrix": {
+              "tn": 1280,
+              "fp": 16766,
+              "fn": 856,
+              "tp": 30230
+            }
+          },
+          "multi_generator_locked": {
+            "n": 49132,
+            "positive_rate": 0.6327,
+            "threshold": 0.5,
+            "accuracy": 0.8939,
+            "precision_machine": 0.9122,
+            "recall_machine": 0.9211,
+            "f1_machine": 0.9166,
+            "precision_macro": 0.8869,
+            "recall_macro": 0.8841,
+            "f1_macro": 0.8855,
+            "roc_auc": 0.9612,
+            "pr_auc": 0.9768,
+            "brier": 0.0758,
+            "ece_10": 0.009,
+            "mean_abs_p_minus_y": 0.1491,
+            "confusion_matrix": {
+              "tn": 15289,
+              "fp": 2757,
+              "fn": 2454,
+              "tp": 28632
+            }
+          },
+          "gap_pr_auc_multi_minus_single": 0.215,
+          "gap_roc_multi_minus_single": 0.3198,
+          "gap_recall_machine_multi_minus_single": -0.0514
+        }
+      },
+      "eval_protocol": {
+        "train": "MAGE-train: all human rows + machine rows of the named family",
+        "eval": "MAGE-test: machine rows of OTHER families + all human rows",
+        "calibration": "isotonic fit on MAGE-validation (all rows); no eval rows touched",
+        "params": {
+          "note": "EXPERIMENTAL models only (E1 single-generator gap, E5 LODO). Fixed to the Phase-1 selected HGB hyperparameters; never tuned on evaluation data; never presented as the baseline.",
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63,
+          "max_iter": 300,
+          "random_state": 42
+        }
+      },
+      "note": "experimental models: fitted on MAGE-train only, calibrated on MAGE-validation; evaluated on the same held-out rows as the locked model. NOT the baseline; baseline untouched.",
+      "test_only_family_tokens": []
+    },
+    "duration_s": 48.5
+  },
+  "E2": {
+    "name": "E2-paraphrase",
+    "status": "ok",
+    "raid": {
+      "dropped_invalid_text": 0,
+      "policy_40_5000_words": {
+        "machine_clean": {
+          "n_pos": 7930,
+          "n_neg": 7913,
+          "n": 15843,
+          "positive_rate": 0.5005,
+          "threshold": 0.5,
+          "accuracy": 0.7501,
+          "precision_machine": 0.7386,
+          "recall_machine": 0.775,
+          "f1_machine": 0.7564,
+          "precision_macro": 0.7507,
+          "recall_macro": 0.7501,
+          "f1_macro": 0.7499,
+          "roc_auc": 0.8386,
+          "pr_auc": 0.852,
+          "brier": 0.1747,
+          "ece_10": 0.0948,
+          "mean_abs_p_minus_y": 0.2867,
+          "confusion_matrix": {
+            "tn": 5738,
+            "fp": 2175,
+            "fn": 1784,
+            "tp": 6146
+          }
+        },
+        "machine_paraphrase": {
+          "n_pos": 7826,
+          "n_neg": 7913,
+          "n": 15739,
+          "positive_rate": 0.4972,
+          "threshold": 0.5,
+          "accuracy": 0.705,
+          "precision_machine": 0.7113,
+          "recall_machine": 0.6846,
+          "f1_machine": 0.6977,
+          "precision_macro": 0.7053,
+          "recall_macro": 0.7049,
+          "f1_macro": 0.7048,
+          "roc_auc": 0.7821,
+          "pr_auc": 0.7761,
+          "brier": 0.2031,
+          "ece_10": 0.1092,
+          "mean_abs_p_minus_y": 0.3318,
+          "confusion_matrix": {
+            "tn": 5738,
+            "fp": 2175,
+            "fn": 2468,
+            "tp": 5358
+          }
+        },
+        "machine_other_attacks": {
+          "n_pos": 3965,
+          "n_neg": 7913,
+          "n": 11878,
+          "positive_rate": 0.3338,
+          "threshold": 0.5,
+          "accuracy": 0.7425,
+          "precision_machine": 0.5862,
+          "recall_machine": 0.777,
+          "f1_machine": 0.6683,
+          "precision_macro": 0.7263,
+          "recall_macro": 0.7511,
+          "f1_macro": 0.7289,
+          "roc_auc": 0.8409,
+          "pr_auc": 0.7722,
+          "brier": 0.1813,
+          "ece_10": 0.1503,
+          "mean_abs_p_minus_y": 0.299,
+          "confusion_matrix": {
+            "tn": 5738,
+            "fp": 2175,
+            "fn": 884,
+            "tp": 3081
+          }
+        },
+        "delta_paraphrase_minus_clean": {
+          "roc_auc": -0.0565,
+          "pr_auc": -0.0759,
+          "recall_machine": -0.0904,
+          "f1_macro": -0.0451,
+          "accuracy": -0.0451,
+          "brier": 0.0284,
+          "ece_10": 0.0144
+        },
+        "human_control": {
+          "n_clean": 7913,
+          "n_paraphrased": 351,
+          "clean_fpr_at_0_5": 0.2749,
+          "clean_mean_p_machine": 0.3266,
+          "paraphrased_fpr_at_0_5": 0.396,
+          "paraphrased_mean_p_machine": 0.4212
+        }
+      },
+      "all_lengths": {
+        "machine_clean": {
+          "n_pos": 8000,
+          "n_neg": 7943,
+          "n": 15943,
+          "positive_rate": 0.5018,
+          "threshold": 0.5,
+          "accuracy": 0.7498,
+          "precision_machine": 0.7387,
+          "recall_machine": 0.7759,
+          "f1_machine": 0.7568,
+          "precision_macro": 0.7504,
+          "recall_macro": 0.7497,
+          "f1_macro": 0.7496,
+          "roc_auc": 0.8382,
+          "pr_auc": 0.8518,
+          "brier": 0.175,
+          "ece_10": 0.0947,
+          "mean_abs_p_minus_y": 0.2872,
+          "confusion_matrix": {
+            "tn": 5747,
+            "fp": 2196,
+            "fn": 1793,
+            "tp": 6207
+          }
+        },
+        "machine_paraphrase": {
+          "n_pos": 8000,
+          "n_neg": 7943,
+          "n": 15943,
+          "positive_rate": 0.5018,
+          "threshold": 0.5,
+          "accuracy": 0.7072,
+          "precision_machine": 0.7157,
+          "recall_machine": 0.691,
+          "f1_machine": 0.7031,
+          "precision_macro": 0.7075,
+          "recall_macro": 0.7073,
+          "f1_macro": 0.7072,
+          "roc_auc": 0.7844,
+          "pr_auc": 0.7813,
+          "brier": 0.2019,
+          "ece_10": 0.1078,
+          "mean_abs_p_minus_y": 0.3301,
+          "confusion_matrix": {
+            "tn": 5747,
+            "fp": 2196,
+            "fn": 2472,
+            "tp": 5528
+          }
+        },
+        "machine_other_attacks": {
+          "n_pos": 4000,
+          "n_neg": 7943,
+          "n": 11943,
+          "positive_rate": 0.3349,
+          "threshold": 0.5,
+          "accuracy": 0.7417,
+          "precision_machine": 0.5862,
+          "recall_machine": 0.7778,
+          "f1_machine": 0.6685,
+          "precision_macro": 0.7261,
+          "recall_macro": 0.7506,
+          "f1_macro": 0.7285,
+          "roc_auc": 0.8405,
+          "pr_auc": 0.7719,
+          "brier": 0.1818,
+          "ece_10": 0.1503,
+          "mean_abs_p_minus_y": 0.2996,
+          "confusion_matrix": {
+            "tn": 5747,
+            "fp": 2196,
+            "fn": 889,
+            "tp": 3111
+          }
+        },
+        "delta_paraphrase_minus_clean": {
+          "roc_auc": -0.0538,
+          "pr_auc": -0.0705,
+          "recall_machine": -0.0849,
+          "f1_macro": -0.0424,
+          "accuracy": -0.0426,
+          "brier": 0.0269,
+          "ece_10": 0.0131
+        },
+        "human_control": {
+          "n_clean": 7943,
+          "n_paraphrased": 353,
+          "clean_fpr_at_0_5": 0.2765,
+          "clean_mean_p_machine": 0.3277,
+          "paraphrased_fpr_at_0_5": 0.3966,
+          "paraphrased_mean_p_machine": 0.4217
+        }
+      },
+      "per_model_clean_vs_paraphrase": {
+        "chatgpt": {
+          "n_clean": 487,
+          "n_paraphrase": 459,
+          "recall_clean": 0.7864,
+          "recall_paraphrase": 0.8039,
+          "delta": 0.0175
+        },
+        "cohere": {
+          "n_clean": 446,
+          "n_paraphrase": 461,
+          "recall_clean": 0.4978,
+          "recall_paraphrase": 0.59,
+          "delta": 0.0923
+        },
+        "cohere-chat": {
+          "n_clean": 479,
+          "n_paraphrase": 487,
+          "recall_clean": 0.7056,
+          "recall_paraphrase": 0.7207,
+          "delta": 0.0151
+        },
+        "gpt2": {
+          "n_clean": 909,
+          "n_paraphrase": 937,
+          "recall_clean": 0.8207,
+          "recall_paraphrase": 0.6201,
+          "delta": -0.2006
+        },
+        "gpt3": {
+          "n_clean": 429,
+          "n_paraphrase": 451,
+          "recall_clean": 0.6876,
+          "recall_paraphrase": 0.7384,
+          "delta": 0.0507
+        },
+        "gpt4": {
+          "n_clean": 458,
+          "n_paraphrase": 462,
+          "recall_clean": 0.5939,
+          "recall_paraphrase": 0.7727,
+          "delta": 0.1788
+        },
+        "llama-chat": {
+          "n_clean": 913,
+          "n_paraphrase": 950,
+          "recall_clean": 0.7788,
+          "recall_paraphrase": 0.7505,
+          "delta": -0.0282
+        },
+        "mistral": {
+          "n_clean": 995,
+          "n_paraphrase": 933,
+          "recall_clean": 0.7849,
+          "recall_paraphrase": 0.5702,
+          "delta": -0.2147
+        },
+        "mistral-chat": {
+          "n_clean": 945,
+          "n_paraphrase": 875,
+          "recall_clean": 0.8243,
+          "recall_paraphrase": 0.752,
+          "delta": -0.0723
+        },
+        "mpt": {
+          "n_clean": 909,
+          "n_paraphrase": 883,
+          "recall_clean": 0.8845,
+          "recall_paraphrase": 0.6512,
+          "delta": -0.2333
+        },
+        "mpt-chat": {
+          "n_clean": 960,
+          "n_paraphrase": 928,
+          "recall_clean": 0.849,
+          "recall_paraphrase": 0.6649,
+          "delta": -0.1841
+        }
+      },
+      "method": {
+        "data": "RAID-train derived stratified subset (eval-only)",
+        "human_control": "RAID clean human rows held unchanged for both tasks"
+      }
+    },
+    "local_rewrite": {
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "prompting": "native chat template (system + user), instruction at the end of a bounded input (<=1500 chars, sentence-boundary cut)",
+      "model_config": {
+        "system": "You are a careful rewriting assistant. You always obey the user's instructions exactly and output only the requested text.",
+        "prompt_template": "Rewrite the text below using different wording throughout. Keep the same meaning, the same information, and approximately the same length. Do not summarize. Do not add new events. Output only the rewritten text.\n\nText:\n{text}",
+        "greedy": true,
+        "max_new_tokens": 200,
+        "max_new_tokens_cap": 800,
+        "max_input_chars": 1500,
+        "sample_n": 64,
+        "human_control_n": 64
+      },
+      "seed": 42,
+      "generation": "greedy (do_sample=False); new-token budget = max(200, 1.4 x input tokens) capped at 800",
+      "device": "cpu",
+      "machine_control": {
+        "n": 64,
+        "recall_pre": 0.9219,
+        "recall_post": 0.7656,
+        "mean_p_pre": 0.8761,
+        "mean_p_post": 0.6869,
+        "mean_delta_p": -0.1892,
+        "frac_post_below_0_5": 0.2344
+      },
+      "human_control": {
+        "n": 64,
+        "fpr_pre": 0.0938,
+        "fpr_post": 0.375,
+        "mean_p_pre": 0.1756,
+        "mean_p_post": 0.3952,
+        "mean_delta_p": 0.2195
+      },
+      "edit_strength_machine": {
+        "mean_similarity_first_600_chars": 0.2968,
+        "mean_words_pre": 282.7,
+        "mean_words_post": 114.9,
+        "mean_words_ratio_post_over_pre": 0.6566
+      },
+      "edit_strength_human_control": {
+        "mean_similarity_first_600_chars": 0.295,
+        "mean_words_pre": 240.4,
+        "mean_words_post": 124.4,
+        "mean_words_ratio_post_over_pre": 0.7295
+      },
+      "examples_machine_evasion": [
+        {
+          "original": "Insulting, dishonest and bottom line an absolute joke! We made reservations over a month ago, arrived and waited over 40 minutes but that wasn't the problem, the problem was the service. The service was so slow that we w",
+          "paraphrase": "Insulting, dishonest, and bottom-line jokes! We reserved over a month ago, arrived late but didn\u2019t mind; the issue was the service. Service was slow, causing us to wait 40 minutes. Poor service led to disappointment. We ",
+          "p_pre": 0.8768,
+          "p_post": 0.0138
+        },
+        {
+          "original": "Notts' 39-run win against Essex at Trent Bridge on Monday sees them return to the showpiece event at Edgbaston for the first time since 2010. Read, who has won a Test cap and an ODI series with England, and coach Peter M",
+          "paraphrase": "Notts' 39-run win over Essex at Trent Bridge marks the club's first appearance at Edgbaston since 2010. Nottinghamshire's men in white are set to face off against Lancashire in the semi-finals, while the women's semi-fin",
+          "p_pre": 0.9776,
+          "p_post": 0.1412
+        },
+        {
+          "original": "In recent times, using small data to train networks has become a hot topic in the field of deep learning. Reusing pre-trained parameters is one of the most important strategies for building state-of-the-art models [1]. R",
+          "paraphrase": "In recent years, utilizing small datasets to train neural networks has gained prominence in the field of deep learning. One crucial strategy for achieving state-of-the-art models involves reusing pre-trained parameters [",
+          "p_pre": 0.9649,
+          "p_post": 0.1461
+        },
+        {
+          "original": "Sandra was worried about her finances. She'd learned that her income would slow down during the holidays. She had Christmas shopping looming and only a small amount saved. Sandra decided to approach her boss about an ove",
+          "paraphrase": "Sandra was worried about her finances. She'd learned that her income would slow down during the holidays. She had Christmas shopping looming and only a small amount saved. Sandra decided to approach her boss about an ove",
+          "p_pre": 1.0,
+          "p_post": 0.2383
+        },
+        {
+          "original": "The Iroquois sent runners to the manor of William Johnson in upstate New York. The British Superintendent for Indian Affairs in the New York region and beyond, Johnson was known to be a friend of the Indians. He had even",
+          "paraphrase": "The Iroquois sent runners to William Johnson in upstate New York. The British Superintendent for Indian Affairs in the New York region and beyond, Johnson was known to be a friend of the Indians. He had even been adopted",
+          "p_pre": 0.9925,
+          "p_post": 0.2383
+        },
+        {
+          "original": "According to organisers a record 3.6 million turned out to vote in the Scottish independence referendum. More than 100,000 of the total were 16 to 17-year-olds who had registered to vote for the first time. The turnout w",
+          "paraphrase": "According to organizers, more than 3.6 million voted in the Scottish independence referendum. Over 100,000 were under 16 years old, making them eligible voters for the first time. The turnout was 84.6% of eligible voters",
+          "p_pre": 0.9925,
+          "p_post": 0.2512
+        }
+      ],
+      "examples_human_control_flips": [
+        {
+          "original": "Standing on a escalator - even if it's to one side so as to let people pass - completely undermines the point of the device. The point of escalators is to increase the flow of human traffic in congested areas. I can't te",
+          "paraphrase": "Standing on an escalator, even if it's to one side to allow passage, completely undermines the purpose of the device. Escalators are designed to increase traffic flow in congested areas; their primary function is to faci",
+          "p_pre": 0.0,
+          "p_post": 0.9073
+        },
+        {
+          "original": "Most home wifi gear, if you leave it at the default config, will just let everything pass up to whatever the uplink will take. The bandwidth is consumed on a first-come-first-serve basis, which usually means that faster ",
+          "paraphrase": "Most home WiFi gear, if left at its default settings, allows everything to pass through until the uplink takes up the available bandwidth. This happens due to the fact that the bandwidth is allocated based on a first-com",
+          "p_pre": 0.0,
+          "p_post": 0.8973
+        },
+        {
+          "original": "It's a bit complicated for a five year old, but see how you do. Metabolism is how your body converts food into energy. There are three main ways to store this energy: Inside muscle cells: when you see a bear, he isn't go",
+          "paraphrase": "It's challenging for a young child, but try it out! The metabolism determines how your body converts food into energy. There are three primary methods of storing this energy: inside muscle cells; when you see a bear, his",
+          "p_pre": 0.0357,
+          "p_post": 0.8973
+        },
+        {
+          "original": "\"Omlette du formage.\" Wait. What? I look up from the menu that I was reading at the waiter. The waiter was..... well waiting for me to finish my order. Something about what the waiter just said doesn't sound right. \"Omle",
+          "paraphrase": "\"I ordered the omlette du fromage.\" Waiter: \"Sir, do you have the omlette du fromage?\" Waiter: \"Yes, the omlette du fromage.\" Waiter: \"There isn't any such thing on our menu!\" Waiter: \"You're a tourist, aren't you?\" Wait",
+          "p_pre": 0.0,
+          "p_post": 0.7488
+        },
+        {
+          "original": "In addition to the other anwers, I am fairly certain that the majority of internetnetwork users have no idea what ipv4 or ipv6 is. They plug in their modem and connect to the wifi or plug in their network cable, and that",
+          "paraphrase": "In addition to the answers provided, I am confident that a significant portion of internet network users do not comprehend either IPv4 or IPv6. They merely connect via modem or network cable, without needing to understan",
+          "p_pre": 0.0357,
+          "p_post": 0.7767
+        },
+        {
+          "original": "On 14 April 1945, just a month before the end of World War Two, 10 US servicemen and one woman died after their Flying Fortress bomber crashed in the Isle of Man. Lt Robert Vielle, an experienced and decorated pilot, had",
+          "paraphrase": "On April 14, 1945, 10 US servicemen and one woman tragically perished after their Flying Fortress bomber crashed in the Isle of Man. Lt. Robert Vielle, an experienced and decorated pilot, had been flying a B-17G from Eng",
+          "p_pre": 0.1367,
+          "p_post": 0.8768
+        }
+      ],
+      "note": "all machine rows are TRUE machine origin; recall drop = evasion rate. Human control passes through the same paraphraser to check that paraphrasing alone does not flip human text."
+    },
+    "duration_s": 1636.1
+  },
+  "E4": {
+    "name": "E4-mixed-authorship",
+    "status": "ok",
+    "mixtures": {
+      "0.25": {
+        "n_docs": 60,
+        "machine_paragraphs": 1,
+        "human_paragraphs": 3,
+        "p_machine_mean": 0.3499,
+        "p_machine_std": 0.3868,
+        "p_machine_min": 0.0,
+        "p_machine_max": 1.0,
+        "frac_ge_0_5": 0.35,
+        "domains_used": [
+          "cmv",
+          "eli5",
+          "hswag",
+          "roct",
+          "sci_gen",
+          "squad",
+          "tldr",
+          "wp",
+          "xsum",
+          "yelp"
+        ]
+      },
+      "0.5": {
+        "n_docs": 60,
+        "machine_paragraphs": 2,
+        "human_paragraphs": 2,
+        "p_machine_mean": 0.3531,
+        "p_machine_std": 0.3974,
+        "p_machine_min": 0.0,
+        "p_machine_max": 1.0,
+        "frac_ge_0_5": 0.3167,
+        "domains_used": [
+          "cmv",
+          "eli5",
+          "hswag",
+          "roct",
+          "sci_gen",
+          "squad",
+          "tldr",
+          "wp",
+          "xsum",
+          "yelp"
+        ]
+      },
+      "0.75": {
+        "n_docs": 60,
+        "machine_paragraphs": 3,
+        "human_paragraphs": 1,
+        "p_machine_mean": 0.5263,
+        "p_machine_std": 0.4164,
+        "p_machine_min": 0.0,
+        "p_machine_max": 1.0,
+        "frac_ge_0_5": 0.5167,
+        "domains_used": [
+          "cmv",
+          "eli5",
+          "hswag",
+          "roct",
+          "sci_gen",
+          "squad",
+          "tldr",
+          "wp",
+          "xsum",
+          "yelp"
+        ]
+      }
+    },
+    "monotonic": true,
+    "spearman_doc_level": {
+      "rho": 0.1962,
+      "p_value": 0.008314,
+      "n_docs": 180,
+      "interpretation": "rank correlation between machine share and document p(machine); failure to be monotonic is itself a finding"
+    },
+    "segment_benchmark": {
+      "n_paragraphs": 720,
+      "class_balance": {
+        "0": 360,
+        "1": 360
+      },
+      "n": 720,
+      "positive_rate": 0.5,
+      "threshold": 0.5,
+      "accuracy": 0.8458,
+      "precision_machine": 0.8136,
+      "recall_machine": 0.8972,
+      "f1_machine": 0.8534,
+      "precision_macro": 0.8495,
+      "recall_macro": 0.8458,
+      "f1_macro": 0.8454,
+      "roc_auc": 0.938,
+      "pr_auc": 0.9437,
+      "brier": 0.1074,
+      "ece_10": 0.0655,
+      "mean_abs_p_minus_y": 0.2012,
+      "confusion_matrix": {
+        "tn": 286,
+        "fp": 74,
+        "fn": 37,
+        "tp": 323
+      },
+      "mean_p_machine_given_machine_para": 0.8627,
+      "mean_p_machine_given_human_para": 0.2652,
+      "note": "paragraph-level predictions on E4 documents; ground truth known by construction - an honest first segment-analysis benchmark (no segment model trained; locked document-level model applied to paragraphs)"
+    },
+    "disclaimer": "Controlled synthetic mixtures. The detector is NOT claimed to measure exact AI authorship percentages; this probes whether document-level p(machine) responds monotonically to evidence.",
+    "duration_s": 29.5
+  },
+  "E5": {
+    "name": "E5-domains-hswag",
+    "status": "ok",
+    "domains": {
+      "cmv": {
+        "n": 4347,
+        "machine_share": 0.7129,
+        "words_mean": 259.8,
+        "positive_rate": 0.7129,
+        "threshold": 0.5,
+        "accuracy": 0.9324,
+        "precision_machine": 0.9567,
+        "recall_machine": 0.948,
+        "f1_machine": 0.9524,
+        "precision_macro": 0.9153,
+        "recall_macro": 0.9207,
+        "f1_macro": 0.9179,
+        "roc_auc": 0.9793,
+        "pr_auc": 0.9908,
+        "brier": 0.0501,
+        "ece_10": 0.0221,
+        "mean_abs_p_minus_y": 0.1043,
+        "confusion_matrix": {
+          "tn": 1115,
+          "fp": 133,
+          "fn": 161,
+          "tp": 2938
+        }
+      },
+      "eli5": {
+        "n": 6654,
+        "machine_share": 0.561,
+        "words_mean": 248.8,
+        "positive_rate": 0.561,
+        "threshold": 0.5,
+        "accuracy": 0.8724,
+        "precision_machine": 0.8634,
+        "recall_machine": 0.9178,
+        "f1_machine": 0.8898,
+        "precision_macro": 0.8746,
+        "recall_macro": 0.8661,
+        "f1_macro": 0.8692,
+        "roc_auc": 0.949,
+        "pr_auc": 0.9572,
+        "brier": 0.0905,
+        "ece_10": 0.025,
+        "mean_abs_p_minus_y": 0.1714,
+        "confusion_matrix": {
+          "tn": 2379,
+          "fp": 542,
+          "fn": 307,
+          "tp": 3426
+        }
+      },
+      "hswag": {
+        "n": 3274,
+        "machine_share": 0.9459,
+        "words_mean": 233.6,
+        "positive_rate": 0.9459,
+        "threshold": 0.5,
+        "accuracy": 0.9172,
+        "precision_machine": 0.9576,
+        "recall_machine": 0.9548,
+        "f1_machine": 0.9562,
+        "precision_macro": 0.6024,
+        "recall_macro": 0.6073,
+        "f1_macro": 0.6048,
+        "roc_auc": 0.8751,
+        "pr_auc": 0.9917,
+        "brier": 0.0587,
+        "ece_10": 0.0482,
+        "mean_abs_p_minus_y": 0.1186,
+        "confusion_matrix": {
+          "tn": 46,
+          "fp": 131,
+          "fn": 140,
+          "tp": 2957
+        }
+      },
+      "roct": {
+        "n": 4689,
+        "machine_share": 0.8064,
+        "words_mean": 219.6,
+        "positive_rate": 0.8064,
+        "threshold": 0.5,
+        "accuracy": 0.958,
+        "precision_machine": 0.9885,
+        "recall_machine": 0.959,
+        "f1_machine": 0.9736,
+        "precision_macro": 0.9184,
+        "recall_macro": 0.9564,
+        "f1_macro": 0.9357,
+        "roc_auc": 0.9899,
+        "pr_auc": 0.9974,
+        "brier": 0.0319,
+        "ece_10": 0.0322,
+        "mean_abs_p_minus_y": 0.0723,
+        "confusion_matrix": {
+          "tn": 866,
+          "fp": 42,
+          "fn": 155,
+          "tp": 3626
+        }
+      },
+      "sci_gen": {
+        "n": 4315,
+        "machine_share": 0.6934,
+        "words_mean": 234.6,
+        "positive_rate": 0.6934,
+        "threshold": 0.5,
+        "accuracy": 0.8841,
+        "precision_machine": 0.9308,
+        "recall_machine": 0.8997,
+        "f1_machine": 0.915,
+        "precision_macro": 0.86,
+        "recall_macro": 0.8743,
+        "f1_macro": 0.8665,
+        "roc_auc": 0.9506,
+        "pr_auc": 0.9779,
+        "brier": 0.0829,
+        "ece_10": 0.0207,
+        "mean_abs_p_minus_y": 0.1667,
+        "confusion_matrix": {
+          "tn": 1123,
+          "fp": 200,
+          "fn": 300,
+          "tp": 2692
+        }
+      },
+      "squad": {
+        "n": 5911,
+        "machine_share": 0.5214,
+        "words_mean": 234.4,
+        "positive_rate": 0.5214,
+        "threshold": 0.5,
+        "accuracy": 0.8795,
+        "precision_machine": 0.8771,
+        "recall_machine": 0.8942,
+        "f1_machine": 0.8856,
+        "precision_macro": 0.8797,
+        "recall_macro": 0.8789,
+        "f1_macro": 0.8792,
+        "roc_auc": 0.9518,
+        "pr_auc": 0.9598,
+        "brier": 0.0872,
+        "ece_10": 0.0355,
+        "mean_abs_p_minus_y": 0.1728,
+        "confusion_matrix": {
+          "tn": 2443,
+          "fp": 386,
+          "fn": 326,
+          "tp": 2756
+        }
+      },
+      "tldr": {
+        "n": 4162,
+        "machine_share": 0.76,
+        "words_mean": 183.9,
+        "positive_rate": 0.76,
+        "threshold": 0.5,
+        "accuracy": 0.8484,
+        "precision_machine": 0.8999,
+        "recall_machine": 0.9007,
+        "f1_machine": 0.9003,
+        "precision_macro": 0.7923,
+        "recall_macro": 0.7917,
+        "f1_macro": 0.792,
+        "roc_auc": 0.914,
+        "pr_auc": 0.9718,
+        "brier": 0.1022,
+        "ece_10": 0.0203,
+        "mean_abs_p_minus_y": 0.1994,
+        "confusion_matrix": {
+          "tn": 682,
+          "fp": 317,
+          "fn": 314,
+          "tp": 2849
+        }
+      },
+      "wp": {
+        "n": 5494,
+        "machine_share": 0.6791,
+        "words_mean": 415.3,
+        "positive_rate": 0.6791,
+        "threshold": 0.5,
+        "accuracy": 0.9303,
+        "precision_machine": 0.9566,
+        "recall_machine": 0.94,
+        "f1_machine": 0.9482,
+        "precision_macro": 0.917,
+        "recall_macro": 0.9249,
+        "f1_macro": 0.9208,
+        "roc_auc": 0.9779,
+        "pr_auc": 0.9874,
+        "brier": 0.0523,
+        "ece_10": 0.024,
+        "mean_abs_p_minus_y": 0.1023,
+        "confusion_matrix": {
+          "tn": 1604,
+          "fp": 159,
+          "fn": 224,
+          "tp": 3507
+        }
+      },
+      "xsum": {
+        "n": 5893,
+        "machine_share": 0.7341,
+        "words_mean": 244.8,
+        "positive_rate": 0.7341,
+        "threshold": 0.5,
+        "accuracy": 0.8659,
+        "precision_machine": 0.9222,
+        "recall_machine": 0.8927,
+        "f1_machine": 0.9072,
+        "precision_macro": 0.825,
+        "recall_macro": 0.8424,
+        "f1_macro": 0.8329,
+        "roc_auc": 0.9328,
+        "pr_auc": 0.9737,
+        "brier": 0.0936,
+        "ece_10": 0.0341,
+        "mean_abs_p_minus_y": 0.1828,
+        "confusion_matrix": {
+          "tn": 1241,
+          "fp": 326,
+          "fn": 464,
+          "tp": 3862
+        }
+      },
+      "yelp": {
+        "n": 7256,
+        "machine_share": 0.4059,
+        "words_mean": 173.4,
+        "positive_rate": 0.4059,
+        "threshold": 0.5,
+        "accuracy": 0.8629,
+        "precision_machine": 0.8259,
+        "recall_machine": 0.839,
+        "f1_machine": 0.8324,
+        "precision_macro": 0.8574,
+        "recall_macro": 0.8591,
+        "f1_macro": 0.8582,
+        "roc_auc": 0.9375,
+        "pr_auc": 0.9244,
+        "brier": 0.0983,
+        "ece_10": 0.0413,
+        "mean_abs_p_minus_y": 0.1898,
+        "confusion_matrix": {
+          "tn": 3790,
+          "fp": 521,
+          "fn": 474,
+          "tp": 2471
+        }
+      }
+    },
+    "hswag": {
+      "n": 3274,
+      "class_balance_canonical": {
+        "1": 3097,
+        "0": 177
+      },
+      "positive_rate_machine": 0.9459,
+      "metrics_canonical": {
+        "n": 3274,
+        "positive_rate": 0.9459,
+        "threshold": 0.5,
+        "accuracy": 0.9172,
+        "precision_machine": 0.9576,
+        "recall_machine": 0.9548,
+        "f1_machine": 0.9562,
+        "precision_macro": 0.6024,
+        "recall_macro": 0.6073,
+        "f1_macro": 0.6048,
+        "roc_auc": 0.8751,
+        "pr_auc": 0.9917,
+        "brier": 0.0587,
+        "ece_10": 0.0482,
+        "mean_abs_p_minus_y": 0.1186
+      },
+      "confusion_matrix": {
+        "tn": 46,
+        "fp": 131,
+        "fn": 140,
+        "tp": 2957
+      },
+      "stored_space_reproduction": {
+        "positive_class": "stored-1 == HUMAN (Phase-1 header said 'machine')",
+        "human_share": 0.0541,
+        "pr_auc_stored_calibrated": 0.2109,
+        "pr_auc_stored_raw": 0.2114,
+        "f1_stored_macro": 0.6048,
+        "note": "Phase-1 reported hswag PR-AUC=0.21 / F1=0.60 in this stored space; reproduced here with corrected orientation labels"
+      },
+      "src_breakdown": {
+        "hswag_human": 177,
+        "hswag_machine_topical_gpt-3.5-trubo": 138,
+        "hswag_machine_continuation_GLM130B": 134,
+        "hswag_machine_continuation_65B": 132,
+        "hswag_machine_continuation_30B": 132,
+        "hswag_machine_continuation_7B": 131,
+        "hswag_machine_continuation_13B": 129,
+        "hswag_machine_continuation_opt_1.3b": 127,
+        "hswag_machine_continuation_bloom_7b": 126,
+        "hswag_machine_continuation_opt_125m": 123,
+        "hswag_machine_continuation_opt_iml_30b": 122,
+        "hswag_machine_continuation_opt_2.7b": 121,
+        "hswag_machine_continuation_opt_6.7b": 121,
+        "hswag_machine_continuation_text-davinci-002": 121,
+        "hswag_machine_continuation_text-davinci-003": 120,
+        "hswag_machine_continuation_gpt_j": 119,
+        "hswag_machine_continuation_opt_iml_max_1.3b": 117,
+        "hswag_machine_continuation_gpt-3.5-trubo": 116,
+        "hswag_machine_continuation_opt_30b": 114,
+        "hswag_machine_continuation_opt_350m": 114,
+        "hswag_machine_continuation_opt_13b": 95,
+        "hswag_machine_topical_text-davinci-002": 86,
+        "hswag_machine_continuation_gpt_neox": 85,
+        "hswag_machine_topical_text-davinci-003": 77,
+        "hswag_machine_continuation_flan_t5_xxl": 75,
+        "hswag_machine_continuation_flan_t5_xl": 57,
+        "hswag_machine_continuation_t0_3b": 55,
+        "hswag_machine_continuation_t0_11b": 53,
+        "hswag_machine_continuation_flan_t5_large": 47,
+        "hswag_machine_continuation_flan_t5_small": 45,
+        "hswag_machine_continuation_flan_t5_base": 41,
+        "hswag_machine_specified_gpt-3.5-trubo": 15,
+        "hswag_machine_specified_text-davinci-002": 8,
+        "hswag_machine_specified_text-davinci-003": 1
+      },
+      "words_machine": {
+        "mean": 244.4,
+        "median": 130.0,
+        "min": 40,
+        "max": 1014,
+        "n": 3097
+      },
+      "words_human": {
+        "mean": 45.0,
+        "median": 44.0,
+        "min": 40,
+        "max": 62,
+        "n": 177
+      },
+      "top_feature_diffs_machine_minus_human": {
+        "n_chars": 1131.3228,
+        "n_chars_no_space": 932.9508,
+        "n_words": 199.3639,
+        "avg_para_len": 199.3639,
+        "exclaim_rate_per_sent": 60.3796,
+        "second_person_rate": -26.7408,
+        "pron_you": -26.7408,
+        "max_sent_len": 14.5128,
+        "min_sent_len": -13.2396,
+        "n_sentences": 11.987,
+        "aux_rate": -11.527,
+        "first_person_rate": 9.3643
+      },
+      "top_diffs_vs_rest_of_test": [
+        {
+          "feature": "n_chars",
+          "hswag_diff": 1131.3228,
+          "rest_of_test_diff": 150.9825
+        },
+        {
+          "feature": "n_chars_no_space",
+          "hswag_diff": 932.9508,
+          "rest_of_test_diff": 132.5896
+        },
+        {
+          "feature": "n_words",
+          "hswag_diff": 199.3639,
+          "rest_of_test_diff": 18.9579
+        },
+        {
+          "feature": "avg_para_len",
+          "hswag_diff": 199.3639,
+          "rest_of_test_diff": 18.9579
+        },
+        {
+          "feature": "exclaim_rate_per_sent",
+          "hswag_diff": 60.3796,
+          "rest_of_test_diff": -1.9855
+        },
+        {
+          "feature": "second_person_rate",
+          "hswag_diff": -26.7408,
+          "rest_of_test_diff": -0.6295
+        },
+        {
+          "feature": "pron_you",
+          "hswag_diff": -26.7408,
+          "rest_of_test_diff": -0.6295
+        },
+        {
+          "feature": "max_sent_len",
+          "hswag_diff": 14.5128,
+          "rest_of_test_diff": 4.6126
+        },
+        {
+          "feature": "min_sent_len",
+          "hswag_diff": -13.2396,
+          "rest_of_test_diff": 1.8723
+        },
+        {
+          "feature": "n_sentences",
+          "hswag_diff": 11.987,
+          "rest_of_test_diff": 0.6827
+        },
+        {
+          "feature": "aux_rate",
+          "hswag_diff": -11.527,
+          "rest_of_test_diff": 1.1691
+        },
+        {
+          "feature": "first_person_rate",
+          "hswag_diff": 9.3643,
+          "rest_of_test_diff": -5.2447
+        }
+      ],
+      "machine_family_behavior": {
+        "13B": {
+          "n": 129,
+          "recall_at_0_5": 0.938,
+          "mean_p_machine": 0.9146
+        },
+        "30B": {
+          "n": 132,
+          "recall_at_0_5": 0.9318,
+          "mean_p_machine": 0.9074
+        },
+        "65B": {
+          "n": 132,
+          "recall_at_0_5": 0.9167,
+          "mean_p_machine": 0.8835
+        },
+        "7B": {
+          "n": 131,
+          "recall_at_0_5": 0.9542,
+          "mean_p_machine": 0.9268
+        },
+        "GLM130B": {
+          "n": 134,
+          "recall_at_0_5": 0.9403,
+          "mean_p_machine": 0.9424
+        },
+        "bloom_7b": {
+          "n": 126,
+          "recall_at_0_5": 0.9921,
+          "mean_p_machine": 0.9851
+        },
+        "flan_t5_base": {
+          "n": 41,
+          "recall_at_0_5": 0.9268,
+          "mean_p_machine": 0.764
+        },
+        "flan_t5_large": {
+          "n": 47,
+          "recall_at_0_5": 0.8298,
+          "mean_p_machine": 0.7645
+        },
+        "flan_t5_small": {
+          "n": 45,
+          "recall_at_0_5": 0.9556,
+          "mean_p_machine": 0.7989
+        },
+        "flan_t5_xl": {
+          "n": 57,
+          "recall_at_0_5": 0.8947,
+          "mean_p_machine": 0.7944
+        },
+        "flan_t5_xxl": {
+          "n": 75,
+          "recall_at_0_5": 0.9867,
+          "mean_p_machine": 0.9506
+        },
+        "gpt-3.5-trubo": {
+          "n": 269,
+          "recall_at_0_5": 0.9442,
+          "mean_p_machine": 0.8856
+        },
+        "gpt_j": {
+          "n": 119,
+          "recall_at_0_5": 1.0,
+          "mean_p_machine": 0.9849
+        },
+        "gpt_neox": {
+          "n": 85,
+          "recall_at_0_5": 1.0,
+          "mean_p_machine": 0.9863
+        },
+        "opt_1.3b": {
+          "n": 127,
+          "recall_at_0_5": 0.9764,
+          "mean_p_machine": 0.9473
+        },
+        "opt_125m": {
+          "n": 123,
+          "recall_at_0_5": 0.9512,
+          "mean_p_machine": 0.9145
+        },
+        "opt_13b": {
+          "n": 95,
+          "recall_at_0_5": 1.0,
+          "mean_p_machine": 0.989
+        },
+        "opt_2.7b": {
+          "n": 121,
+          "recall_at_0_5": 0.9835,
+          "mean_p_machine": 0.9681
+        },
+        "opt_30b": {
+          "n": 114,
+          "recall_at_0_5": 0.9912,
+          "mean_p_machine": 0.9803
+        },
+        "opt_350m": {
+          "n": 114,
+          "recall_at_0_5": 0.9737,
+          "mean_p_machine": 0.947
+        },
+        "opt_6.7b": {
+          "n": 121,
+          "recall_at_0_5": 0.9917,
+          "mean_p_machine": 0.939
+        },
+        "opt_iml_30b": {
+          "n": 122,
+          "recall_at_0_5": 1.0,
+          "mean_p_machine": 0.9652
+        },
+        "opt_iml_max_1.3b": {
+          "n": 117,
+          "recall_at_0_5": 0.9402,
+          "mean_p_machine": 0.8862
+        },
+        "t0_11b": {
+          "n": 53,
+          "recall_at_0_5": 0.8868,
+          "mean_p_machine": 0.8151
+        },
+        "t0_3b": {
+          "n": 55,
+          "recall_at_0_5": 0.9091,
+          "mean_p_machine": 0.8172
+        },
+        "text-davinci-002": {
+          "n": 215,
+          "recall_at_0_5": 0.9209,
+          "mean_p_machine": 0.8489
+        },
+        "text-davinci-003": {
+          "n": 198,
+          "recall_at_0_5": 0.9444,
+          "mean_p_machine": 0.8556
+        }
+      },
+      "human_behavior": {
+        "n": 177,
+        "mean_p_machine": 0.6509,
+        "frac_ge_0_5": 0.7401,
+        "frac_le_0_3": 0.0508
+      },
+      "domain_contrast": [
+        {
+          "feature": "n_chars",
+          "hswag_machine_minus_human": 1131.3228,
+          "other_domains_machine_minus_human": 150.9825
+        },
+        {
+          "feature": "n_chars_no_space",
+          "hswag_machine_minus_human": 932.9508,
+          "other_domains_machine_minus_human": 132.5896
+        },
+        {
+          "feature": "n_words",
+          "hswag_machine_minus_human": 199.3639,
+          "other_domains_machine_minus_human": 18.9579
+        },
+        {
+          "feature": "avg_para_len",
+          "hswag_machine_minus_human": 199.3639,
+          "other_domains_machine_minus_human": 18.9579
+        },
+        {
+          "feature": "exclaim_rate_per_sent",
+          "hswag_machine_minus_human": 60.3796,
+          "other_domains_machine_minus_human": -1.9855
+        },
+        {
+          "feature": "second_person_rate",
+          "hswag_machine_minus_human": -26.7408,
+          "other_domains_machine_minus_human": -0.6295
+        },
+        {
+          "feature": "pron_you",
+          "hswag_machine_minus_human": -26.7408,
+          "other_domains_machine_minus_human": -0.6295
+        },
+        {
+          "feature": "max_sent_len",
+          "hswag_machine_minus_human": 14.5128,
+          "other_domains_machine_minus_human": 4.6126
+        },
+        {
+          "feature": "min_sent_len",
+          "hswag_machine_minus_human": -13.2396,
+          "other_domains_machine_minus_human": 1.8723
+        },
+        {
+          "feature": "n_sentences",
+          "hswag_machine_minus_human": 11.987,
+          "other_domains_machine_minus_human": 0.6827
+        },
+        {
+          "feature": "aux_rate",
+          "hswag_machine_minus_human": -11.527,
+          "other_domains_machine_minus_human": 1.1691
+        },
+        {
+          "feature": "first_person_rate",
+          "hswag_machine_minus_human": 9.3643,
+          "other_domains_machine_minus_human": -5.2447
+        }
+      ]
+    },
+    "lodo": {
+      "enabled": true,
+      "protocol": {
+        "train": "MAGE-train rows of all domains except d (stored labels)",
+        "feature_state": "document-frequency stats refit on train-minus-d text (rare_token_ratio/mean_log_df recomputed; other 71 features are state-independent)",
+        "calibration": "isotonic fit on MAGE-val rows of domains != d",
+        "eval": "MAGE-test rows of domain d only",
+        "params": {
+          "note": "EXPERIMENTAL models only (E1 single-generator gap, E5 LODO). Fixed to the Phase-1 selected HGB hyperparameters; never tuned on evaluation data; never presented as the baseline.",
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63,
+          "max_iter": 300,
+          "random_state": 42
+        },
+        "note": "experimental models - reported separately from the locked baseline"
+      },
+      "folds": {
+        "cmv": {
+          "n_train": 142945,
+          "n_val": 47651,
+          "n_test": 4347,
+          "machine_share": 0.7129,
+          "lodo_model": {
+            "n": 4347,
+            "positive_rate": 0.7129,
+            "threshold": 0.5,
+            "accuracy": 0.9105,
+            "precision_machine": 0.9414,
+            "recall_machine": 0.9326,
+            "f1_machine": 0.9369,
+            "precision_macro": 0.8889,
+            "recall_macro": 0.8942,
+            "f1_macro": 0.8914,
+            "roc_auc": 0.966,
+            "pr_auc": 0.9849,
+            "brier": 0.0651,
+            "ece_10": 0.029,
+            "mean_abs_p_minus_y": 0.1406,
+            "confusion_matrix": {
+              "tn": 1068,
+              "fp": 180,
+              "fn": 209,
+              "tp": 2890
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 4347,
+            "positive_rate": 0.7129,
+            "threshold": 0.5,
+            "accuracy": 0.9324,
+            "precision_machine": 0.9567,
+            "recall_machine": 0.948,
+            "f1_machine": 0.9524,
+            "precision_macro": 0.9153,
+            "recall_macro": 0.9207,
+            "f1_macro": 0.9179,
+            "roc_auc": 0.9793,
+            "pr_auc": 0.9908,
+            "brier": 0.0501,
+            "ece_10": 0.0221,
+            "mean_abs_p_minus_y": 0.1043,
+            "confusion_matrix": {
+              "tn": 1115,
+              "fp": 133,
+              "fn": 161,
+              "tp": 2938
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0058,
+          "duration_s": 38.1,
+          "model_saved": "ml/experiments/phase2/models/lodo_cmv.joblib"
+        },
+        "eli5": {
+          "n_train": 136032,
+          "n_val": 45346,
+          "n_test": 6654,
+          "machine_share": 0.561,
+          "lodo_model": {
+            "n": 6654,
+            "positive_rate": 0.561,
+            "threshold": 0.5,
+            "accuracy": 0.7916,
+            "precision_machine": 0.7539,
+            "recall_machine": 0.933,
+            "f1_machine": 0.834,
+            "precision_macro": 0.8155,
+            "recall_macro": 0.7719,
+            "f1_macro": 0.777,
+            "roc_auc": 0.9051,
+            "pr_auc": 0.927,
+            "brier": 0.15,
+            "ece_10": 0.1248,
+            "mean_abs_p_minus_y": 0.2482,
+            "confusion_matrix": {
+              "tn": 1784,
+              "fp": 1137,
+              "fn": 250,
+              "tp": 3483
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 6654,
+            "positive_rate": 0.561,
+            "threshold": 0.5,
+            "accuracy": 0.8724,
+            "precision_machine": 0.8634,
+            "recall_machine": 0.9178,
+            "f1_machine": 0.8898,
+            "precision_macro": 0.8746,
+            "recall_macro": 0.8661,
+            "f1_macro": 0.8692,
+            "roc_auc": 0.949,
+            "pr_auc": 0.9572,
+            "brier": 0.0905,
+            "ece_10": 0.025,
+            "mean_abs_p_minus_y": 0.1714,
+            "confusion_matrix": {
+              "tn": 2379,
+              "fp": 542,
+              "fn": 307,
+              "tp": 3426
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0302,
+          "duration_s": 38.3,
+          "model_saved": "ml/experiments/phase2/models/lodo_eli5.joblib"
+        },
+        "hswag": {
+          "n_train": 146167,
+          "n_val": 48719,
+          "n_test": 3274,
+          "machine_share": 0.9459,
+          "lodo_model": {
+            "n": 3274,
+            "positive_rate": 0.9459,
+            "threshold": 0.5,
+            "accuracy": 0.8668,
+            "precision_machine": 0.9425,
+            "recall_machine": 0.9151,
+            "f1_machine": 0.9286,
+            "precision_macro": 0.4787,
+            "recall_macro": 0.4688,
+            "f1_macro": 0.4733,
+            "roc_auc": 0.7279,
+            "pr_auc": 0.9813,
+            "brier": 0.0966,
+            "ece_10": 0.0971,
+            "mean_abs_p_minus_y": 0.1692,
+            "confusion_matrix": {
+              "tn": 4,
+              "fp": 173,
+              "fn": 263,
+              "tp": 2834
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 3274,
+            "positive_rate": 0.9459,
+            "threshold": 0.5,
+            "accuracy": 0.9172,
+            "precision_machine": 0.9576,
+            "recall_machine": 0.9548,
+            "f1_machine": 0.9562,
+            "precision_macro": 0.6024,
+            "recall_macro": 0.6073,
+            "f1_macro": 0.6048,
+            "roc_auc": 0.8751,
+            "pr_auc": 0.9917,
+            "brier": 0.0587,
+            "ece_10": 0.0482,
+            "mean_abs_p_minus_y": 0.1186,
+            "confusion_matrix": {
+              "tn": 46,
+              "fp": 131,
+              "fn": 140,
+              "tp": 2957
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0104,
+          "duration_s": 39.5,
+          "model_saved": "ml/experiments/phase2/models/lodo_hswag.joblib"
+        },
+        "roct": {
+          "n_train": 141910,
+          "n_val": 47302,
+          "n_test": 4689,
+          "machine_share": 0.8064,
+          "lodo_model": {
+            "n": 4689,
+            "positive_rate": 0.8064,
+            "threshold": 0.5,
+            "accuracy": 0.7799,
+            "precision_machine": 0.8143,
+            "recall_machine": 0.9418,
+            "f1_machine": 0.8734,
+            "precision_macro": 0.5591,
+            "recall_macro": 0.5238,
+            "f1_macro": 0.5151,
+            "roc_auc": 0.7647,
+            "pr_auc": 0.9385,
+            "brier": 0.1611,
+            "ece_10": 0.122,
+            "mean_abs_p_minus_y": 0.2391,
+            "confusion_matrix": {
+              "tn": 96,
+              "fp": 812,
+              "fn": 220,
+              "tp": 3561
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 4689,
+            "positive_rate": 0.8064,
+            "threshold": 0.5,
+            "accuracy": 0.958,
+            "precision_machine": 0.9885,
+            "recall_machine": 0.959,
+            "f1_machine": 0.9736,
+            "precision_macro": 0.9184,
+            "recall_macro": 0.9564,
+            "f1_macro": 0.9357,
+            "roc_auc": 0.9899,
+            "pr_auc": 0.9974,
+            "brier": 0.0319,
+            "ece_10": 0.0322,
+            "mean_abs_p_minus_y": 0.0723,
+            "confusion_matrix": {
+              "tn": 866,
+              "fp": 42,
+              "fn": 155,
+              "tp": 3626
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0589,
+          "duration_s": 37.9,
+          "model_saved": "ml/experiments/phase2/models/lodo_roct.joblib"
+        },
+        "sci_gen": {
+          "n_train": 143053,
+          "n_val": 47682,
+          "n_test": 4315,
+          "machine_share": 0.6934,
+          "lodo_model": {
+            "n": 4315,
+            "positive_rate": 0.6934,
+            "threshold": 0.5,
+            "accuracy": 0.8146,
+            "precision_machine": 0.8695,
+            "recall_machine": 0.862,
+            "f1_machine": 0.8657,
+            "precision_macro": 0.7817,
+            "recall_macro": 0.7847,
+            "f1_macro": 0.7832,
+            "roc_auc": 0.8876,
+            "pr_auc": 0.9514,
+            "brier": 0.1293,
+            "ece_10": 0.0451,
+            "mean_abs_p_minus_y": 0.2288,
+            "confusion_matrix": {
+              "tn": 936,
+              "fp": 387,
+              "fn": 413,
+              "tp": 2579
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 4315,
+            "positive_rate": 0.6934,
+            "threshold": 0.5,
+            "accuracy": 0.8841,
+            "precision_machine": 0.9308,
+            "recall_machine": 0.8997,
+            "f1_machine": 0.915,
+            "precision_macro": 0.86,
+            "recall_macro": 0.8743,
+            "f1_macro": 0.8665,
+            "roc_auc": 0.9506,
+            "pr_auc": 0.9779,
+            "brier": 0.0829,
+            "ece_10": 0.0207,
+            "mean_abs_p_minus_y": 0.1667,
+            "confusion_matrix": {
+              "tn": 1123,
+              "fp": 200,
+              "fn": 300,
+              "tp": 2692
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0265,
+          "duration_s": 39.0,
+          "model_saved": "ml/experiments/phase2/models/lodo_sci_gen.joblib"
+        },
+        "squad": {
+          "n_train": 138262,
+          "n_val": 46087,
+          "n_test": 5911,
+          "machine_share": 0.5214,
+          "lodo_model": {
+            "n": 5911,
+            "positive_rate": 0.5214,
+            "threshold": 0.5,
+            "accuracy": 0.7066,
+            "precision_machine": 0.6495,
+            "recall_machine": 0.95,
+            "f1_machine": 0.7715,
+            "precision_macro": 0.7699,
+            "recall_macro": 0.6958,
+            "f1_macro": 0.6809,
+            "roc_auc": 0.9035,
+            "pr_auc": 0.9243,
+            "brier": 0.1876,
+            "ece_10": 0.2077,
+            "mean_abs_p_minus_y": 0.3064,
+            "confusion_matrix": {
+              "tn": 1249,
+              "fp": 1580,
+              "fn": 154,
+              "tp": 2928
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 5911,
+            "positive_rate": 0.5214,
+            "threshold": 0.5,
+            "accuracy": 0.8795,
+            "precision_machine": 0.8771,
+            "recall_machine": 0.8942,
+            "f1_machine": 0.8856,
+            "precision_macro": 0.8797,
+            "recall_macro": 0.8789,
+            "f1_macro": 0.8792,
+            "roc_auc": 0.9518,
+            "pr_auc": 0.9598,
+            "brier": 0.0872,
+            "ece_10": 0.0355,
+            "mean_abs_p_minus_y": 0.1728,
+            "confusion_matrix": {
+              "tn": 2443,
+              "fp": 386,
+              "fn": 326,
+              "tp": 2756
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0355,
+          "duration_s": 49.5,
+          "model_saved": "ml/experiments/phase2/models/lodo_squad.joblib"
+        },
+        "tldr": {
+          "n_train": 143496,
+          "n_val": 47832,
+          "n_test": 4162,
+          "machine_share": 0.76,
+          "lodo_model": {
+            "n": 4162,
+            "positive_rate": 0.76,
+            "threshold": 0.5,
+            "accuracy": 0.7893,
+            "precision_machine": 0.8418,
+            "recall_machine": 0.89,
+            "f1_machine": 0.8652,
+            "precision_macro": 0.7082,
+            "recall_macro": 0.6802,
+            "f1_macro": 0.6913,
+            "roc_auc": 0.8481,
+            "pr_auc": 0.9509,
+            "brier": 0.1404,
+            "ece_10": 0.0604,
+            "mean_abs_p_minus_y": 0.2464,
+            "confusion_matrix": {
+              "tn": 470,
+              "fp": 529,
+              "fn": 348,
+              "tp": 2815
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 4162,
+            "positive_rate": 0.76,
+            "threshold": 0.5,
+            "accuracy": 0.8484,
+            "precision_machine": 0.8999,
+            "recall_machine": 0.9007,
+            "f1_machine": 0.9003,
+            "precision_macro": 0.7923,
+            "recall_macro": 0.7917,
+            "f1_macro": 0.792,
+            "roc_auc": 0.914,
+            "pr_auc": 0.9718,
+            "brier": 0.1022,
+            "ece_10": 0.0203,
+            "mean_abs_p_minus_y": 0.1994,
+            "confusion_matrix": {
+              "tn": 682,
+              "fp": 317,
+              "fn": 314,
+              "tp": 2849
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0209,
+          "duration_s": 38.0,
+          "model_saved": "ml/experiments/phase2/models/lodo_tldr.joblib"
+        },
+        "wp": {
+          "n_train": 139500,
+          "n_val": 46508,
+          "n_test": 5494,
+          "machine_share": 0.6791,
+          "lodo_model": {
+            "n": 5494,
+            "positive_rate": 0.6791,
+            "threshold": 0.5,
+            "accuracy": 0.8214,
+            "precision_machine": 0.8321,
+            "recall_machine": 0.9233,
+            "f1_machine": 0.8754,
+            "precision_macro": 0.8104,
+            "recall_macro": 0.7646,
+            "f1_macro": 0.7803,
+            "roc_auc": 0.8965,
+            "pr_auc": 0.9446,
+            "brier": 0.132,
+            "ece_10": 0.0811,
+            "mean_abs_p_minus_y": 0.2031,
+            "confusion_matrix": {
+              "tn": 1068,
+              "fp": 695,
+              "fn": 286,
+              "tp": 3445
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 5494,
+            "positive_rate": 0.6791,
+            "threshold": 0.5,
+            "accuracy": 0.9303,
+            "precision_machine": 0.9566,
+            "recall_machine": 0.94,
+            "f1_machine": 0.9482,
+            "precision_macro": 0.917,
+            "recall_macro": 0.9249,
+            "f1_macro": 0.9208,
+            "roc_auc": 0.9779,
+            "pr_auc": 0.9874,
+            "brier": 0.0523,
+            "ece_10": 0.024,
+            "mean_abs_p_minus_y": 0.1023,
+            "confusion_matrix": {
+              "tn": 1604,
+              "fp": 159,
+              "fn": 224,
+              "tp": 3507
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0428,
+          "duration_s": 36.4,
+          "model_saved": "ml/experiments/phase2/models/lodo_wp.joblib"
+        },
+        "xsum": {
+          "n_train": 138313,
+          "n_val": 46101,
+          "n_test": 5893,
+          "machine_share": 0.7341,
+          "lodo_model": {
+            "n": 5893,
+            "positive_rate": 0.7341,
+            "threshold": 0.5,
+            "accuracy": 0.7692,
+            "precision_machine": 0.8298,
+            "recall_machine": 0.8625,
+            "f1_machine": 0.8458,
+            "precision_macro": 0.702,
+            "recall_macro": 0.6871,
+            "f1_macro": 0.6935,
+            "roc_auc": 0.8032,
+            "pr_auc": 0.9145,
+            "brier": 0.163,
+            "ece_10": 0.088,
+            "mean_abs_p_minus_y": 0.2667,
+            "confusion_matrix": {
+              "tn": 802,
+              "fp": 765,
+              "fn": 595,
+              "tp": 3731
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 5893,
+            "positive_rate": 0.7341,
+            "threshold": 0.5,
+            "accuracy": 0.8659,
+            "precision_machine": 0.9222,
+            "recall_machine": 0.8927,
+            "f1_machine": 0.9072,
+            "precision_macro": 0.825,
+            "recall_macro": 0.8424,
+            "f1_macro": 0.8329,
+            "roc_auc": 0.9328,
+            "pr_auc": 0.9737,
+            "brier": 0.0936,
+            "ece_10": 0.0341,
+            "mean_abs_p_minus_y": 0.1828,
+            "confusion_matrix": {
+              "tn": 1241,
+              "fp": 326,
+              "fn": 464,
+              "tp": 3862
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0591,
+          "duration_s": 38.9,
+          "model_saved": "ml/experiments/phase2/models/lodo_xsum.joblib"
+        },
+        "yelp": {
+          "n_train": 134214,
+          "n_val": 44736,
+          "n_test": 7256,
+          "machine_share": 0.4059,
+          "lodo_model": {
+            "n": 7256,
+            "positive_rate": 0.4059,
+            "threshold": 0.5,
+            "accuracy": 0.6756,
+            "precision_machine": 0.5592,
+            "recall_machine": 0.9477,
+            "f1_machine": 0.7034,
+            "precision_macro": 0.7456,
+            "recall_macro": 0.7187,
+            "f1_macro": 0.6727,
+            "roc_auc": 0.8913,
+            "pr_auc": 0.8709,
+            "brier": 0.2215,
+            "ece_10": 0.2449,
+            "mean_abs_p_minus_y": 0.3248,
+            "confusion_matrix": {
+              "tn": 2111,
+              "fp": 2200,
+              "fn": 154,
+              "tp": 2791
+            }
+          },
+          "locked_baseline_same_rows": {
+            "n": 7256,
+            "positive_rate": 0.4059,
+            "threshold": 0.5,
+            "accuracy": 0.8629,
+            "precision_machine": 0.8259,
+            "recall_machine": 0.839,
+            "f1_machine": 0.8324,
+            "precision_macro": 0.8574,
+            "recall_macro": 0.8591,
+            "f1_macro": 0.8582,
+            "roc_auc": 0.9375,
+            "pr_auc": 0.9244,
+            "brier": 0.0983,
+            "ece_10": 0.0413,
+            "mean_abs_p_minus_y": 0.1898,
+            "confusion_matrix": {
+              "tn": 3790,
+              "fp": 521,
+              "fn": 474,
+              "tp": 2471
+            }
+          },
+          "delta_pr_auc_lodo_minus_locked": -0.0536,
+          "duration_s": 39.3,
+          "model_saved": "ml/experiments/phase2/models/lodo_yelp.joblib"
+        }
+      },
+      "summary": {
+        "n_folds": 10,
+        "mean_pr_auc_lodo": 0.9388,
+        "min_pr_auc_lodo": 0.8709,
+        "mean_pr_auc_locked": 0.9732,
+        "worst_domains": [
+          "yelp",
+          "xsum",
+          "squad"
+        ]
+      }
+    },
+    "raid_cross_corpus": {
+      "note": "cross-corpus supervised view (locked MAGE-trained model)",
+      "policy": "40-5000 words (Phase-1 inclusion range)",
+      "per_domain": {
+        "abstracts": {
+          "n": 3982,
+          "positive_rate": 0.6233,
+          "threshold": 0.5,
+          "accuracy": 0.6251,
+          "precision_machine": 0.7003,
+          "recall_machine": 0.6966,
+          "f1_machine": 0.6984,
+          "precision_macro": 0.6013,
+          "recall_macro": 0.6016,
+          "f1_macro": 0.6015,
+          "roc_auc": 0.6735,
+          "pr_auc": 0.7876,
+          "brier": 0.2513,
+          "ece_10": 0.1728,
+          "mean_abs_p_minus_y": 0.3895,
+          "confusion_matrix": {
+            "tn": 760,
+            "fp": 740,
+            "fn": 753,
+            "tp": 1729
+          },
+          "n_machine": 2482,
+          "n_human": 1500
+        },
+        "books": {
+          "n": 3988,
+          "positive_rate": 0.6249,
+          "threshold": 0.5,
+          "accuracy": 0.7766,
+          "precision_machine": 0.8494,
+          "recall_machine": 0.7809,
+          "f1_machine": 0.8137,
+          "precision_macro": 0.7638,
+          "recall_macro": 0.7751,
+          "f1_macro": 0.7673,
+          "roc_auc": 0.8505,
+          "pr_auc": 0.8936,
+          "brier": 0.1573,
+          "ece_10": 0.0783,
+          "mean_abs_p_minus_y": 0.2654,
+          "confusion_matrix": {
+            "tn": 1151,
+            "fp": 345,
+            "fn": 546,
+            "tp": 1946
+          },
+          "n_machine": 2492,
+          "n_human": 1496
+        },
+        "news": {
+          "n": 3972,
+          "positive_rate": 0.6224,
+          "threshold": 0.5,
+          "accuracy": 0.756,
+          "precision_machine": 0.8272,
+          "recall_machine": 0.7686,
+          "f1_machine": 0.7968,
+          "precision_macro": 0.7428,
+          "recall_macro": 0.752,
+          "f1_macro": 0.7458,
+          "roc_auc": 0.8267,
+          "pr_auc": 0.8753,
+          "brier": 0.1708,
+          "ece_10": 0.0804,
+          "mean_abs_p_minus_y": 0.2845,
+          "confusion_matrix": {
+            "tn": 1103,
+            "fp": 397,
+            "fn": 572,
+            "tp": 1900
+          },
+          "n_machine": 2472,
+          "n_human": 1500
+        },
+        "poetry": {
+          "n": 3912,
+          "positive_rate": 0.6194,
+          "threshold": 0.5,
+          "accuracy": 0.6887,
+          "precision_machine": 0.7644,
+          "recall_machine": 0.7189,
+          "f1_machine": 0.741,
+          "precision_macro": 0.6737,
+          "recall_macro": 0.6791,
+          "f1_macro": 0.6754,
+          "roc_auc": 0.7459,
+          "pr_auc": 0.8089,
+          "brier": 0.2244,
+          "ece_10": 0.1536,
+          "mean_abs_p_minus_y": 0.3359,
+          "confusion_matrix": {
+            "tn": 952,
+            "fp": 537,
+            "fn": 681,
+            "tp": 1742
+          },
+          "n_machine": 2423,
+          "n_human": 1489
+        },
+        "recipes": {
+          "n": 3956,
+          "positive_rate": 0.6208,
+          "threshold": 0.5,
+          "accuracy": 0.6775,
+          "precision_machine": 0.7132,
+          "recall_machine": 0.8037,
+          "f1_machine": 0.7557,
+          "precision_macro": 0.6537,
+          "recall_macro": 0.6372,
+          "f1_macro": 0.6405,
+          "roc_auc": 0.7204,
+          "pr_auc": 0.8087,
+          "brier": 0.2258,
+          "ece_10": 0.1322,
+          "mean_abs_p_minus_y": 0.3555,
+          "confusion_matrix": {
+            "tn": 706,
+            "fp": 794,
+            "fn": 482,
+            "tp": 1974
+          },
+          "n_machine": 2456,
+          "n_human": 1500
+        },
+        "reddit": {
+          "n": 3938,
+          "positive_rate": 0.6199,
+          "threshold": 0.5,
+          "accuracy": 0.7542,
+          "precision_machine": 0.887,
+          "recall_machine": 0.6915,
+          "f1_machine": 0.7772,
+          "precision_macro": 0.7585,
+          "recall_macro": 0.7739,
+          "f1_macro": 0.7515,
+          "roc_auc": 0.8378,
+          "pr_auc": 0.8826,
+          "brier": 0.1815,
+          "ece_10": 0.1394,
+          "mean_abs_p_minus_y": 0.2798,
+          "confusion_matrix": {
+            "tn": 1282,
+            "fp": 215,
+            "fn": 753,
+            "tp": 1688
+          },
+          "n_machine": 2441,
+          "n_human": 1497
+        },
+        "reviews": {
+          "n": 3873,
+          "positive_rate": 0.639,
+          "threshold": 0.5,
+          "accuracy": 0.7563,
+          "precision_machine": 0.896,
+          "recall_machine": 0.6998,
+          "f1_machine": 0.7858,
+          "precision_macro": 0.7565,
+          "recall_macro": 0.778,
+          "f1_macro": 0.7515,
+          "roc_auc": 0.8648,
+          "pr_auc": 0.8997,
+          "brier": 0.1754,
+          "ece_10": 0.1636,
+          "mean_abs_p_minus_y": 0.2788,
+          "confusion_matrix": {
+            "tn": 1197,
+            "fp": 201,
+            "fn": 743,
+            "tp": 1732
+          },
+          "n_machine": 2475,
+          "n_human": 1398
+        },
+        "wiki": {
+          "n": 3980,
+          "positive_rate": 0.6231,
+          "threshold": 0.5,
+          "accuracy": 0.7651,
+          "precision_machine": 0.8507,
+          "recall_machine": 0.7556,
+          "f1_machine": 0.8003,
+          "precision_macro": 0.7548,
+          "recall_macro": 0.7682,
+          "f1_macro": 0.7575,
+          "roc_auc": 0.8472,
+          "pr_auc": 0.8897,
+          "brier": 0.1633,
+          "ece_10": 0.0941,
+          "mean_abs_p_minus_y": 0.2727,
+          "confusion_matrix": {
+            "tn": 1171,
+            "fp": 329,
+            "fn": 606,
+            "tp": 1874
+          },
+          "n_machine": 2480,
+          "n_human": 1500
+        }
+      },
+      "overall": {
+        "n": 31601,
+        "positive_rate": 0.6241,
+        "threshold": 0.5,
+        "accuracy": 0.7249,
+        "precision_machine": 0.8039,
+        "recall_machine": 0.7396,
+        "f1_machine": 0.7704,
+        "precision_macro": 0.7111,
+        "recall_macro": 0.72,
+        "f1_macro": 0.7136,
+        "roc_auc": 0.7952,
+        "pr_auc": 0.854,
+        "brier": 0.1937,
+        "ece_10": 0.1138,
+        "mean_abs_p_minus_y": 0.3078,
+        "confusion_matrix": {
+          "tn": 8322,
+          "fp": 3558,
+          "fn": 5136,
+          "tp": 14585
+        }
+      }
+    },
+    "duration_s": 406.9
+  },
+  "E6": {
+    "name": "E6-length-sensitivity",
+    "status": "ok",
+    "buckets": {
+      "0-25w": {
+        "n": 0,
+        "note": "too few / single-class"
+      },
+      "25-50w": {
+        "n": 4852,
+        "machine_share": 0.7251,
+        "positive_rate": 0.7251,
+        "threshold": 0.5,
+        "accuracy": 0.8502,
+        "precision_machine": 0.8677,
+        "recall_machine": 0.936,
+        "f1_machine": 0.9006,
+        "precision_macro": 0.8274,
+        "recall_macro": 0.7799,
+        "f1_macro": 0.7983,
+        "roc_auc": 0.8907,
+        "pr_auc": 0.9473,
+        "brier": 0.1087,
+        "ece_10": 0.0192,
+        "mean_abs_p_minus_y": 0.2086,
+        "mean_abs_confidence": 0.3607,
+        "frac_uncertain_0_4_0_6": 0.0676
+      },
+      "50-75w": {
+        "n": 7150,
+        "machine_share": 0.7109,
+        "positive_rate": 0.7109,
+        "threshold": 0.5,
+        "accuracy": 0.8413,
+        "precision_machine": 0.8701,
+        "recall_machine": 0.913,
+        "f1_machine": 0.891,
+        "precision_macro": 0.8133,
+        "recall_macro": 0.7889,
+        "f1_macro": 0.7994,
+        "roc_auc": 0.898,
+        "pr_auc": 0.9529,
+        "brier": 0.1134,
+        "ece_10": 0.0131,
+        "mean_abs_p_minus_y": 0.2206,
+        "mean_abs_confidence": 0.3466,
+        "frac_uncertain_0_4_0_6": 0.0808
+      },
+      "75-100w": {
+        "n": 6155,
+        "machine_share": 0.6213,
+        "positive_rate": 0.6213,
+        "threshold": 0.5,
+        "accuracy": 0.8434,
+        "precision_machine": 0.884,
+        "recall_machine": 0.8609,
+        "f1_machine": 0.8723,
+        "precision_macro": 0.8326,
+        "recall_macro": 0.8378,
+        "f1_macro": 0.8349,
+        "roc_auc": 0.925,
+        "pr_auc": 0.9549,
+        "brier": 0.1074,
+        "ece_10": 0.0143,
+        "mean_abs_p_minus_y": 0.2098,
+        "mean_abs_confidence": 0.3541,
+        "frac_uncertain_0_4_0_6": 0.0825
+      },
+      "100-150w": {
+        "n": 8747,
+        "machine_share": 0.5744,
+        "positive_rate": 0.5744,
+        "threshold": 0.5,
+        "accuracy": 0.8638,
+        "precision_machine": 0.8989,
+        "recall_machine": 0.8597,
+        "f1_machine": 0.8788,
+        "precision_macro": 0.86,
+        "recall_macro": 0.8646,
+        "f1_macro": 0.8617,
+        "roc_auc": 0.9411,
+        "pr_auc": 0.9581,
+        "brier": 0.0959,
+        "ece_10": 0.0094,
+        "mean_abs_p_minus_y": 0.1869,
+        "mean_abs_confidence": 0.3714,
+        "frac_uncertain_0_4_0_6": 0.0654
+      },
+      "150-200w": {
+        "n": 5301,
+        "machine_share": 0.5789,
+        "positive_rate": 0.5789,
+        "threshold": 0.5,
+        "accuracy": 0.8847,
+        "precision_machine": 0.925,
+        "recall_machine": 0.8716,
+        "f1_machine": 0.8975,
+        "precision_macro": 0.8807,
+        "recall_macro": 0.8872,
+        "f1_macro": 0.8829,
+        "roc_auc": 0.9572,
+        "pr_auc": 0.9696,
+        "brier": 0.0818,
+        "ece_10": 0.0164,
+        "mean_abs_p_minus_y": 0.1619,
+        "mean_abs_confidence": 0.3877,
+        "frac_uncertain_0_4_0_6": 0.0568
+      },
+      "200-300w": {
+        "n": 6733,
+        "machine_share": 0.6272,
+        "positive_rate": 0.6272,
+        "threshold": 0.5,
+        "accuracy": 0.9188,
+        "precision_machine": 0.9423,
+        "recall_machine": 0.9273,
+        "f1_machine": 0.9347,
+        "precision_macro": 0.9116,
+        "recall_macro": 0.9158,
+        "f1_macro": 0.9136,
+        "roc_auc": 0.9756,
+        "pr_auc": 0.9852,
+        "brier": 0.0597,
+        "ece_10": 0.0108,
+        "mean_abs_p_minus_y": 0.1248,
+        "mean_abs_confidence": 0.4096,
+        "frac_uncertain_0_4_0_6": 0.0411
+      },
+      "300-400w": {
+        "n": 3444,
+        "machine_share": 0.6472,
+        "positive_rate": 0.6472,
+        "threshold": 0.5,
+        "accuracy": 0.9382,
+        "precision_machine": 0.9569,
+        "recall_machine": 0.9471,
+        "f1_machine": 0.952,
+        "precision_macro": 0.9308,
+        "recall_macro": 0.9344,
+        "f1_macro": 0.9326,
+        "roc_auc": 0.984,
+        "pr_auc": 0.9911,
+        "brier": 0.0466,
+        "ece_10": 0.0122,
+        "mean_abs_p_minus_y": 0.0958,
+        "mean_abs_confidence": 0.4324,
+        "frac_uncertain_0_4_0_6": 0.0325
+      },
+      "400-infw": {
+        "n": 9613,
+        "machine_share": 0.726,
+        "positive_rate": 0.726,
+        "threshold": 0.5,
+        "accuracy": 0.9757,
+        "precision_machine": 0.9867,
+        "recall_machine": 0.9797,
+        "f1_machine": 0.9832,
+        "precision_macro": 0.9669,
+        "recall_macro": 0.9724,
+        "f1_macro": 0.9696,
+        "roc_auc": 0.996,
+        "pr_auc": 0.9981,
+        "brier": 0.0186,
+        "ece_10": 0.0029,
+        "mean_abs_p_minus_y": 0.0378,
+        "mean_abs_confidence": 0.4744,
+        "frac_uncertain_0_4_0_6": 0.0103
+      }
+    },
+    "plan_buckets": {
+      "<50w": {
+        "n": 4852,
+        "machine_share": 0.7251,
+        "positive_rate": 0.7251,
+        "threshold": 0.5,
+        "accuracy": 0.8502,
+        "precision_machine": 0.8677,
+        "recall_machine": 0.936,
+        "f1_machine": 0.9006,
+        "precision_macro": 0.8274,
+        "recall_macro": 0.7799,
+        "f1_macro": 0.7983,
+        "roc_auc": 0.8907,
+        "pr_auc": 0.9473,
+        "brier": 0.1087,
+        "ece_10": 0.0192,
+        "mean_abs_p_minus_y": 0.2086,
+        "mean_abs_confidence": 0.3607,
+        "frac_uncertain_0_4_0_6": 0.0676
+      },
+      "50-150w": {
+        "n": 22052,
+        "machine_share": 0.6317,
+        "positive_rate": 0.6317,
+        "threshold": 0.5,
+        "accuracy": 0.8508,
+        "precision_machine": 0.8838,
+        "recall_machine": 0.8795,
+        "f1_machine": 0.8816,
+        "precision_macro": 0.8394,
+        "recall_macro": 0.8406,
+        "f1_macro": 0.84,
+        "roc_auc": 0.9275,
+        "pr_auc": 0.9564,
+        "brier": 0.1048,
+        "ece_10": 0.0083,
+        "mean_abs_p_minus_y": 0.2042,
+        "mean_abs_confidence": 0.3585,
+        "frac_uncertain_0_4_0_6": 0.0752
+      },
+      "150-400w": {
+        "n": 15478,
+        "machine_share": 0.6151,
+        "positive_rate": 0.6151,
+        "threshold": 0.5,
+        "accuracy": 0.9114,
+        "precision_machine": 0.9404,
+        "recall_machine": 0.914,
+        "f1_machine": 0.927,
+        "precision_macro": 0.9044,
+        "recall_macro": 0.9107,
+        "f1_macro": 0.9072,
+        "roc_auc": 0.972,
+        "pr_auc": 0.9824,
+        "brier": 0.0643,
+        "ece_10": 0.0102,
+        "mean_abs_p_minus_y": 0.1311,
+        "mean_abs_confidence": 0.4072,
+        "frac_uncertain_0_4_0_6": 0.0446
+      },
+      "400w+": {
+        "n": 9613,
+        "machine_share": 0.726,
+        "positive_rate": 0.726,
+        "threshold": 0.5,
+        "accuracy": 0.9757,
+        "precision_machine": 0.9867,
+        "recall_machine": 0.9797,
+        "f1_machine": 0.9832,
+        "precision_macro": 0.9669,
+        "recall_macro": 0.9724,
+        "f1_macro": 0.9696,
+        "roc_auc": 0.996,
+        "pr_auc": 0.9981,
+        "brier": 0.0186,
+        "ece_10": 0.0029,
+        "mean_abs_p_minus_y": 0.0378,
+        "mean_abs_confidence": 0.4744,
+        "frac_uncertain_0_4_0_6": 0.0103
+      }
+    },
+    "gate_table": [
+      {
+        "min_words": 25,
+        "n_kept": 51995,
+        "n_abstained": 0,
+        "frac_abstained": 0.0,
+        "roc_auc": 0.9586,
+        "pr_auc": 0.977,
+        "ece_10": 0.0067,
+        "brier": 0.0772,
+        "f1_macro": 0.8809,
+        "accuracy": 0.8919
+      },
+      {
+        "min_words": 50,
+        "n_kept": 47143,
+        "n_abstained": 4852,
+        "frac_abstained": 0.0933,
+        "roc_auc": 0.9626,
+        "pr_auc": 0.9789,
+        "ece_10": 0.0057,
+        "brier": 0.0739,
+        "f1_macro": 0.8871,
+        "accuracy": 0.8962
+      },
+      {
+        "min_words": 75,
+        "n_kept": 39993,
+        "n_abstained": 12002,
+        "frac_abstained": 0.2308,
+        "roc_auc": 0.9694,
+        "pr_auc": 0.9822,
+        "ece_10": 0.0059,
+        "brier": 0.0669,
+        "f1_macro": 0.8996,
+        "accuracy": 0.906
+      },
+      {
+        "min_words": 100,
+        "n_kept": 33838,
+        "n_abstained": 18157,
+        "frac_abstained": 0.3492,
+        "roc_auc": 0.9754,
+        "pr_auc": 0.9857,
+        "ece_10": 0.0064,
+        "brier": 0.0595,
+        "f1_macro": 0.9116,
+        "accuracy": 0.9174
+      },
+      {
+        "min_words": 150,
+        "n_kept": 25091,
+        "n_abstained": 26904,
+        "frac_abstained": 0.5174,
+        "roc_auc": 0.9839,
+        "pr_auc": 0.9913,
+        "ece_10": 0.0074,
+        "brier": 0.0468,
+        "f1_macro": 0.9296,
+        "accuracy": 0.936
+      },
+      {
+        "min_words": 200,
+        "n_kept": 19790,
+        "n_abstained": 32205,
+        "frac_abstained": 0.6194,
+        "roc_auc": 0.989,
+        "pr_auc": 0.9944,
+        "ece_10": 0.0065,
+        "brier": 0.0374,
+        "f1_macro": 0.9427,
+        "accuracy": 0.9498
+      }
+    ],
+    "short_text_behavior": {
+      "n_under_50w": 4852,
+      "machine_share": 0.7251,
+      "mean_abs_confidence": 0.3607,
+      "frac_uncertain_0_4_0_6": 0.0676,
+      "frac_extreme_ge_0_9_or_le_0_1": 0.5425,
+      "note": "the gate RECOMMENDATION is derived in the report from these tables; no threshold was tuned against them"
+    },
+    "duration_s": 0.3
+  },
+  "E7": {
+    "name": "E7-temporal-drift",
+    "status": "ok",
+    "performance_by_corpus": {
+      "mage_test_in_domain": {
+        "n": 51995,
+        "positive_rate": 0.6529,
+        "threshold": 0.5,
+        "accuracy": 0.8919,
+        "precision_machine": 0.9185,
+        "recall_machine": 0.9156,
+        "f1_machine": 0.9171,
+        "precision_macro": 0.8804,
+        "recall_macro": 0.8814,
+        "f1_macro": 0.8809,
+        "roc_auc": 0.9586,
+        "pr_auc": 0.977,
+        "brier": 0.0772,
+        "ece_10": 0.0067,
+        "mean_abs_p_minus_y": 0.1521,
+        "confusion_matrix": {
+          "tn": 15289,
+          "fp": 2757,
+          "fn": 2865,
+          "tp": 31084
+        }
+      },
+      "hc3_overall": {
+        "n": 64952,
+        "positive_rate": 0.3999,
+        "threshold": 0.5,
+        "accuracy": 0.6918,
+        "precision_machine": 0.5789,
+        "recall_machine": 0.8416,
+        "f1_machine": 0.6859,
+        "precision_macro": 0.7138,
+        "recall_macro": 0.7168,
+        "f1_macro": 0.6917,
+        "roc_auc": 0.8277,
+        "pr_auc": 0.7779,
+        "brier": 0.2085,
+        "ece_10": 0.1762,
+        "mean_abs_p_minus_y": 0.3392,
+        "confusion_matrix": {
+          "tn": 23073,
+          "fp": 15903,
+          "fn": 4115,
+          "tp": 21861
+        }
+      },
+      "hc3_by_domain": {
+        "finance": {
+          "n": 7950,
+          "positive_rate": 0.5535,
+          "threshold": 0.5,
+          "accuracy": 0.7669,
+          "precision_machine": 0.7725,
+          "recall_machine": 0.8205,
+          "f1_machine": 0.7958,
+          "precision_macro": 0.7657,
+          "recall_macro": 0.7605,
+          "f1_macro": 0.7622,
+          "roc_auc": 0.8484,
+          "pr_auc": 0.8588,
+          "brier": 0.1597,
+          "ece_10": 0.0493,
+          "mean_abs_p_minus_y": 0.2867,
+          "confusion_matrix": {
+            "tn": 2487,
+            "fp": 1063,
+            "fn": 790,
+            "tp": 3610
+          }
+        },
+        "medicine": {
+          "n": 2396,
+          "positive_rate": 0.543,
+          "threshold": 0.5,
+          "accuracy": 0.8197,
+          "precision_machine": 0.7664,
+          "recall_machine": 0.9608,
+          "f1_machine": 0.8527,
+          "precision_macro": 0.8499,
+          "recall_macro": 0.8064,
+          "f1_macro": 0.8102,
+          "roc_auc": 0.9423,
+          "pr_auc": 0.9448,
+          "brier": 0.1255,
+          "ece_10": 0.1339,
+          "mean_abs_p_minus_y": 0.2391,
+          "confusion_matrix": {
+            "tn": 714,
+            "fp": 381,
+            "fn": 51,
+            "tp": 1250
+          }
+        },
+        "open_qa": {
+          "n": 3585,
+          "positive_rate": 0.9325,
+          "threshold": 0.5,
+          "accuracy": 0.5743,
+          "precision_machine": 0.9224,
+          "recall_machine": 0.5935,
+          "f1_machine": 0.7222,
+          "precision_macro": 0.4873,
+          "recall_macro": 0.4517,
+          "f1_macro": 0.4059,
+          "roc_auc": 0.4718,
+          "pr_auc": 0.9355,
+          "brier": 0.2738,
+          "ece_10": 0.3498,
+          "mean_abs_p_minus_y": 0.4319,
+          "confusion_matrix": {
+            "tn": 75,
+            "fp": 167,
+            "fn": 1359,
+            "tp": 1984
+          }
+        },
+        "reddit_eli5": {
+          "n": 49451,
+          "positive_rate": 0.3255,
+          "threshold": 0.5,
+          "accuracy": 0.6784,
+          "precision_machine": 0.5035,
+          "recall_machine": 0.8848,
+          "f1_machine": 0.6418,
+          "precision_macro": 0.7079,
+          "recall_macro": 0.7318,
+          "f1_macro": 0.675,
+          "roc_auc": 0.8582,
+          "pr_auc": 0.7709,
+          "brier": 0.2177,
+          "ece_10": 0.2401,
+          "mean_abs_p_minus_y": 0.3484,
+          "confusion_matrix": {
+            "tn": 19307,
+            "fp": 14046,
+            "fn": 1855,
+            "tp": 14243
+          }
+        },
+        "wiki_csai": {
+          "n": 1570,
+          "positive_rate": 0.5312,
+          "threshold": 0.5,
+          "accuracy": 0.8051,
+          "precision_machine": 0.7588,
+          "recall_machine": 0.9281,
+          "f1_machine": 0.835,
+          "precision_macro": 0.8249,
+          "recall_macro": 0.7969,
+          "f1_macro": 0.7985,
+          "roc_auc": 0.9041,
+          "pr_auc": 0.9086,
+          "brier": 0.1433,
+          "ece_10": 0.1168,
+          "mean_abs_p_minus_y": 0.255,
+          "confusion_matrix": {
+            "tn": 490,
+            "fp": 246,
+            "fn": 60,
+            "tp": 774
+          }
+        }
+      },
+      "test_ood_set_gpt": {
+        "n": 1562,
+        "positive_rate": 0.5122,
+        "threshold": 0.5,
+        "accuracy": 0.63,
+        "precision_machine": 0.6613,
+        "recall_machine": 0.5687,
+        "f1_machine": 0.6116,
+        "precision_macro": 0.6333,
+        "recall_macro": 0.6315,
+        "f1_macro": 0.6291,
+        "roc_auc": 0.6907,
+        "pr_auc": 0.6278,
+        "brier": 0.2561,
+        "ece_10": 0.1772,
+        "mean_abs_p_minus_y": 0.3972,
+        "confusion_matrix": {
+          "tn": 529,
+          "fp": 233,
+          "fn": 345,
+          "tp": 455
+        }
+      },
+      "test_ood_set_gpt_para": {
+        "n": 2362,
+        "positive_rate": 0.6774,
+        "threshold": 0.5,
+        "accuracy": 0.5127,
+        "precision_machine": 0.7454,
+        "recall_machine": 0.4263,
+        "f1_machine": 0.5423,
+        "precision_macro": 0.5555,
+        "recall_macro": 0.5602,
+        "f1_macro": 0.5106,
+        "roc_auc": 0.6026,
+        "pr_auc": 0.7114,
+        "brier": 0.3453,
+        "ece_10": 0.335,
+        "mean_abs_p_minus_y": 0.4882,
+        "confusion_matrix": {
+          "tn": 529,
+          "fp": 233,
+          "fn": 918,
+          "tp": 682
+        }
+      }
+    },
+    "feature_drift_machine_hc3_vs_mage": {
+      "n_a": 25976,
+      "n_b": 33949,
+      "top_shifted_features": [
+        {
+          "feature": "hapax_ratio",
+          "mean_hc3_machine": 0.3442,
+          "mean_mage_machine": 0.5262,
+          "cohen_d": -1.0723
+        },
+        {
+          "feature": "ttr",
+          "mean_hc3_machine": 0.5267,
+          "mean_mage_machine": 0.6649,
+          "cohen_d": -0.9212
+        },
+        {
+          "feature": "log_ttr",
+          "mean_hc3_machine": 0.8731,
+          "mean_mage_machine": 0.912,
+          "cohen_d": -0.797
+        },
+        {
+          "feature": "first_person_rate",
+          "mean_hc3_machine": 3.6851,
+          "mean_mage_machine": 20.9454,
+          "cohen_d": -0.7267
+        },
+        {
+          "feature": "root_ttr",
+          "mean_hc3_machine": 6.7647,
+          "mean_mage_machine": 8.6815,
+          "cohen_d": -0.6792
+        },
+        {
+          "feature": "n_paragraphs",
+          "mean_hc3_machine": 1.7368,
+          "mean_mage_machine": 1.0,
+          "cohen_d": 0.6762
+        },
+        {
+          "feature": "cv_para_len",
+          "mean_hc3_machine": 0.0661,
+          "mean_mage_machine": 0.0,
+          "cohen_d": 0.6499
+        },
+        {
+          "feature": "pron_i",
+          "mean_hc3_machine": 1.1617,
+          "mean_mage_machine": 14.3597,
+          "cohen_d": -0.6486
+        },
+        {
+          "feature": "coordinator_rate",
+          "mean_hc3_machine": 48.4148,
+          "mean_mage_machine": 35.9971,
+          "cohen_d": 0.6438
+        },
+        {
+          "feature": "pron_heshe",
+          "mean_hc3_machine": 1.8361,
+          "mean_mage_machine": 15.4279,
+          "cohen_d": -0.6112
+        },
+        {
+          "feature": "avg_para_len",
+          "mean_hc3_machine": 143.6215,
+          "mean_mage_machine": 251.6953,
+          "cohen_d": -0.5917
+        },
+        {
+          "feature": "aux_rate",
+          "mean_hc3_machine": 81.2532,
+          "mean_mage_machine": 64.6389,
+          "cohen_d": 0.578
+        },
+        {
+          "feature": "n_sentences",
+          "mean_hc3_machine": 7.2075,
+          "mean_mage_machine": 14.772,
+          "cohen_d": -0.5432
+        },
+        {
+          "feature": "stopword_ratio",
+          "mean_hc3_machine": 0.4769,
+          "mean_mage_machine": 0.4423,
+          "cohen_d": 0.5165
+        },
+        {
+          "feature": "mean_log_df",
+          "mean_hc3_machine": 4.1132,
+          "mean_mage_machine": 4.0175,
+          "cohen_d": 0.4635
+        }
+      ],
+      "lexicon_and_stylistic_rates": [
+        {
+          "feature": "avg_sent_len",
+          "mean_hc3_machine": 27.0374,
+          "mean_mage_machine": 22.5433,
+          "cohen_d": 0.2364
+        },
+        {
+          "feature": "cv_sent_len",
+          "mean_hc3_machine": 0.3661,
+          "mean_mage_machine": 0.4374,
+          "cohen_d": -0.3371
+        },
+        {
+          "feature": "ttr",
+          "mean_hc3_machine": 0.5267,
+          "mean_mage_machine": 0.6649,
+          "cohen_d": -0.9212
+        },
+        {
+          "feature": "hapax_ratio",
+          "mean_hc3_machine": 0.3442,
+          "mean_mage_machine": 0.5262,
+          "cohen_d": -1.0723
+        },
+        {
+          "feature": "rare_token_ratio",
+          "mean_hc3_machine": 0.0472,
+          "mean_mage_machine": 0.0611,
+          "cohen_d": -0.3131
+        },
+        {
+          "feature": "mean_log_df",
+          "mean_hc3_machine": 4.1132,
+          "mean_mage_machine": 4.0175,
+          "cohen_d": 0.4635
+        },
+        {
+          "feature": "stopword_ratio",
+          "mean_hc3_machine": 0.4769,
+          "mean_mage_machine": 0.4423,
+          "cohen_d": 0.5165
+        },
+        {
+          "feature": "contraction_rate",
+          "mean_hc3_machine": 0.0052,
+          "mean_mage_machine": 0.0116,
+          "cohen_d": -0.437
+        },
+        {
+          "feature": "comma_rate",
+          "mean_hc3_machine": 8.6011,
+          "mean_mage_machine": 6.7207,
+          "cohen_d": 0.4481
+        },
+        {
+          "feature": "qmark_rate",
+          "mean_hc3_machine": 0.0813,
+          "mean_mage_machine": 0.4158,
+          "cohen_d": -0.3354
+        },
+        {
+          "feature": "pron_i",
+          "mean_hc3_machine": 1.1617,
+          "mean_mage_machine": 14.3597,
+          "cohen_d": -0.6486
+        },
+        {
+          "feature": "pron_we",
+          "mean_hc3_machine": 2.5235,
+          "mean_mage_machine": 6.5857,
+          "cohen_d": -0.3407
+        },
+        {
+          "feature": "first_person_rate",
+          "mean_hc3_machine": 3.6851,
+          "mean_mage_machine": 20.9454,
+          "cohen_d": -0.7267
+        },
+        {
+          "feature": "second_person_rate",
+          "mean_hc3_machine": 17.1938,
+          "mean_mage_machine": 10.3754,
+          "cohen_d": 0.2812
+        },
+        {
+          "feature": "hedge_rate",
+          "mean_hc3_machine": 8.929,
+          "mean_mage_machine": 5.08,
+          "cohen_d": 0.417
+        },
+        {
+          "feature": "transition_rate",
+          "mean_hc3_machine": 2.6119,
+          "mean_mage_machine": 2.3672,
+          "cohen_d": 0.0552
+        },
+        {
+          "feature": "boilerplate_rate",
+          "mean_hc3_machine": 0.6366,
+          "mean_mage_machine": 0.1037,
+          "cohen_d": 0.3193
+        },
+        {
+          "feature": "exclaim_rate_per_sent",
+          "mean_hc3_machine": 14.6428,
+          "mean_mage_machine": 60.3113,
+          "cohen_d": -0.3303
+        },
+        {
+          "feature": "clause_density",
+          "mean_hc3_machine": 2.3403,
+          "mean_mage_machine": 1.5657,
+          "cohen_d": 0.428
+        },
+        {
+          "feature": "flesch_reading_ease",
+          "mean_hc3_machine": 46.9888,
+          "mean_mage_machine": 53.5302,
+          "cohen_d": -0.244
+        }
+      ],
+      "positive_d_means": "positive d = hc3_machine higher than mage_machine"
+    },
+    "feature_drift_human_hc3_vs_mage": {
+      "n_a": 38976,
+      "n_b": 18046,
+      "top_shifted_features": [
+        {
+          "feature": "contraction_rate",
+          "mean_hc3_human": 0.0012,
+          "mean_mage_human": 0.011,
+          "cohen_d": -0.88
+        },
+        {
+          "feature": "pron_you",
+          "mean_hc3_human": 23.1383,
+          "mean_mage_human": 9.0183,
+          "cohen_d": 0.6093
+        },
+        {
+          "feature": "second_person_rate",
+          "mean_hc3_human": 23.1383,
+          "mean_mage_human": 9.0183,
+          "cohen_d": 0.6093
+        },
+        {
+          "feature": "root_ttr",
+          "mean_hc3_human": 7.1691,
+          "mean_mage_human": 8.2406,
+          "cohen_d": -0.5576
+        },
+        {
+          "feature": "subordinator_rate",
+          "mean_hc3_human": 41.1469,
+          "mean_mage_human": 30.4095,
+          "cohen_d": 0.5395
+        },
+        {
+          "feature": "first_person_rate",
+          "mean_hc3_human": 13.537,
+          "mean_mage_human": 27.005,
+          "cohen_d": -0.4887
+        },
+        {
+          "feature": "pron_heshe",
+          "mean_hc3_human": 2.9745,
+          "mean_mage_human": 11.8722,
+          "cohen_d": -0.4404
+        },
+        {
+          "feature": "pron_it",
+          "mean_hc3_human": 18.804,
+          "mean_mage_human": 12.0687,
+          "cohen_d": 0.4328
+        },
+        {
+          "feature": "n_sentences",
+          "mean_hc3_human": 7.822,
+          "mean_mage_human": 14.0811,
+          "cohen_d": -0.4311
+        },
+        {
+          "feature": "pron_i",
+          "mean_hc3_human": 8.8313,
+          "mean_mage_human": 19.1934,
+          "cohen_d": -0.4259
+        },
+        {
+          "feature": "aux_rate",
+          "mean_hc3_human": 75.4698,
+          "mean_mage_human": 64.0749,
+          "cohen_d": 0.3992
+        },
+        {
+          "feature": "median_word_len",
+          "mean_hc3_human": 3.9389,
+          "mean_mage_human": 4.1238,
+          "cohen_d": -0.3868
+        },
+        {
+          "feature": "stopword_ratio",
+          "mean_hc3_human": 0.4734,
+          "mean_mage_human": 0.4498,
+          "cohen_d": 0.3791
+        },
+        {
+          "feature": "n_chars_no_space",
+          "mean_hc3_human": 711.4221,
+          "mean_mage_human": 1081.615,
+          "cohen_d": -0.3748
+        },
+        {
+          "feature": "avg_para_len",
+          "mean_hc3_human": 154.6775,
+          "mean_mage_human": 231.6237,
+          "cohen_d": -0.357
+        }
+      ],
+      "lexicon_and_stylistic_rates": [
+        {
+          "feature": "avg_sent_len",
+          "mean_hc3_human": 22.2853,
+          "mean_mage_human": 19.6356,
+          "cohen_d": 0.2113
+        },
+        {
+          "feature": "cv_sent_len",
+          "mean_hc3_human": 0.4556,
+          "mean_mage_human": 0.4631,
+          "cohen_d": -0.0352
+        },
+        {
+          "feature": "ttr",
+          "mean_hc3_human": 0.6628,
+          "mean_mage_human": 0.6466,
+          "cohen_d": 0.1346
+        },
+        {
+          "feature": "hapax_ratio",
+          "mean_hc3_human": 0.4983,
+          "mean_mage_human": 0.4924,
+          "cohen_d": 0.0425
+        },
+        {
+          "feature": "rare_token_ratio",
+          "mean_hc3_human": 0.0651,
+          "mean_mage_human": 0.073,
+          "cohen_d": -0.1682
+        },
+        {
+          "feature": "mean_log_df",
+          "mean_hc3_human": 4.0585,
+          "mean_mage_human": 3.9965,
+          "cohen_d": 0.3076
+        },
+        {
+          "feature": "stopword_ratio",
+          "mean_hc3_human": 0.4734,
+          "mean_mage_human": 0.4498,
+          "cohen_d": 0.3791
+        },
+        {
+          "feature": "contraction_rate",
+          "mean_hc3_human": 0.0012,
+          "mean_mage_human": 0.011,
+          "cohen_d": -0.88
+        },
+        {
+          "feature": "comma_rate",
+          "mean_hc3_human": 7.7886,
+          "mean_mage_human": 7.9179,
+          "cohen_d": -0.0274
+        },
+        {
+          "feature": "qmark_rate",
+          "mean_hc3_human": 0.3044,
+          "mean_mage_human": 0.3789,
+          "cohen_d": -0.0679
+        },
+        {
+          "feature": "pron_i",
+          "mean_hc3_human": 8.8313,
+          "mean_mage_human": 19.1934,
+          "cohen_d": -0.4259
+        },
+        {
+          "feature": "pron_we",
+          "mean_hc3_human": 4.7056,
+          "mean_mage_human": 7.8116,
+          "cohen_d": -0.2375
+        },
+        {
+          "feature": "first_person_rate",
+          "mean_hc3_human": 13.537,
+          "mean_mage_human": 27.005,
+          "cohen_d": -0.4887
+        },
+        {
+          "feature": "second_person_rate",
+          "mean_hc3_human": 23.1383,
+          "mean_mage_human": 9.0183,
+          "cohen_d": 0.6093
+        },
+        {
+          "feature": "hedge_rate",
+          "mean_hc3_human": 6.6391,
+          "mean_mage_human": 4.7208,
+          "cohen_d": 0.2273
+        },
+        {
+          "feature": "transition_rate",
+          "mean_hc3_human": 2.1779,
+          "mean_mage_human": 1.964,
+          "cohen_d": 0.0467
+        },
+        {
+          "feature": "boilerplate_rate",
+          "mean_hc3_human": 0.0484,
+          "mean_mage_human": 0.0824,
+          "cohen_d": -0.0395
+        },
+        {
+          "feature": "exclaim_rate_per_sent",
+          "mean_hc3_human": 13.862,
+          "mean_mage_human": 59.8231,
+          "cohen_d": -0.1698
+        },
+        {
+          "feature": "clause_density",
+          "mean_hc3_human": 1.7918,
+          "mean_mage_human": 1.3803,
+          "cohen_d": 0.3501
+        },
+        {
+          "feature": "flesch_reading_ease",
+          "mean_hc3_human": 58.2854,
+          "mean_mage_human": 57.7026,
+          "cohen_d": 0.0277
+        }
+      ],
+      "positive_d_means": "positive d = hc3_human higher than mage_human"
+    },
+    "lexicon_rates": {
+      "hedge_rate": {
+        "mage_human": 4.7208,
+        "mage_machine": 5.08,
+        "hc3_human": 6.6391,
+        "hc3_machine": 8.929
+      },
+      "boilerplate_rate": {
+        "mage_human": 0.0824,
+        "mage_machine": 0.1037,
+        "hc3_human": 0.0484,
+        "hc3_machine": 0.6366
+      },
+      "transition_rate": {
+        "mage_human": 1.964,
+        "mage_machine": 2.3672,
+        "hc3_human": 2.1779,
+        "hc3_machine": 2.6119
+      },
+      "first_person_rate": {
+        "mage_human": 27.005,
+        "mage_machine": 20.9454,
+        "hc3_human": 13.537,
+        "hc3_machine": 3.6851
+      },
+      "contraction_rate": {
+        "mage_human": 0.011,
+        "mage_machine": 0.0116,
+        "hc3_human": 0.0012,
+        "hc3_machine": 0.0052
+      }
+    },
+    "reproducibility": {
+      "score_bit_identical": true,
+      "config_sha256": "0723c78104b4bdca54398d2940056ea484793a2bcc49a98b69805d0ff37bd6fa",
+      "feature_names_sha256": "0fffe6bf4f79ae82232b06169c8e95a68ca5fb296175a8d43429a3f4990fbd12"
+    },
+    "duration_s": 17.0
+  },
+  "error_examples": {
+    "attribution_method": "per-row z-scores of the 73 v1 features against MAGE-train mean/std; the top-|z| features are shown (standardized deviation, NOT SHAP)",
+    "threshold": 0.5,
+    "slice_policy": "false positives of humans and false negatives of machine text, sorted by confidence in the wrong direction",
+    "slices": {
+      "mage_test_human_fp": [
+        {
+          "text": "Player 1 plays a Blue Charge Crystal Player 1 summons Dragon Whelp using 1 Blue Charge Player 2 plays a Yellow Charge Crystal Player 2 summons a Young Valiant using 1 Yellow Charge Player 1 playes a Red Charge Crystal Player 1 powers up Dra",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "mean_log_df",
+              "value": 3.1724,
+              "z": -3.588
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.2441,
+              "z": 3.535
+            },
+            {
+              "feature": "stopword_ratio",
+              "value": 0.1863,
+              "z": -3.405
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 1.2496,
+              "z": 3.396
+            }
+          ],
+          "words": 553,
+          "domain": "wp",
+          "src": "wp_human"
+        },
+        {
+          "text": "What evidence do you have that they are crossing constitutional lines all the time? Additionally what evidence do you have that they are never penalized? If someone broke a law while conducting classified work, the results of that penalty w",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "subordinator_rate",
+              "value": 159.0909,
+              "z": 6.331
+            },
+            {
+              "feature": "enum_rate",
+              "value": 22.7273,
+              "z": 5.229
+            },
+            {
+              "feature": "transition_rate",
+              "value": 22.7273,
+              "z": 4.518
+            },
+            {
+              "feature": "qmark_rate",
+              "value": 7.4906,
+              "z": 3.998
+            }
+          ],
+          "words": 44,
+          "domain": "eli5",
+          "src": "eli5_human"
+        },
+        {
+          "text": "You will find a scorpion in places that scorpions are likely to be found. If you found one scorpion in a place that place is a place where scorpions are likely to be. Since that place is a place where scorpions are likely to be you are like",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hedge_rate",
+              "value": 76.9231,
+              "z": 9.293
+            },
+            {
+              "feature": "subordinator_rate",
+              "value": 128.2051,
+              "z": 4.78
+            },
+            {
+              "feature": "aux_rate",
+              "value": 166.6667,
+              "z": 3.387
+            },
+            {
+              "feature": "log_ttr",
+              "value": 0.7478,
+              "z": -3.084
+            }
+          ],
+          "words": 78,
+          "domain": "eli5",
+          "src": "eli5_human"
+        },
+        {
+          "text": "They are organic reactions. The simplest is an electrophilic addition. A double bond between two C atoms has 4 electrons relatively close together, so it can attract an electrophile (electron-lover). Here the double bond will be broken and ",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.4831,
+              "z": 3.882
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.4916,
+              "z": -3.216
+            },
+            {
+              "feature": "paren_rate",
+              "value": 9.4518,
+              "z": 2.797
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.0222,
+              "z": -2.556
+            }
+          ],
+          "words": 180,
+          "domain": "eli5",
+          "src": "eli5_human"
+        },
+        {
+          "text": "In psychology, memory is the process in which information is encoded, stored, and retrieved. Encoding allows information from the outside world to be sensed in the form of chemical and physical stimuli. In the first stage the information mu",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "aux_rate",
+              "value": 151.2605,
+              "z": 2.876
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 25.2101,
+              "z": 2.617
+            },
+            {
+              "feature": "enum_rate",
+              "value": 8.4034,
+              "z": 1.779
+            },
+            {
+              "feature": "transition_rate",
+              "value": 8.4034,
+              "z": 1.361
+            }
+          ],
+          "words": 119,
+          "domain": "squad",
+          "src": "squad_human"
+        },
+        {
+          "text": "Plagiarism and Editing: The story of Ken Ham. A MAN! A MAN! SCREAMED KEN HAM. A MAN! A MAN! I DO NOT LIKE THAT SAID KEN HAM! DO WOULD YOU LIKE ANOTHER MAN? I DO NOT LIKE THEM SAID KEN HAM! I DO NOT LIKE ANOTHER MAN. WOULD YOU FUCK HIM HERE ",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "uppercase_word_ratio",
+              "value": 0.796,
+              "z": 39.635
+            },
+            {
+              "feature": "n_sentences",
+              "value": 138.0,
+              "z": 6.552
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.3131,
+              "z": -4.574
+            },
+            {
+              "feature": "log_ttr",
+              "value": 0.672,
+              "z": -4.504
+            }
+          ],
+          "words": 809,
+          "domain": "wp",
+          "src": "wp_human"
+        }
+      ],
+      "mage_test_machine_fn": [
+        {
+          "text": "Laney was chatting with some friends at the store. She mentioned that she hadn't gotten her Christmas tree yet. Then, her friend offered to give her her old tree. Laney was thrilled and grateful for the offer. She thanked her friend and ask",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_heshe",
+              "value": 183.6735,
+              "z": 5.753
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 20.4082,
+              "z": 1.998
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.1354,
+              "z": -1.312
+            },
+            {
+              "feature": "std_word_len",
+              "value": 1.8824,
+              "z": -1.283
+            }
+          ],
+          "words": 49,
+          "domain": "roct",
+          "src": "roct_machine_continuation_gpt-3.5-trubo"
+        },
+        {
+          "text": "Off the beaten path...Sunset Road..but easy to find ad it is on the main drag...This place has home deco and finishing statement pieces which would add glamour and a touch of class to your home...and at a very affordable price..I love this ",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "ellipsis_rate",
+              "value": 12.1681,
+              "z": 7.8
+            },
+            {
+              "feature": "clause_density",
+              "value": 5.3333,
+              "z": 2.113
+            },
+            {
+              "feature": "min_sent_len",
+              "value": 48.0,
+              "z": 1.953
+            },
+            {
+              "feature": "exclaim_rate_per_sent",
+              "value": 1333.3333,
+              "z": 1.868
+            }
+          ],
+          "words": 175,
+          "domain": "yelp",
+          "src": "yelp_machine_continuation_GLM130B"
+        },
+        {
+          "text": "The first European to travel the length of the Amazon River was Francisco de Orellana in 1542. The BBC's Unnatural Histories presents evidence that Orellana, rather than exaggerating his claims of Amazon women warriors, was actually telling",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "certainty_rate",
+              "value": 9.1743,
+              "z": 3.185
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.3028,
+              "z": 2.254
+            },
+            {
+              "feature": "avg_syllables_per_word",
+              "value": 1.9817,
+              "z": 2.139
+            },
+            {
+              "feature": "mean_log_df",
+              "value": 3.5603,
+              "z": -1.933
+            }
+          ],
+          "words": 109,
+          "domain": "squad",
+          "src": "squad_machine_continuation_gpt-3.5-trubo"
+        },
+        {
+          "text": "Visiting NC from South Florida, which is closer to NY on the culinary map than the Deep South, we were craving some down-home style southern food. FBC did not disappoint! Food was fantastic. The fried green tomatoes were the best I've had. ",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "comma_rate",
+              "value": 17.2811,
+              "z": 2.064
+            },
+            {
+              "feature": "aux_rate",
+              "value": 108.1081,
+              "z": 1.445
+            },
+            {
+              "feature": "uppercase_word_ratio",
+              "value": 0.0338,
+              "z": 1.308
+            },
+            {
+              "feature": "coordinator_rate",
+              "value": 13.5135,
+              "z": -1.218
+            }
+          ],
+          "words": 148,
+          "domain": "yelp",
+          "src": "yelp_machine_continuation_30B"
+        },
+        {
+          "text": "Definitely over rated and over seasoned. And what I mean by that is EVERY item we received was seriously over-salted. We had the falafel hummus app. Seriously over-salted. The butternut squash, the leftover from last year's turkey sandwich,",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "certainty_rate",
+              "value": 16.5289,
+              "z": 5.938
+            },
+            {
+              "feature": "pron_they",
+              "value": 49.5868,
+              "z": 2.689
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.9058,
+              "z": 1.943
+            },
+            {
+              "feature": "hyphen_rate",
+              "value": 4.2433,
+              "z": 0.963
+            }
+          ],
+          "words": 121,
+          "domain": "yelp",
+          "src": "yelp_machine_continuation_opt_125m"
+        },
+        {
+          "text": "The Reds looked in control when Roberto Firmino converted James Milner's pass and Daniel Sturridge backheeled to Sadio Mane to clip home a second. But Leicester were given hope when Jamie Vardy converted Riyad Mahrez's pass and Marc Albrigh",
+          "p_machine_cal": 0.0099,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_we",
+              "value": 26.699,
+              "z": 1.463
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.1262,
+              "z": 1.208
+            },
+            {
+              "feature": "root_ttr",
+              "value": 11.9225,
+              "z": 1.002
+            },
+            {
+              "feature": "max_token_repeat_ratio",
+              "value": 0.0388,
+              "z": -0.927
+            }
+          ],
+          "words": 412,
+          "domain": "xsum",
+          "src": "xsum_machine_continuation_text-davinci-002"
+        }
+      ],
+      "hc3_human_fp": [
+        {
+          "text": "\" I \" is a subject and \" me \" is an object . The subject is the one performing the action and the object is the one on whom the action is being performed . So if you were to say \" Chuck and I went to Taco Bell , \" \" I \" is a subject . * I *",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "quote_rate",
+              "value": 28.4091,
+              "z": 6.254
+            },
+            {
+              "feature": "pron_i",
+              "value": 87.5912,
+              "z": 2.505
+            },
+            {
+              "feature": "log_ttr",
+              "value": 0.7992,
+              "z": -2.122
+            },
+            {
+              "feature": "first_person_rate",
+              "value": 87.5912,
+              "z": 2.033
+            }
+          ],
+          "words": 137,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "The T+3 settlement date only affects cash accounts. In a cash account, you need to wait until the T+3 settlement date for your funds to be available to make your next trade. But if you convert your cash account into a margin account, then y",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_you",
+              "value": 125.0,
+              "z": 5.752
+            },
+            {
+              "feature": "second_person_rate",
+              "value": 125.0,
+              "z": 5.752
+            },
+            {
+              "feature": "sent_len_trend",
+              "value": 0.9982,
+              "z": 2.107
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7465,
+              "z": -1.278
+            }
+          ],
+          "words": 72,
+          "domain": "finance",
+          "src": "finance"
+        },
+        {
+          "text": "- If you own a share in a company this means that you are part owner of the company . The more shares you own , the more of the company you own - The stock market is just a market where you can buy and sell shares - If you own some shares a",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "bullet_rate",
+              "value": 2.3095,
+              "z": 40.578
+            },
+            {
+              "feature": "pron_you",
+              "value": 100.0,
+              "z": 4.501
+            },
+            {
+              "feature": "second_person_rate",
+              "value": 100.0,
+              "z": 4.501
+            },
+            {
+              "feature": "hyphen_rate",
+              "value": 9.2379,
+              "z": 2.717
+            }
+          ],
+          "words": 90,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "The important parts to this problem are : * The host always knows what 's behind all three doors * The host will never open the door that you picked * The host will always open a door that is different from the one that you picked , and tha",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hash_rate",
+              "value": 4.8222,
+              "z": 4.822
+            },
+            {
+              "feature": "pron_you",
+              "value": 73.0159,
+              "z": 3.15
+            },
+            {
+              "feature": "second_person_rate",
+              "value": 73.0159,
+              "z": 3.15
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.5255,
+              "z": -2.959
+            }
+          ],
+          "words": 315,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "We do n't know . We do n't know if it was caused . If it was caused , we do n't know what caused it . If it was n't caused , we do n't know how it happened . We do n't even know if there 's any sense in which \" where did it come from \" or \"",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_it",
+              "value": 98.5915,
+              "z": 6.643
+            },
+            {
+              "feature": "pron_we",
+              "value": 84.507,
+              "z": 5.752
+            },
+            {
+              "feature": "subordinator_rate",
+              "value": 126.7606,
+              "z": 4.707
+            },
+            {
+              "feature": "aux_rate",
+              "value": 154.9296,
+              "z": 2.998
+            }
+          ],
+          "words": 71,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "Multiplication is repeated additions . So A * B means add A to itself B times . If you have -A * B , you are saying to add -A to itself B times . Because adding a negative to a negative only makes the sum more negative ( further below zero ",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hyphen_rate",
+              "value": 16.4835,
+              "z": 5.261
+            },
+            {
+              "feature": "log_ttr",
+              "value": 0.778,
+              "z": -2.519
+            },
+            {
+              "feature": "pron_you",
+              "value": 56.7376,
+              "z": 2.335
+            },
+            {
+              "feature": "second_person_rate",
+              "value": 56.7376,
+              "z": 2.335
+            }
+          ],
+          "words": 141,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        }
+      ],
+      "hc3_machine_fn": [
+        {
+          "text": "In the double-slit experiment, a particle (like a photon, or a particle of light) is sent through a barrier with two slits in it. On the other side of the barrier, there is a screen that the particles can hit, and when many particles are se",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "paren_rate",
+              "value": 6.192,
+              "z": 1.669
+            },
+            {
+              "feature": "stopword_ratio",
+              "value": 0.569,
+              "z": 1.629
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2385,
+              "z": -1.434
+            },
+            {
+              "feature": "connective_phrase_rate",
+              "value": 4.1841,
+              "z": 1.427
+            }
+          ],
+          "words": 239,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "Cono Sur (meaning \"Southern Cone\" in Spanish) is a term that refers to the southern cone of South America, which includes the following countries:\\n\\nArgentina\\nChile\\nUruguay\\nParaguay\\nSouthern Brazil (specifically, the states of Paran\u00e1, ",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.1809,
+              "z": 2.286
+            },
+            {
+              "feature": "mean_log_df",
+              "value": 3.5327,
+              "z": -2.051
+            },
+            {
+              "feature": "first_sent_len",
+              "value": 63.0,
+              "z": 2.029
+            },
+            {
+              "feature": "paren_rate",
+              "value": 6.8376,
+              "z": 1.892
+            }
+          ],
+          "words": 94,
+          "domain": "open_qa",
+          "src": "open_qa"
+        },
+        {
+          "text": "Il Divo is a multinational operatic pop vocal group formed in the United Kingdom in 2003. The members of Il Divo are:\\n\\nDavid Miller (American tenor)\\nS\u00e9bastien Izambard (French pop singer)\\nCarlos Mar\u00edn (Spanish baritone)\\nUrs B\u00fchler (Swi",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "paren_rate",
+              "value": 13.1148,
+              "z": 4.064
+            },
+            {
+              "feature": "mean_log_df",
+              "value": 3.1294,
+              "z": -3.772
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.2449,
+              "z": 3.55
+            },
+            {
+              "feature": "stopword_ratio",
+              "value": 0.3061,
+              "z": -1.829
+            }
+          ],
+          "words": 98,
+          "domain": "open_qa",
+          "src": "open_qa"
+        },
+        {
+          "text": "CGI stands for \"Common Gateway Interface\". It's a way for a web server to run programs and scripts on a computer, and then send the results back to a web browser.In the past, CGI was used a lot to add interactive features to websites, like ",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "uppercase_word_ratio",
+              "value": 0.042,
+              "z": 1.722
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.8458,
+              "z": 1.69
+            },
+            {
+              "feature": "transition_rate",
+              "value": 8.4034,
+              "z": 1.361
+            },
+            {
+              "feature": "comma_rate",
+              "value": 12.8824,
+              "z": 1.169
+            }
+          ],
+          "words": 119,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "Sure! The EPR paradox is a thought experiment in quantum mechanics that was proposed by physicists Albert Einstein, Boris Podolsky, and Nathan Rosen in 1935. It's called a paradox because it seems to show that quantum mechanics, which is a ",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "subordinator_rate",
+              "value": 87.4126,
+              "z": 2.731
+            },
+            {
+              "feature": "relative_clause_rate",
+              "value": 1.7778,
+              "z": 1.797
+            },
+            {
+              "feature": "clause_density",
+              "value": 4.0,
+              "z": 1.377
+            },
+            {
+              "feature": "pron_they",
+              "value": 27.972,
+              "z": 1.208
+            }
+          ],
+          "words": 286,
+          "domain": "reddit_eli5",
+          "src": "reddit_eli5"
+        },
+        {
+          "text": "Auburndale is a city in Polk County, Florida, United States. According to the United States Census Bureau, the city has a total area of 10.8 square miles (28.1 square kilometers), of which 10.7 square miles (27.8 square kilometers) is land ",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "digit_word_ratio",
+              "value": 0.2159,
+              "z": 8.059
+            },
+            {
+              "feature": "paren_rate",
+              "value": 19.9601,
+              "z": 6.434
+            },
+            {
+              "feature": "digit_char_ratio",
+              "value": 0.0659,
+              "z": 5.181
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 34.0909,
+              "z": 3.764
+            }
+          ],
+          "words": 88,
+          "domain": "open_qa",
+          "src": "open_qa"
+        }
+      ],
+      "raid_human_fp": [
+        {
+          "text": "L\u200ba\u200bk\u200be\u200b \u200bC\u200bo\u200bu\u200bn\u200bt\u200br\u200by\u200b \u200bi\u200bs\u200b \u200ba\u200b \u200bd\u200bi\u200bs\u200bt\u200br\u200bi\u200bc\u200bt\u200b \u200bm\u200bu\u200bn\u200bi\u200bc\u200bi\u200bp\u200ba\u200bl\u200bi\u200bt\u200by\u200b \u200bw\u200bi\u200bt\u200bh\u200b \u200ba\u200b \u200bp\u200bo\u200bp\u200bu\u200bl\u200ba\u200bt\u200bi\u200bo\u200bn\u200b \u200bo\u200bf\u200b \u200ba\u200bp\u200bp\u200br\u200bo\u200bx\u200bi\u200bm\u200ba\u200bt\u200be\u200bl\u200by\u200b \u200b1\u200b5\u200b,\u200b0\u200b0\u200b0\u200b \u200bi\u200bn\u200b \u200bt\u200bh\u200be\u200b \u200bO\u200bk\u200ba\u200bn\u200ba\u200bg\u200ba\u200bn\u200b \u200bV\u200ba\u200bl\u200bl\u200be\u200by\u200b \u200br\u200be\u200bg\u200bi\u200bo\u200bn\u200b \u200bo\u200bf\u200b \u200bB\u200br\u200bi\u200bt\u200bi\u200b",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "min_sent_len",
+              "value": 827.0,
+              "z": 42.211
+            },
+            {
+              "feature": "median_sent_len",
+              "value": 827.0,
+              "z": 39.567
+            },
+            {
+              "feature": "avg_sent_len",
+              "value": 827.0,
+              "z": 37.685
+            },
+            {
+              "feature": "first_sent_len",
+              "value": 827.0,
+              "z": 37.625
+            }
+          ],
+          "words": 827,
+          "model": "human",
+          "attack": "zero_width_space",
+          "domain": "wiki"
+        },
+        {
+          "text": "\u200b \u200bW\u200be\u200b \u200bs\u200bt\u200bu\u200bd\u200by\u200b \u200bt\u200bh\u200be\u200b \u200bl\u200be\u200bx\u200bi\u200bc\u200bo\u200bg\u200br\u200ba\u200bp\u200bh\u200bi\u200bc\u200ba\u200bl\u200bl\u200by\u200b \u200bl\u200be\u200ba\u200bs\u200bt\u200b \u200bi\u200bn\u200bf\u200bi\u200bn\u200bi\u200bt\u200be\u200b \u200b$\u200ba\u200b/\u200bb\u200b$\u200b-\u200bp\u200bo\u200bw\u200be\u200br\u200b-\u200bf\u200br\u200be\u200be\u200b \u200bw\u200bo\u200br\u200bd\u200b \u200bo\u200bn\u200b \u200bt\u200bh\u200be\u200b\n\u200ba\u200bl\u200bp\u200bh\u200ba\u200bb\u200be\u200bt\u200b \u200bo\u200bf\u200b \u200bn\u200bo\u200bn\u200b-\u200bn\u200be\u200bg\u200ba\u200bt\u200bi\u200bv\u200be\u200b \u200bi\u200bn\u200bt\u200be\u200bg\u200be\u200br\u200bs\u200b.\u200b \u200bF\u200br\u200be\u200bq\u200bu\u200be\u200bn\u200bt\u200bl",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "log_ttr",
+              "value": 0.5216,
+              "z": -7.322
+            },
+            {
+              "feature": "avg_word_len",
+              "value": 1.0,
+              "z": -6.549
+            },
+            {
+              "feature": "std_word_len",
+              "value": 0.0,
+              "z": -5.96
+            },
+            {
+              "feature": "median_word_len",
+              "value": 1.0,
+              "z": -5.399
+            }
+          ],
+          "words": 723,
+          "model": "human",
+          "attack": "zero_width_space",
+          "domain": "abstracts"
+        },
+        {
+          "text": "T\u200bh\u200bi\u200bs\u200b \u200bp\u200ba\u200bp\u200be\u200br\u200b \u200bo\u200bf\u200bf\u200be\u200br\u200bs\u200b \u200bt\u200bh\u200br\u200be\u200be\u200b \u200bn\u200be\u200bw\u200b,\u200b \u200bo\u200bp\u200be\u200bn\u200b-\u200bs\u200bo\u200bu\u200br\u200bc\u200be\u200b,\u200b \u200bd\u200be\u200be\u200bp\u200b \u200bl\u200be\u200ba\u200br\u200bn\u200bi\u200bn\u200bg\u200b-\u200bb\u200ba\u200bs\u200be\u200bd\u200b \u200bi\u200br\u200bi\u200bs\u200b\n\u200bs\u200be\u200bg\u200bm\u200be\u200bn\u200bt\u200ba\u200bt\u200bi\u200bo\u200bn\u200b \u200bm\u200be\u200bt\u200bh\u200bo\u200bd\u200bs\u200b,\u200b \u200ba\u200bn\u200bd\u200b \u200bt\u200bh\u200be\u200b \u200bm\u200be\u200bt\u200bh\u200bo\u200bd\u200bo\u200bl\u200bo\u200bg\u200by\u200b \u200bh\u200bo\u200bw\u200b \u200bt\u200bo\u200b \u200bu\u200bs\u200be\u200b \u200b",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "log_ttr",
+              "value": 0.5029,
+              "z": -7.673
+            },
+            {
+              "feature": "avg_word_len",
+              "value": 1.0,
+              "z": -6.549
+            },
+            {
+              "feature": "std_word_len",
+              "value": 0.0,
+              "z": -5.96
+            },
+            {
+              "feature": "median_word_len",
+              "value": 1.0,
+              "z": -5.399
+            }
+          ],
+          "words": 924,
+          "model": "human",
+          "attack": "zero_width_space",
+          "domain": "abstracts"
+        },
+        {
+          "text": "W\u200be\u200b \u200bi\u200bn\u200bt\u200br\u200bo\u200bd\u200bu\u200bc\u200be\u200b \u200bS\u200be\u200bg\u200bm\u200be\u200bn\u200bt\u200b-\u200bP\u200bh\u200br\u200ba\u200bs\u200be\u200b \u200bT\u200ba\u200bb\u200bl\u200be\u200b \u200b(\u200bS\u200bP\u200bT\u200b)\u200b,\u200b \u200ba\u200b \u200bl\u200ba\u200br\u200bg\u200be\u200b \u200bc\u200bo\u200bl\u200bl\u200be\u200bc\u200bt\u200bi\u200bo\u200bn\u200b \u200bo\u200bf\u200b \u200bb\u200bi\u200bj\u200be\u200bc\u200bt\u200bi\u200bv\u200be\u200b\n\u200ba\u200bs\u200bs\u200bo\u200bc\u200bi\u200ba\u200bt\u200bi\u200bo\u200bn\u200bs\u200b \u200bb\u200be\u200bt\u200bw\u200be\u200be\u200bn\u200b \u200bt\u200be\u200bx\u200bt\u200bu\u200ba\u200bl\u200b \u200bp\u200bh\u200br\u200ba\u200bs\u200be\u200bs\u200b \u200ba\u200bn\u200bd\u200b \u200bt\u200bh\u200be\u200bi\u200br\u200b \u200b",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "log_ttr",
+              "value": 0.4754,
+              "z": -8.188
+            },
+            {
+              "feature": "avg_word_len",
+              "value": 1.0,
+              "z": -6.549
+            },
+            {
+              "feature": "std_word_len",
+              "value": 0.0,
+              "z": -5.96
+            },
+            {
+              "feature": "median_word_len",
+              "value": 1.0,
+              "z": -5.399
+            }
+          ],
+          "words": 872,
+          "model": "human",
+          "attack": "zero_width_space",
+          "domain": "abstracts"
+        },
+        {
+          "text": "D\u200be\u200be\u200bp\u200b \u200bl\u200be\u200ba\u200br\u200bn\u200bi\u200bn\u200bg\u200b \u200bb\u200ba\u200bs\u200be\u200bd\u200b \u200bm\u200be\u200bd\u200bi\u200bc\u200ba\u200bl\u200b \u200bi\u200bm\u200ba\u200bg\u200be\u200b \u200bs\u200be\u200bg\u200bm\u200be\u200bn\u200bt\u200ba\u200bt\u200bi\u200bo\u200bn\u200b \u200bm\u200bo\u200bd\u200be\u200bl\u200bs\u200b \u200bu\u200bs\u200bu\u200ba\u200bl\u200bl\u200by\u200b \u200br\u200be\u200bq\u200bu\u200bi\u200br\u200be\u200b \u200bl\u200ba\u200br\u200bg\u200be\u200b\n\u200bd\u200ba\u200bt\u200ba\u200bs\u200be\u200bt\u200bs\u200b \u200bw\u200bi\u200bt\u200bh\u200b \u200bh\u200bi\u200bg\u200bh\u200b-\u200bq\u200bu\u200ba\u200bl\u200bi\u200bt\u200by\u200b \u200bd\u200be\u200bn\u200bs\u200be\u200b \u200bs\u200be\u200bg\u200bm\u200be\u200bn\u200bt\u200ba\u200bt\u200bi\u200bo\u200b",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "log_ttr",
+              "value": 0.4786,
+              "z": -8.128
+            },
+            {
+              "feature": "avg_word_len",
+              "value": 1.0,
+              "z": -6.549
+            },
+            {
+              "feature": "std_word_len",
+              "value": 0.0,
+              "z": -5.96
+            },
+            {
+              "feature": "median_word_len",
+              "value": 1.0,
+              "z": -5.399
+            }
+          ],
+          "words": 905,
+          "model": "human",
+          "attack": "zero_width_space",
+          "domain": "abstracts"
+        },
+        {
+          "text": "D\u200ba\u200bn\u200bi\u200be\u200bl\u200b \u200bM\u200ba\u200bn\u200bn\u200bi\u200bx\u200b \u200bP\u200be\u200bt\u200br\u200bi\u200be\u200b \u200bJ\u200br\u200b.\u200b \u200b(\u200bb\u200bo\u200br\u200bn\u200b \u200bN\u200bo\u200bv\u200be\u200bm\u200bb\u200be\u200br\u200b \u200b3\u200b0\u200b,\u200b \u200b1\u200b9\u200b5\u200b1\u200b)\u200b \u200bi\u200bs\u200b \u200ba\u200b \u200bC\u200ba\u200bn\u200ba\u200bd\u200bi\u200ba\u200bn\u200b-\u200bA\u200bm\u200be\u200br\u200bi\u200bc\u200ba\u200bn\u200b \u200bp\u200br\u200bo\u200bd\u200bu\u200bc\u200be\u200br\u200b,\u200b \u200bw\u200br\u200bi\u200bt\u200be\u200br\u200b,\u200b \u200ba\u200bn\u200bd\u200b \u200bd\u200bi\u200br\u200be\u200bc\u200bt\u200bo\u200br\u200b \u200bo\u200bf\u200b \u200bf\u200bi\u200bl\u200bm\u200b \u200ba\u200bn\u200bd\u200b \u200bt\u200be\u200bl\u200be\u200b",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "median_sent_len",
+              "value": 598.5,
+              "z": 28.364
+            },
+            {
+              "feature": "avg_sent_len",
+              "value": 598.5,
+              "z": 26.993
+            },
+            {
+              "feature": "flesch_kincaid_grade",
+              "value": 229.625,
+              "z": 24.018
+            },
+            {
+              "feature": "last_sent_len",
+              "value": 873.0,
+              "z": 21.564
+            }
+          ],
+          "words": 1197,
+          "model": "human",
+          "attack": "zero_width_space",
+          "domain": "wiki"
+        }
+      ],
+      "raid_machine_fn": [
+        {
+          "text": "We report a novel class of integrated nanophotonic metamaterials for on-chip nonlinear optics with extraordinary second-order nonlinear optical responses. The metamaterials are composed of an array of aluminum nanodisks embedded in an alumi",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "hyphen_rate",
+              "value": 11.8534,
+              "z": 3.635
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.331,
+              "z": 2.635
+            },
+            {
+              "feature": "std_word_len",
+              "value": 3.3035,
+              "z": 2.248
+            },
+            {
+              "feature": "avg_syllables_per_word",
+              "value": 2.0,
+              "z": 2.227
+            }
+          ],
+          "words": 142,
+          "model": "gpt3",
+          "attack": "none",
+          "domain": "abstracts"
+        },
+        {
+          "text": "350hrs in and I still have no idea what I\u2019m doing.. I feel like this is probably normal? Every day is completely different and I\u2019m seeing a wide variety of patients. Absolutely loving the exposure and experience I\u2019m getting, and even when i",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "qmark_rate",
+              "value": 5.1151,
+              "z": 2.657
+            },
+            {
+              "feature": "certainty_rate",
+              "value": 6.6225,
+              "z": 2.229
+            },
+            {
+              "feature": "coordinator_rate",
+              "value": 79.4702,
+              "z": 2.188
+            },
+            {
+              "feature": "n_paragraphs",
+              "value": 3.0,
+              "z": 2.0
+            }
+          ],
+          "words": 151,
+          "model": "cohere",
+          "attack": "none",
+          "domain": "reddit"
+        },
+        {
+          "text": "First of all, I want to thank you, guys, for taking the time to read and contribute to my post.\n\nBackground info: I am 25 years old, 5' 10'', currently weigh 175 lbs, and have been working out consistently for the last few months. When I fi",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "n_paragraphs",
+              "value": 7.0,
+              "z": 6.0
+            },
+            {
+              "feature": "pron_i",
+              "value": 81.8505,
+              "z": 2.304
+            },
+            {
+              "feature": "first_person_rate",
+              "value": 81.8505,
+              "z": 1.853
+            },
+            {
+              "feature": "sent_len_trend",
+              "value": -0.6658,
+              "z": -1.538
+            }
+          ],
+          "words": 281,
+          "model": "gpt4",
+          "attack": "none",
+          "domain": "reddit"
+        },
+        {
+          "text": "I've had what for most is a fairly normal growth spurt recently. I was 4 months post-partum when I started to notice things in my life that had been growing for a number of years (after all, I was born 2 years to the day after my sister \u2013 w",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "n_paragraphs",
+              "value": 6.0,
+              "z": 5.0
+            },
+            {
+              "feature": "pron_i",
+              "value": 96.7742,
+              "z": 2.826
+            },
+            {
+              "feature": "en_dash_rate",
+              "value": 2.3958,
+              "z": 2.396
+            },
+            {
+              "feature": "first_person_rate",
+              "value": 96.7742,
+              "z": 2.322
+            }
+          ],
+          "words": 403,
+          "model": "gpt2",
+          "attack": "none",
+          "domain": "reddit"
+        },
+        {
+          "text": "\"School bus driver\" is only partially accurate. \"Drivers\" can be the most important, most underpaid job there is. If you're the person sitting in the front, making up the difference between a teacher's pay and a bus driver's, you're a part ",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "n_paragraphs",
+              "value": 6.0,
+              "z": 5.0
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.7789,
+              "z": 1.407
+            },
+            {
+              "feature": "pron_they",
+              "value": 30.0,
+              "z": 1.347
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.3075,
+              "z": -1.076
+            }
+          ],
+          "words": 400,
+          "model": "gpt2",
+          "attack": "none",
+          "domain": "reddit"
+        },
+        {
+          "text": "Sure! Here's a possible Reddit post:\n\nHey fellow gamers, I've got a random story to share with y'all that still has me shook. So, I was playing this new survival game with some friends, and we had been going hard for hours, scavenging for s",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "n_paragraphs",
+              "value": 6.0,
+              "z": 5.0
+            },
+            {
+              "feature": "pron_we",
+              "value": 56.7164,
+              "z": 3.69
+            },
+            {
+              "feature": "first_person_rate",
+              "value": 71.6418,
+              "z": 1.531
+            },
+            {
+              "feature": "pron_it",
+              "value": 26.8657,
+              "z": 1.147
+            }
+          ],
+          "words": 335,
+          "model": "llama-chat",
+          "attack": "none",
+          "domain": "reddit"
+        }
+      ],
+      "ood_test_ood_set_gpt_machine_fn": [
+        {
+          "text": "Yes, comparative secretome analysis suggests low plant cell wall degrading capacity in Frankia symbionts. A study by Nguyen et al. (2018) showed that Frankia strains have a reduced repertoire of plant cell wall degrading enzymes (PCWDEs), p",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "hedge_rate",
+              "value": 26.087,
+              "z": 2.731
+            },
+            {
+              "feature": "mean_log_df",
+              "value": 3.49,
+              "z": -2.233
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.2783,
+              "z": 1.924
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.1565,
+              "z": 1.806
+            }
+          ],
+          "src": "pubmed_gpt4"
+        },
+        {
+          "text": "Yes, the L1-type cell adhesion molecule Neuroglian is necessary for maintenance of sensory axon advance in the Drosophila embryo. Studies have shown that neuroglian, a homolog of the vertebrate L1 family of cell adhesion molecules, is invol",
+          "p_machine_cal": 0.0099,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.2326,
+              "z": 3.307
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.3372,
+              "z": 2.719
+            },
+            {
+              "feature": "mean_log_df",
+              "value": 3.4213,
+              "z": -2.526
+            },
+            {
+              "feature": "transition_rate",
+              "value": 11.6279,
+              "z": 2.072
+            }
+          ],
+          "src": "pubmed_gpt4"
+        },
+        {
+          "text": "Yes, the primary metabolism of chickpea can be an initial target during the early sensing of Fusarium oxysporum f. sp. ciceri race I, which is a fungus that causes wilt disease in chickpea plants. When wounds are induced in the plant, the f",
+          "p_machine_cal": 0.0099,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "median_word_len",
+              "value": 5.5,
+              "z": 2.31
+            },
+            {
+              "feature": "sent_len_trend",
+              "value": -0.9659,
+              "z": -2.196
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.29,
+              "z": 2.082
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.17,
+              "z": 2.072
+            }
+          ],
+          "src": "pubmed_gpt4"
+        },
+        {
+          "text": "Minocycline has been shown to have potential neuroprotective effects by reducing neuroinflammation induced by diabetic metabolic disorder. Studies have suggested that minocycline might alleviate beta-amyloid protein and tau pathology, which",
+          "p_machine_cal": 0.0099,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "median_word_len",
+              "value": 6.5,
+              "z": 4.024
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 34.8837,
+              "z": 3.866
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.3837,
+              "z": 3.346
+            },
+            {
+              "feature": "avg_word_len",
+              "value": 6.4302,
+              "z": 3.251
+            }
+          ],
+          "src": "pubmed_gpt4"
+        },
+        {
+          "text": "Well, I saw that yesterday and it was much better than the other making-of from VH1. Too bad that this one is pretty outdated, but you get to see all the staff who make South Park - very interesting stuff. It's also funny that this document",
+          "p_machine_cal": 0.0099,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "certainty_rate",
+              "value": 7.1942,
+              "z": 2.443
+            },
+            {
+              "feature": "subordinator_rate",
+              "value": 71.9424,
+              "z": 1.953
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 14.3885,
+              "z": 1.221
+            },
+            {
+              "feature": "coordinator_rate",
+              "value": 57.554,
+              "z": 1.057
+            }
+          ],
+          "src": "imdb_gpt4"
+        },
+        {
+          "text": "Former Madrid Star Alvaro Arbeloa tips Mourinho for Real Madrid return Real Madrid's former defender, Alvaro Arbeloa, believes Chelsea boss Jose Mourinho could return to manage the Spanish-side one day. Mourinho left the club back in 2013, ",
+          "p_machine_cal": 0.0099,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "transition_rate",
+              "value": 16.2602,
+              "z": 3.093
+            },
+            {
+              "feature": "stopword_ratio",
+              "value": 0.3252,
+              "z": -1.578
+            },
+            {
+              "feature": "coordinator_rate",
+              "value": 8.1301,
+              "z": -1.496
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 16.2602,
+              "z": 1.462
+            }
+          ],
+          "src": "cnn_gpt4"
+        }
+      ],
+      "ood_test_ood_set_gpt_human_fp": [
+        {
+          "text": "A zoo in Ohio is celebrating the 'miracle' birth of three rare Amur tiger cubs after it was feared their mother's biological clock had stopped ticking. Keepers at the Columbus Zoo say ten-year-old Irisa had mated before but never conceived.",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.2311,
+              "z": 1.66
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2143,
+              "z": -1.56
+            },
+            {
+              "feature": "hyphen_rate",
+              "value": 5.9254,
+              "z": 1.554
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7117,
+              "z": -1.542
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "A Coast Guard cutter arrived in San Diego on Thursday with more than 14 tons of cocaine, part of what authorities has described as a surge of seizures near Central and South America. The cocaine, valued by the Coast Guard at 424 million, wa",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.3577,
+              "z": 2.776
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.5677,
+              "z": -2.638
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.1039,
+              "z": -2.132
+            },
+            {
+              "feature": "ttr",
+              "value": 0.3403,
+              "z": -1.87
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "Poundland has been been forced to pull decorative plastic Easter Eggs from their shelves over fears children may choke - because they look like Cadbury Mini Eggs. Trading Standards officials in Buckinghamshire and Surrey raised the alarm ov",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "last_sent_len",
+              "value": 125.0,
+              "z": 2.582
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.9705,
+              "z": 2.217
+            },
+            {
+              "feature": "std_sent_len",
+              "value": 39.5466,
+              "z": 2.173
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 21.4724,
+              "z": 2.135
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "Fired:Major General James Post III was fired on Friday after making a treason comment . An Air Force major general has been formally reprimanded and removed from his job for telling a group of officers that talking to Congress in a bid to b",
+          "p_machine_cal": 0.9973,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2607,
+              "z": -1.319
+            },
+            {
+              "feature": "ttr",
+              "value": 0.444,
+              "z": -1.261
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7571,
+              "z": -1.197
+            },
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.1616,
+              "z": 1.047
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "The body of an autistic 20-year-old who left his home 44 days ago and never returned has been found floating in a creek near a golf course. Eagle Scout Brian Gewirtz told his family he was going for a walk near his Brooklyn, New York, home ",
+          "p_machine_cal": 0.9973,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_heshe",
+              "value": 77.9221,
+              "z": 2.161
+            },
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.1863,
+              "z": 1.265
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2792,
+              "z": -1.223
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7622,
+              "z": -1.158
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "A top Queensland barrister with a handsome income will use case law dating back 200 years to try to avoid a 146 speeding fine. Tony Morris QC is mounting a landmark legal challenge against Queensland's speed-camera laws, The Courier-Mail re",
+          "p_machine_cal": 0.9973,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2354,
+              "z": -1.45
+            },
+            {
+              "feature": "ttr",
+              "value": 0.4365,
+              "z": -1.305
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7586,
+              "z": -1.185
+            },
+            {
+              "feature": "pron_heshe",
+              "value": 44.9735,
+              "z": 1.041
+            }
+          ],
+          "src": "cnn_human"
+        }
+      ],
+      "ood_test_ood_set_gpt_para_machine_fn": [
+        {
+          "text": "I recently visited a movie theater situated in the city center of Prague to see a movie. I didn't find the poster to be modern or contemporary; it had a classic and heroic Hollywood style. The reason why I don't enjoy most high-rated French",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_i",
+              "value": 45.8221,
+              "z": 1.044
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.6828,
+              "z": 1.001
+            },
+            {
+              "feature": "root_ttr",
+              "value": 11.318,
+              "z": 0.824
+            },
+            {
+              "feature": "certainty_rate",
+              "value": 2.6954,
+              "z": 0.759
+            }
+          ],
+          "src": "imdb_human_para"
+        },
+        {
+          "text": "I do not believe in any gods or deities. The significance of history and truth holds great importance to me. This movie is based on a book that was first published in 1921 and has since been continuously revised to reflect a historical acco",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "n_chars_no_space",
+              "value": 5703.0,
+              "z": 3.777
+            },
+            {
+              "feature": "n_chars",
+              "value": 6832.0,
+              "z": 3.751
+            },
+            {
+              "feature": "n_words",
+              "value": 1136.0,
+              "z": 3.58
+            },
+            {
+              "feature": "avg_para_len",
+              "value": 1136.0,
+              "z": 3.58
+            }
+          ],
+          "src": "imdb_human_para"
+        },
+        {
+          "text": "Are you familiar with the expression \"Curiosity Killed The Cat\"? I have been informed about this movie a lot. A magazine declared it as one of the most startling films ever made, it is in the list of \"1001 movies you have to watch before yo",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_it",
+              "value": 33.3333,
+              "z": 1.643
+            },
+            {
+              "feature": "comma_rate",
+              "value": 13.6728,
+              "z": 1.33
+            },
+            {
+              "feature": "connective_phrase_rate",
+              "value": 2.7778,
+              "z": 0.854
+            },
+            {
+              "feature": "root_ttr",
+              "value": 11.3315,
+              "z": 0.828
+            }
+          ],
+          "src": "imdb_human_para"
+        },
+        {
+          "text": "The expected protein secretion systems of Frankia sp. The sizes of these organisms are quite small and they have only a limited number of hydrolases, which may indicate that they have adapted to living in a symbiotic manner. The absence of ",
+          "p_machine_cal": 0.0,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "hedge_rate",
+              "value": 24.3902,
+              "z": 2.512
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.189,
+              "z": 2.448
+            },
+            {
+              "feature": "polysyllable_ratio",
+              "value": 0.2927,
+              "z": 2.118
+            },
+            {
+              "feature": "avg_syllables_per_word",
+              "value": 1.9512,
+              "z": 1.993
+            }
+          ],
+          "src": "pubmed_human_para"
+        },
+        {
+          "text": "Changes in the cellular expression of miRNAs, which occur during the disease progression and in various patients, demonstrate the impact of HIVSIV infection on them. The results of our study show that SIV infection affects the levels of pri",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "uppercase_word_ratio",
+              "value": 0.0588,
+              "z": 2.567
+            },
+            {
+              "feature": "mean_log_df",
+              "value": 3.5772,
+              "z": -1.861
+            },
+            {
+              "feature": "rare_token_ratio",
+              "value": 0.1471,
+              "z": 1.619
+            },
+            {
+              "feature": "hyphen_rate",
+              "value": 5.8411,
+              "z": 1.524
+            }
+          ],
+          "src": "pubmed_human_para"
+        },
+        {
+          "text": "Person1: Excuse me, Susan. Can I bother you for a moment? I have some inquiries regarding my salary. Person2: Certainly, Emily. Take a seat. Person1: As a newcomer to this country, I received my initial payment and there are some aspects th",
+          "p_machine_cal": 0.0057,
+          "true": "machine",
+          "top_feature_deviations": [
+            {
+              "feature": "colon_rate",
+              "value": 5.196,
+              "z": 3.404
+            },
+            {
+              "feature": "pron_i",
+              "value": 57.3066,
+              "z": 1.446
+            },
+            {
+              "feature": "transition_rate",
+              "value": 8.596,
+              "z": 1.404
+            },
+            {
+              "feature": "first_person_rate",
+              "value": 57.3066,
+              "z": 1.081
+            }
+          ],
+          "src": "dialogsum_human_para"
+        }
+      ],
+      "ood_test_ood_set_gpt_para_human_fp": [
+        {
+          "text": "A zoo in Ohio is celebrating the 'miracle' birth of three rare Amur tiger cubs after it was feared their mother's biological clock had stopped ticking. Keepers at the Columbus Zoo say ten-year-old Irisa had mated before but never conceived.",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.2311,
+              "z": 1.66
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2143,
+              "z": -1.56
+            },
+            {
+              "feature": "hyphen_rate",
+              "value": 5.9254,
+              "z": 1.554
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7117,
+              "z": -1.542
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "A Coast Guard cutter arrived in San Diego on Thursday with more than 14 tons of cocaine, part of what authorities has described as a surge of seizures near Central and South America. The cocaine, valued by the Coast Guard at 424 million, wa",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.3577,
+              "z": 2.776
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.5677,
+              "z": -2.638
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.1039,
+              "z": -2.132
+            },
+            {
+              "feature": "ttr",
+              "value": 0.3403,
+              "z": -1.87
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "Poundland has been been forced to pull decorative plastic Easter Eggs from their shelves over fears children may choke - because they look like Cadbury Mini Eggs. Trading Standards officials in Buckinghamshire and Surrey raised the alarm ov",
+          "p_machine_cal": 1.0,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "last_sent_len",
+              "value": 125.0,
+              "z": 2.582
+            },
+            {
+              "feature": "cv_sent_len",
+              "value": 0.9705,
+              "z": 2.217
+            },
+            {
+              "feature": "std_sent_len",
+              "value": 39.5466,
+              "z": 2.173
+            },
+            {
+              "feature": "hedge_rate",
+              "value": 21.4724,
+              "z": 2.135
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "Fired:Major General James Post III was fired on Friday after making a treason comment . An Air Force major general has been formally reprimanded and removed from his job for telling a group of officers that talking to Congress in a bid to b",
+          "p_machine_cal": 0.9973,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2607,
+              "z": -1.319
+            },
+            {
+              "feature": "ttr",
+              "value": 0.444,
+              "z": -1.261
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7571,
+              "z": -1.197
+            },
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.1616,
+              "z": 1.047
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "The body of an autistic 20-year-old who left his home 44 days ago and never returned has been found floating in a creek near a golf course. Eagle Scout Brian Gewirtz told his family he was going for a walk near his Brooklyn, New York, home ",
+          "p_machine_cal": 0.9973,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "pron_heshe",
+              "value": 77.9221,
+              "z": 2.161
+            },
+            {
+              "feature": "trigram_repeat_rate",
+              "value": 0.1863,
+              "z": 1.265
+            },
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2792,
+              "z": -1.223
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7622,
+              "z": -1.158
+            }
+          ],
+          "src": "cnn_human"
+        },
+        {
+          "text": "A top Queensland barrister with a handsome income will use case law dating back 200 years to try to avoid a 146 speeding fine. Tony Morris QC is mounting a landmark legal challenge against Queensland's speed-camera laws, The Courier-Mail re",
+          "p_machine_cal": 0.9973,
+          "true": "human",
+          "top_feature_deviations": [
+            {
+              "feature": "hapax_ratio",
+              "value": 0.2354,
+              "z": -1.45
+            },
+            {
+              "feature": "ttr",
+              "value": 0.4365,
+              "z": -1.305
+            },
+            {
+              "feature": "unique_bigram_ratio",
+              "value": 0.7586,
+              "z": -1.185
+            },
+            {
+              "feature": "pron_heshe",
+              "value": 44.9735,
+              "z": 1.041
+            }
+          ],
+          "src": "cnn_human"
+        }
+      ]
+    },
+    "slice_counts": {
+      "mage_test_human_fp": 6,
+      "mage_test_machine_fn": 6,
+      "hc3_human_fp": 6,
+      "hc3_machine_fn": 6,
+      "raid_human_fp": 6,
+      "raid_machine_fn": 6,
+      "ood_test_ood_set_gpt_machine_fn": 6,
+      "ood_test_ood_set_gpt_human_fp": 6,
+      "ood_test_ood_set_gpt_para_machine_fn": 6,
+      "ood_test_ood_set_gpt_para_human_fp": 6
+    },
+    "duration_s": 46.9
+  }
+}

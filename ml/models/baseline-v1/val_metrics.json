@@ -1,0 +1,86 @@
+{
+  "selection_metric": "pr_auc_val_tune",
+  "val_tune_pr_auc": {
+    "dummy_prior": 0.3448264853302685,
+    "logistic_regression": 0.7480573438628298,
+    "hist_gradient_boosting": 0.9221827160318365
+  },
+  "selected_model": "hist_gradient_boosting",
+  "calibration": {
+    "fitted_on": "val_cal (group-disjoint from val_tune)",
+    "chosen": "isotonic",
+    "brier_platt": 0.07635200432777103,
+    "brier_isotonic": 0.07573753042204456,
+    "val_cal_raw": {
+      "brier": 0.0765370161295342,
+      "ece": 0.013105553749924241
+    },
+    "val_cal_calibrated": {
+      "brier": 0.07573753042204456,
+      "ece": 2.931843467265702e-07
+    }
+  },
+  "grid": [
+    {
+      "model": "dummy_prior",
+      "params": {
+        "strategy": "prior"
+      },
+      "val_tune_pr_auc": 0.3448264853302685
+    },
+    {
+      "model": "logreg",
+      "params": {
+        "C": 0.1
+      },
+      "val_tune_pr_auc": 0.7446737380097002
+    },
+    {
+      "model": "logreg",
+      "params": {
+        "C": 1.0
+      },
+      "val_tune_pr_auc": 0.7478833834819378
+    },
+    {
+      "model": "logreg",
+      "params": {
+        "C": 10.0
+      },
+      "val_tune_pr_auc": 0.7480573438628298
+    },
+    {
+      "model": "hist_gbdt",
+      "params": {
+        "learning_rate": 0.06,
+        "max_leaf_nodes": 31
+      },
+      "val_tune_pr_auc": 0.9137647449954903
+    },
+    {
+      "model": "hist_gbdt",
+      "params": {
+        "learning_rate": 0.06,
+        "max_leaf_nodes": 63
+      },
+      "val_tune_pr_auc": 0.9201877610399177
+    },
+    {
+      "model": "hist_gbdt",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31
+      },
+      "val_tune_pr_auc": 0.9176579308569173
+    },
+    {
+      "model": "hist_gbdt",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      "val_tune_pr_auc": 0.9221827160318365
+    }
+  ],
+  "n_features": 73
+}

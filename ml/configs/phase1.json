@@ -1,0 +1,32 @@
+{
+  "pipeline_version": "phase1_v1",
+  "seed": 42,
+  "dedup_seed": 13,
+  "target_sample_rows": 260000,
+  "min_words": 40,
+  "max_words": 5000,
+  "split_fractions": [0.6, 0.2, 0.2],
+  "dedup": {
+    "shingle_size": 5,
+    "max_shingles": 4000,
+    "num_perm": 128,
+    "bands": 32,
+    "rows": 4,
+    "jaccard_threshold": 0.75,
+    "max_pairs_per_bucket": 5000
+  },
+  "dedup_workers": 4,
+  "feature_workers": 4,
+  "rare_frac": 0.001,
+  "val_tune_fraction": 0.6,
+  "models": {
+    "lr_C_grid": [0.1, 1.0, 10.0],
+    "hgb_learning_rate_grid": [0.06, 0.1],
+    "hgb_max_leaf_nodes_grid": [31, 63],
+    "hgb_max_iter": 300
+  },
+  "feature_version": "features_v1",
+  "run_name": "baseline-v1",
+  "selection_metric": "pr_auc_val_tune",
+  "notes": "Phase 1 config. MAGE only for train/val/test. HC3 is eval-only. RAID is eval-only and never trained on. Seeds recorded in run manifests."
+}

@@ -1,0 +1,451 @@
+{
+  "train_reference_stats": {
+    "n_chars": {
+      "median": 837.0,
+      "mean": 1403.900249,
+      "std": 1447.218634
+    },
+    "n_chars_no_space": {
+      "median": 695.0,
+      "mean": 1163.082397,
+      "std": 1201.982536
+    },
+    "n_words": {
+      "median": 144.0,
+      "mean": 243.365349,
+      "std": 249.320316
+    },
+    "n_sentences": {
+      "median": 7.0,
+      "mean": 14.400037,
+      "std": 18.86448
+    },
+    "n_paragraphs": {
+      "median": 1.0,
+      "mean": 1.0,
+      "std": 1.0
+    },
+    "avg_word_len": {
+      "median": 4.567568,
+      "mean": 4.628659,
+      "std": 0.554101
+    },
+    "std_word_len": {
+      "median": 2.366616,
+      "mean": 2.398803,
+      "std": 0.402517
+    },
+    "median_word_len": {
+      "median": 4.0,
+      "mean": 4.151486,
+      "std": 0.583688
+    },
+    "avg_sent_len": {
+      "median": 19.333333,
+      "mean": 21.625569,
+      "std": 21.371239
+    },
+    "median_sent_len": {
+      "median": 18.0,
+      "mean": 19.98748,
+      "std": 20.39586
+    },
+    "std_sent_len": {
+      "median": 7.396939,
+      "mean": 9.503517,
+      "std": 13.826877
+    },
+    "cv_sent_len": {
+      "median": 0.423307,
+      "mean": 0.445894,
+      "std": 0.23665
+    },
+    "min_sent_len": {
+      "median": 8.0,
+      "mean": 10.211869,
+      "std": 19.349957
+    },
+    "max_sent_len": {
+      "median": 33.0,
+      "mean": 40.433931,
+      "std": 42.444569
+    },
+    "first_sent_len": {
+      "median": 17.0,
+      "mean": 19.457279,
+      "std": 21.462887
+    },
+    "last_sent_len": {
+      "median": 18.0,
+      "mean": 23.235262,
+      "std": 39.40574
+    },
+    "avg_para_len": {
+      "median": 144.0,
+      "mean": 243.365349,
+      "std": 249.320316
+    },
+    "cv_para_len": {
+      "median": 0.0,
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "ttr": {
+      "median": 0.678571,
+      "mean": 0.658787,
+      "std": 0.170324
+    },
+    "root_ttr": {
+      "median": 7.793275,
+      "mean": 8.520245,
+      "std": 3.395802
+    },
+    "log_ttr": {
+      "median": 0.920206,
+      "mean": 0.912448,
+      "std": 0.053379
+    },
+    "hapax_ratio": {
+      "median": 0.521277,
+      "mean": 0.514944,
+      "std": 0.192767
+    },
+    "rare_token_ratio": {
+      "median": 0.054795,
+      "mean": 0.065002,
+      "std": 0.050668
+    },
+    "mean_log_df": {
+      "median": 4.04002,
+      "mean": 4.013312,
+      "std": 0.234341
+    },
+    "stopword_ratio": {
+      "median": 0.450292,
+      "mean": 0.445179,
+      "std": 0.076041
+    },
+    "contraction_rate": {
+      "median": 0.002882,
+      "mean": 0.011396,
+      "std": 0.017253
+    },
+    "uppercase_word_ratio": {
+      "median": 0.0,
+      "mean": 0.007761,
+      "std": 0.019889
+    },
+    "digit_word_ratio": {
+      "median": 0.0,
+      "mean": 0.012489,
+      "std": 0.025242
+    },
+    "comma_rate": {
+      "median": 6.633499,
+      "mean": 7.141016,
+      "std": 4.91221
+    },
+    "semicolon_rate": {
+      "median": 0.0,
+      "mean": 0.166909,
+      "std": 1.198685
+    },
+    "colon_rate": {
+      "median": 0.0,
+      "mean": 0.461947,
+      "std": 1.390609
+    },
+    "em_dash_rate": {
+      "median": 0.0,
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "en_dash_rate": {
+      "median": 0.0,
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "ellipsis_rate": {
+      "median": 0.0,
+      "mean": 0.311287,
+      "std": 1.520044
+    },
+    "quote_rate": {
+      "median": 0.0,
+      "mean": 1.757012,
+      "std": 4.261769
+    },
+    "paren_rate": {
+      "median": 0.0,
+      "mean": 1.370984,
+      "std": 2.889385
+    },
+    "qmark_rate": {
+      "median": 0.0,
+      "mean": 0.405487,
+      "std": 1.77233
+    },
+    "exclaim_rate": {
+      "median": 0.0,
+      "mean": 0.70415,
+      "std": 3.371986
+    },
+    "pct_rate": {
+      "median": 0.0,
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "hash_rate": {
+      "median": 0.0,
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "hyphen_rate": {
+      "median": 0.570125,
+      "mean": 1.500236,
+      "std": 2.847835
+    },
+    "bullet_rate": {
+      "median": 0.0,
+      "mean": 0.001401,
+      "std": 0.05688
+    },
+    "digit_char_ratio": {
+      "median": 0.000963,
+      "mean": 0.005495,
+      "std": 0.011654
+    },
+    "pron_i": {
+      "median": 0.0,
+      "mean": 15.955621,
+      "std": 28.597242
+    },
+    "pron_you": {
+      "median": 0.0,
+      "mean": 10.109195,
+      "std": 19.97255
+    },
+    "pron_we": {
+      "median": 0.0,
+      "mean": 6.9847,
+      "std": 13.478042
+    },
+    "pron_they": {
+      "median": 5.747126,
+      "mean": 10.346414,
+      "std": 14.594029
+    },
+    "pron_heshe": {
+      "median": 0.0,
+      "mean": 14.315883,
+      "std": 29.439822
+    },
+    "pron_it": {
+      "median": 9.21659,
+      "mean": 11.895622,
+      "std": 13.051387
+    },
+    "first_person_rate": {
+      "median": 9.433962,
+      "mean": 22.940322,
+      "std": 31.800325
+    },
+    "second_person_rate": {
+      "median": 0.0,
+      "mean": 10.109195,
+      "std": 19.97255
+    },
+    "hedge_rate": {
+      "median": 0.0,
+      "mean": 4.933717,
+      "std": 7.746574
+    },
+    "certainty_rate": {
+      "median": 0.0,
+      "mean": 0.668124,
+      "std": 2.671032
+    },
+    "transition_rate": {
+      "median": 0.0,
+      "mean": 2.224761,
+      "std": 4.538109
+    },
+    "connective_phrase_rate": {
+      "median": 0.0,
+      "mean": 0.681266,
+      "std": 2.454462
+    },
+    "boilerplate_rate": {
+      "median": 0.0,
+      "mean": 0.0935,
+      "std": 1.014223
+    },
+    "enum_rate": {
+      "median": 0.0,
+      "mean": 1.019556,
+      "std": 4.151519
+    },
+    "question_rate_per_sent": {
+      "median": 0.0,
+      "mean": 36.556584,
+      "std": 336.731668
+    },
+    "exclaim_rate_per_sent": {
+      "median": 0.0,
+      "mean": 63.326407,
+      "std": 679.711512
+    },
+    "trigram_repeat_rate": {
+      "median": 0.005405,
+      "mean": 0.042759,
+      "std": 0.113452
+    },
+    "unique_bigram_ratio": {
+      "median": 0.956522,
+      "mean": 0.914439,
+      "std": 0.131461
+    },
+    "max_token_repeat_ratio": {
+      "median": 0.061224,
+      "mean": 0.065508,
+      "std": 0.028775
+    },
+    "clause_density": {
+      "median": 1.3,
+      "mean": 1.501994,
+      "std": 1.813474
+    },
+    "subordinator_rate": {
+      "median": 31.847134,
+      "mean": 33.054889,
+      "std": 19.907077
+    },
+    "coordinator_rate": {
+      "median": 35.087719,
+      "mean": 37.09368,
+      "std": 19.364005
+    },
+    "relative_clause_rate": {
+      "median": 0.25,
+      "mean": 0.333639,
+      "std": 0.803542
+    },
+    "aux_rate": {
+      "median": 62.5,
+      "mean": 64.555385,
+      "std": 30.147642
+    },
+    "flesch_reading_ease": {
+      "median": 58.641373,
+      "mean": 54.895721,
+      "std": 30.300366
+    },
+    "flesch_kincaid_grade": {
+      "median": 10.056421,
+      "mean": 10.974871,
+      "std": 9.103564
+    },
+    "avg_syllables_per_word": {
+      "median": 1.503311,
+      "mean": 1.536517,
+      "std": 0.208098
+    },
+    "polysyllable_ratio": {
+      "median": 0.122642,
+      "mean": 0.135574,
+      "std": 0.074171
+    },
+    "sent_len_trend": {
+      "median": 0.011511,
+      "mean": 0.036402,
+      "std": 0.456495
+    },
+    "header_rate": {
+      "median": 0.0,
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "syn_pos_noun_ratio": {
+      "median": 178.082192,
+      "mean": 183.735469,
+      "std": 54.494328
+    },
+    "syn_pos_pron_ratio": {
+      "median": 79.470199,
+      "mean": 84.312508,
+      "std": 50.346516
+    },
+    "syn_pos_verb_ratio": {
+      "median": 118.556701,
+      "mean": 118.211083,
+      "std": 33.240531
+    },
+    "syn_pos_adj_ratio": {
+      "median": 66.489362,
+      "mean": 70.244593,
+      "std": 32.290605
+    },
+    "syn_pos_adv_ratio": {
+      "median": 41.709637,
+      "mean": 45.353963,
+      "std": 27.839963
+    },
+    "syn_pos_det_ratio": {
+      "median": 77.922078,
+      "mean": 80.44045,
+      "std": 31.679214
+    },
+    "syn_pos_adp_ratio": {
+      "median": 95.238095,
+      "mean": 95.882743,
+      "std": 30.616214
+    },
+    "syn_pos_sconj_ratio": {
+      "median": 19.685039,
+      "mean": 21.11785,
+      "std": 15.324961
+    },
+    "syn_pos_cconj_ratio": {
+      "median": 27.972028,
+      "mean": 29.933643,
+      "std": 16.2555
+    },
+    "syn_pos_entropy": {
+      "median": 3.397283,
+      "mean": 3.363443,
+      "std": 0.172729
+    },
+    "syn_clause_rate": {
+      "median": 1.3,
+      "mean": 1.490359,
+      "std": 1.637188
+    },
+    "syn_mark_rate": {
+      "median": 13.333333,
+      "mean": 14.621968,
+      "std": 12.4822
+    },
+    "syn_depth_mean": {
+      "median": 2.771084,
+      "mean": 2.907911,
+      "std": 2.187412
+    },
+    "syn_depth_std": {
+      "median": 1.825933,
+      "mean": 1.968657,
+      "std": 1.628142
+    },
+    "syn_passive_rate": {
+      "median": 0.25,
+      "mean": 0.416282,
+      "std": 0.67918
+    },
+    "syn_dep_len_mean": {
+      "median": 3.050633,
+      "mean": 3.142169,
+      "std": 3.444438
+    }
+  },
+  "note": "MAGE-train distribution of the final feature set; used by ml/explain.py for local perturbation explanations",
+  "n_train_rows": 155988
+}

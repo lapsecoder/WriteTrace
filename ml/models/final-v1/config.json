@@ -1,0 +1,20 @@
+{
+  "spec_key": "hgb",
+  "spec": {
+    "type": "hist_gradient_boosting",
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 63,
+    "max_iter": 300,
+    "random_state": 42
+  },
+  "C": null,
+  "calibrator": "platt",
+  "threshold": 0.5,
+  "label_policy": "canonical y=1 MACHINE (MAGE label complemented); calibrators fit in canonical space; p = cal(model(x))",
+  "train_rows": 155988,
+  "val_tune_rows": 31323,
+  "val_cal_rows": 20673,
+  "seed": 42,
+  "trained_at": "2026-10-08T09:08:31.846557+00:00",
+  "hc3_raid_policy": "evaluation-only: never trained/calibrated/tuned on"
+}

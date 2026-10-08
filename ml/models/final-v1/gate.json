@@ -1,0 +1,37 @@
+{
+  "status": "active",
+  "min_words": 50,
+  "decision_rule": "smallest min_words whose EXCLUDED bucket on test has F1-macro strictly below the KEPT subset F1-macro (the cut must actually separate quality) AND abstained fraction <= abstain_frac_max; validated descriptively on HC3/OOD (kept-subset human FPR must not exceed full-set human FPR). Coverage constraint rationale: abstention must stay a minority of inputs so the tool remains useful.",
+  "abstain_frac_max": 0.15,
+  "abstain_frac_test": 0.0933,
+  "threshold": 0.5,
+  "mixed_band": [
+    0.4,
+    0.6
+  ],
+  "mixed_band_rule": "p in [lo, hi] around 0.5 is 'mixed/low confidence' where [lo, hi] is the smallest reliability interval on val_cal containing 0.5 whose observed accuracy is < 0.75 (empirical; frozen before test reporting)",
+  "mixed_band_accuracy": 0.5342,
+  "validation": {
+    "hc3": {
+      "n_kept": 60771,
+      "frac_abstained": 0.0644,
+      "kept_human_fpr": 0.3215,
+      "full_human_fpr": 0.3774
+    },
+    "ood_gpt": {
+      "n_kept": 1518,
+      "frac_abstained": 0.0282,
+      "kept_human_fpr": 0.3127,
+      "full_human_fpr": 0.3136
+    },
+    "ood_gpt_para": {
+      "n_kept": 2343,
+      "frac_abstained": 0.008,
+      "kept_human_fpr": 0.3127,
+      "full_human_fpr": 0.3136
+    },
+    "note": "kept-subset human FPR must not exceed full-set"
+  },
+  "threshold_policy": "0.5 fixed from Phase 1; never tuned on evaluation data",
+  "written_at": "2026-10-08T09:48:24.538000+00:00"
+}

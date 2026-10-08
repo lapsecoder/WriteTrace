@@ -1,0 +1,166 @@
+{
+  "pipeline_version": "phase3_v1",
+  "seed": 42,
+  "rare_frac": 0.001,
+  "feature_workers": 4,
+  "threshold": 0.5,
+  "threshold_policy": "0.5 fixed from Phase 1; never tuned on evaluation data",
+  "label_convention": {
+    "note": "ALL Phase-3 candidates are trained on CANONICAL labels (y=1 MACHINE, y=0 HUMAN): MAGE stored labels are complemented (stored-1==HUMAN). Calibrators are therefore fit in canonical space and p(machine)=calibrator(model(x)) directly - no complement at inference. The Phase-1 locked baseline keeps its stored-orientation semantics and is scored via the Phase-2 machinery (1 - calibrated stored score) ONLY as a reference.",
+    "mage": "canonical = 1 - stored label",
+    "hc3": "stored label already canonical",
+    "raid": "y = (model != 'human')"
+  },
+  "splits": {
+    "val_tune_fraction": 0.6,
+    "val_tune_salt": "phase1_val_tune",
+    "cal_fit_salt": "phase3_cal_fit",
+    "cal_fit_fraction": 0.5,
+    "note": "val_tune (model/hyperparameter selection) and val_cal (calibration) are group-disjoint halves of MAGE-validation, split exactly like Phase 1. val_cal is further split into cal_fit/cal_eval (group-disjoint) ONLY for comparing calibrator types in E4; the winning calibrator is refit on the full val_cal for the final artifact."
+  },
+  "ablation_model": {
+    "type": "hist_gradient_boosting",
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 63,
+    "max_iter": 300,
+    "random_state": 42
+  },
+  "ablations": [
+    {"key": "all", "remove": [], "question": "full 73-feature reference"},
+    {"key": "minus_lexical", "remove_family": "lexical"},
+    {"key": "minus_punctuation", "remove_family": "punctuation"},
+    {"key": "minus_stylometric", "remove_family": "stylometric"},
+    {"key": "minus_repetition", "remove_family": "repetition"},
+    {"key": "minus_structure", "remove_family": "structure"},
+    {"key": "minus_readability", "remove_family": "readability"},
+    {"key": "minus_positional", "remove_family": "positional"},
+    {"key": "minus_syntactic_proxy", "remove_family": "syntactic"},
+    {
+      "key": "minus_leakage_preregistered",
+      "remove": [
+        "ttr", "root_ttr", "log_ttr", "hapax_ratio", "rare_token_ratio",
+        "mean_log_df", "stopword_ratio", "contraction_rate",
+        "uppercase_word_ratio", "digit_word_ratio",
+        "boilerplate_rate", "transition_rate", "connective_phrase_rate",
+        "hash_rate", "bullet_rate", "header_rate"
+      ],
+      "justification": "PREREGISTERED before Phase-3 results: (a) rare_token_ratio/mean_log_df are document-frequency statistics of the MAGE training corpus and transfer poorly by construction; (b) TTR-family features are length/corpus-composition dependent (Phase-2 E7 drift: hapax_ratio Cohen-d -1.07 MAGE vs HC3 machine text); (c) boilerplate/transition/connective phrase rates are generator-vintage lexicons (Phase-2 E7: boilerplate_rate 0.10 MAGE machine vs 0.64 HC3 machine); (d) hash/bullet/header rates and uppercase_word_ratio are markdown/source formatting artifacts, not authorship evidence (Phase-2 hswag forensics showed formatting/length artifacts dominating errors)."
+    }
+  ],
+  "candidates": {
+    "lr": {
+      "type": "logistic_regression",
+      "C_grid": [0.1, 1.0, 10.0],
+      "selection": "val_tune PR-AUC (same grid as Phase 1 for comparability)",
+      "pipeline": "median impute -> standardize -> lbfgs, class_weight=balanced, max_iter=1000"
+    },
+    "hgb": {
+      "type": "hist_gradient_boosting",
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 63,
+      "max_iter": 300,
+      "random_state": 42
+    },
+    "extratrees": {
+      "type": "extratrees",
+      "n_estimators": 300,
+      "min_samples_leaf": 2,
+      "class_weight": "balanced_subsample",
+      "random_state": 42,
+      "n_jobs": -1,
+      "justification": "the spec's variance-baseline family (Random Forest/ExtraTrees); extra-trees randomization reduces single-feature artifact memorization vs plain trees; native feature_importances_ for cross-checking permutation importance"
+    }
+  },
+  "syntactic": {
+    "version": "syntactic_spacy_v1",
+    "model": "en_core_web_sm",
+    "disable": ["ner", "lemmatizer"],
+    "n_process": 4,
+    "batch_size": 48,
+    "cache_dir": "ml/experiments/phase3/cache",
+    "verdict_rule": {
+      "include_if_all": {
+        "generalization_mean_roc_delta": 0.003,
+        "note": "mean ROC over {ood_gpt, ood_gpt_para, hc3, raid_clean} must beat hgb by >= 0.003",
+        "test_ece_max": 0.015,
+        "hc3_fpr_delta_max": 0.01
+      },
+      "note_rule": "pre-declared: syntactic features enter the final model ONLY if they improve generalization without unacceptable calibration/FPR cost; otherwise documented and excluded"
+    }
+  },
+  "e4": {
+    "calibrators": ["isotonic", "platt"],
+    "prefer_on_tie": "platt",
+    "tie_brier_eps": 0.0001,
+    "note": "calibrator types compared on group-disjoint cal_eval after fitting on cal_fit; winner refit on full val_cal for the artifact. Test metrics for both types are descriptive only (never used to pick)."
+  },
+  "selection_pool": {
+    "primary": ["hgb", "lr", "extratrees"],
+    "challengers": ["abl_minus_leakage_preregistered", "hgb_syn"],
+    "challenger_rules": "abl_minus_leakage_preregistered enters only if it was fitted (E1 always fits it); hgb_syn enters ONLY if the pre-declared E2 verdict rule passes. Ablations other than the preregistered leakage one are family-importance studies, never selection candidates.",
+    "note": "ranked lexicographically by `selection.criteria_order`; the locked Phase-1 baseline is the incumbent to beat on the robustness criteria but is NEVER retrained and is scored through the Phase-2 machinery"
+  },
+  "e5": {
+    "lodo": {
+      "enabled": true,
+      "top_k": 2,
+      "selection_rule": "top-2 candidates by the E5 robustness score (mean ROC over ood_gpt/ood_gpt_para/hc3/raid) - chosen BEFORE running LODO",
+      "use": "supporting evidence: a robustness leader whose LODO mean PR-AUC is >0.02 below the runner-up's LODO mean PR-AUC triggers a documented manual override (swap) that is recorded in the selection trace"
+    }
+  },
+  "e6": {
+    "permutation": {"n_rows": 8000, "n_repeats": 5, "seed": 42},
+    "probes": ["lexical_only", "formatting_only"],
+    "artifact_flag": {"min_abs_delta_auc": 0.15, "note": "flag feature if |val AUC - HC3 AUC| or |val AUC - RAID AUC| exceeds this while val AUC >= 0.60"}
+  },
+  "e7": {
+    "error_examples_per_slice": 6,
+    "edited_text": {
+      "enabled": true,
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "sample_n": 32,
+      "seed_offset": 3,
+      "temperature": 0.3,
+      "top_p": 0.9,
+      "max_new_tokens": 400,
+      "max_new_tokens_cap": 800,
+      "max_input_chars": 1500,
+      "prompt_template": "Edit this so it reads like it was written by a person: vary sentence lengths, add contractions and personal asides, keep all the original information, and avoid list-like parallelism. Output only the edited text.\n\nText:\n{text}",
+      "system": "You are a careful editor. You always obey the user's instructions exactly and output only the requested text.",
+      "greedy": false,
+      "note": "same protocol as Phase-2 E3 so edited texts are comparable; regenerated once and cached (Phase-2 E3 did not persist the edited texts)"
+    }
+  },
+  "e8": {
+    "gate_candidates": [25, 50, 75, 100, 150],
+    "abstain_frac_max": 0.15,
+    "decision_rule": "smallest min_words whose EXCLUDED bucket on test has F1-macro strictly below the KEPT subset F1-macro (the cut must actually separate quality) AND abstained fraction <= abstain_frac_max; validated descriptively on HC3/OOD (kept-subset human FPR must not exceed full-set human FPR). Coverage constraint rationale: abstention must stay a minority of inputs so the tool remains useful.",
+    "mixed_band_rule": "p in [lo, hi] around 0.5 is 'mixed/low confidence' where [lo, hi] is the smallest reliability interval on val_cal containing 0.5 whose observed accuracy is < 0.75 (empirical; frozen before test reporting)"
+  },
+  "selection": {
+    "criteria_order": [
+      "robustness_generalization",
+      "calibration",
+      "false_positive_behavior",
+      "pr_auc",
+      "interpretability",
+      "computational_practicality",
+      "in_distribution_performance"
+    ],
+    "robustness_score": "mean ROC-AUC over {ood_gpt, ood_gpt_para, hc3, raid_clean} for EVERY candidate (identical components for all); LODO mean PR-AUC is reported as supporting evidence and applies only the pre-declared >0.02 override rule in e5.lodo.use",
+    "tie_bands": {
+      "robustness_generalization": 0.005,
+      "calibration": 0.005,
+      "false_positive_behavior": 0.01,
+      "pr_auc": 0.005,
+      "interpretability": 0,
+      "computational_practicality": 0,
+      "in_distribution_performance": 0.005
+    },
+    "note": "lexicographic comparison with tie bands; every candidate's score per criterion is recorded so the decision can be audited. NOT selected by headline MAGE accuracy."
+  },
+  "results_dir": "ml/experiments/phase3",
+  "final_artifact_dir": "ml/models/final-v1",
+  "report_path": "docs/experiments/phase3-report.md",
+  "notes": "Phase 3 config. MAGE-only training/validation; HC3 and RAID are evaluation-only (never trained/calibrated/tuned on). OOD sets are evaluation-only. Threshold 0.5 never tuned. Phase-1 baseline artifacts untouched (ml/models/baseline-v1)."
+}
