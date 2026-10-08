@@ -46,9 +46,20 @@ def _nan_row() -> dict[str, float]:
     return {n: float("nan") for n in SYNTACTIC_FEATURES}
 
 
+_NLP_CACHE: dict[tuple, object] = {}
+
+
 def _load_nlp(disable=("ner", "lemmatizer")):
-    import spacy
-    return spacy.load("en_core_web_sm", disable=list(disable))
+    """Load en_core_web_sm once per process (Phase-4: inference must not
+    reload the pipeline per request). Values are identical either way - the
+    model on disk is fixed and `nlp.pipe` is deterministic."""
+    key = tuple(disable)
+    nlp = _NLP_CACHE.get(key)
+    if nlp is None:
+        import spacy
+        nlp = spacy.load("en_core_web_sm", disable=list(disable))
+        _NLP_CACHE[key] = nlp
+    return nlp
 
 
 def _token_depth(tok) -> int:

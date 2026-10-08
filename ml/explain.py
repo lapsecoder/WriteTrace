@@ -139,26 +139,34 @@ def load_reference(final_dir: Path = FINAL_DIR) -> dict:
 def local_contributions(model, calibrator, features: list[str],
                         x_row: np.ndarray, ref_stats: dict,
                         k: int | None = None) -> list[dict]:
-    """One-at-a-time perturbation of a single feature row (canonical space)."""
+    """One-at-a-time perturbation of a single feature row (canonical space).
+
+    Evaluated as ONE batched predict (base row + one perturbed row per
+    feature) for latency; per-row math is identical to the sequential
+    definition in the module docstring and is asserted by the test suite.
+    """
     x_row = np.asarray(x_row, dtype=float)
-    p_base = float(calibrator.predict(
-        model.predict_proba(x_row.reshape(1, -1))[:, 1])[0])
-    out = []
+    n = len(features)
+    X = np.repeat(x_row.reshape(1, -1), n + 1, axis=0)
+    keep: list[int] = []
     for j, f in enumerate(features):
         st = ref_stats.get(f)
         if st is None:
             continue
-        ref = float(st["median"])
-        x2 = x_row.copy()
-        x2[j] = ref
-        p2 = float(calibrator.predict(
-            model.predict_proba(x2.reshape(1, -1))[:, 1])[0])
-        contrib = p_base - p2
+        keep.append(j)
+        X[j + 1, j] = float(st["median"])
+    p_all = calibrator.predict(model.predict_proba(X)[:, 1])
+    p_base = float(p_all[0])
+    out = []
+    for j in keep:
+        f = features[j]
+        st = ref_stats.get(f)
+        contrib = p_base - float(p_all[j + 1])
         val = float(x_row[j])
         out.append({
             "feature": f, "phrase": phrase(f),
             "value": round(val, 4) if np.isfinite(val) else None,
-            "reference_median": ref,
+            "reference_median": float(st["median"]),
             "contribution_to_p_machine": round(contrib, 4),
             "direction": "toward machine" if contrib > 1e-6
             else ("toward human" if contrib < -1e-6 else "no effect"),

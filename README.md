@@ -18,9 +18,9 @@ WriteTrace estimates whether a piece of writing shows stylistic patterns *associ
 
 Generative models now produce fluent prose everywhere. People need tools that help *investigate* text origin — but published research shows detectors are fragile under paraphrasing, editing, new generators, and domain shifts. WriteTrace is built to make that fragility **visible**: honest evaluation, calibrated uncertainty, and documented failure modes are features, not embarrassments.
 
-## 3. How the model works (status: Phase 0 — specified, not yet trained)
+## 3. How the model works (status: trained — locked Phase-3 artifact)
 
-Handcrafted lexical, sentence-level, syntactic, and stylometric features (~140 per document) feed **classical ML models** (logistic regression, gradient boosting, forests, SVM, TF-IDF baselines). Predictions come from the trained model — never from keywords, regex, or an external LLM API. Probabilities are calibrated (Platt/isotonic), and a reliability gate downgrades confidence on short or ambiguous inputs.
+Handcrafted lexical, sentence-level, syntactic, and stylometric features feed **classical ML models** (logistic regression, gradient boosting, forests, SVM, TF-IDF baselines); the selected winner uses **89 features** (73 base + 16 spaCy syntactic). Predictions come from the trained model — never from keywords, regex, or an external LLM API. Probabilities are calibrated (Platt), and a reliability gate (≥50 words) abstains on short inputs. Artifact: `ml/models/final-v1/` (winner `hgb_syn`, threshold 0.5).
 
 See `docs/technical-specification.md`, `docs/methodology.md`.
 
@@ -34,36 +34,45 @@ Lexical diversity & word-frequency structure · sentence-length statistics & uni
 
 ## 6. Models tested & 7. Evaluation results
 
-**Not yet available — Phase 1.** Plan: multiple classical baselines, selected on PR-AUC/ROC-AUC **plus** calibration (Brier/ECE) plus robustness on held-out generators — not on headline accuracy. Full metrics (precision, recall, F1, confusion matrix, calibration curves, per-domain/per-length slices) will be published in `docs/experiments/` when training runs exist. This README will not claim numbers before they are honestly measured.
+Measured and published: baselines, model selection, calibration, and the locked test evaluation live in `docs/experiments/` (`phase2-report.md`, `phase3-report.md`). Headline (MAGE-test, n=51,995): **ROC-AUC 0.9618, PR-AUC 0.9799, F1(macro) 0.8856, Brier 0.0739, ECE-10 0.0058**; OOD results (GPT/GPT-para/HC3/RAID) and per-length/abstention slices are reported there with their failure modes.
 
 ## 8. Robustness experiments (plan in `docs/experiments/robustness-plan.md`)
 
 Unseen generators · paraphrased machine text · human-edited machine text · mixed authorship documents · leave-one-domain-out transfer · length sensitivity · temporal drift. Failures will be documented.
 
-## 9. Limitations (current, pre-training)
+## 9. Limitations (current, measured — see `docs/experiments/`)
 
-- Detection is probabilistic and ages quickly; new generators will degrade performance.
-- Paraphrasing and human editing substantially erode stylometric cues (expected finding, to be quantified).
-- Short texts (< ~50 words) are fundamentally under-determined → "insufficient evidence."
-- Known bias risk: non-native/ESL writing can resemble machine regularity; UI must warn against punitive use.
+- Detection is probabilistic and ages quickly; new generators degrade performance (OOD-GPT ROC-AUC 0.6958, OOD-GPT-para 0.6165).
+- Paraphrasing and human editing substantially erode stylometric cues (quantified in the phase reports).
+- Short texts (< 50 words) are under-determined → the API reports **insufficient evidence** and abstains (9.33% of validation text).
+- Known bias risk: conversational/non-native writing can resemble machine regularity (HC3 human FPR 0.3774); never use output as sole evidence of authorship.
 - Training corpora skew to forums/news/academic text; other genres are less validated.
 
-## 10. Local setup (Phase 1+)
+## 10. Local setup (training + API)
 
 ```bash
 # Python 3.11+
 python -m venv .venv && .venv\Scripts\activate        # Windows
 pip install -r ml/requirements.txt
+python -m spacy download en_core_web_sm               # syntactic features
 python scripts/download_data.py                        # free HF/git downloads
 python scripts/train.py --config ml/training/configs/baselines.yaml
 python scripts/evaluate.py --run latest                # writes docs/experiments reports
+python -m pytest tests/ -q                             # full suite (127 tests)
 ```
 
-Frontend/backend setup arrives with Phases 3–4 (Astro + FastAPI). No API keys, no paid services.
+Run the inference API (Phase 4; no API keys, no paid services, no DB):
+
+```bash
+python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
+# interactive docs: http://127.0.0.1:8000/docs   (API contract: docs/api.md)
+```
+
+Frontend arrives with Phase 5 (Astro).
 
 ## 11. Training / 12. Inference
 
-Training is fully local and reproducible (fixed seeds, config + data-manifest hashes, artifacts in `ml/models/`). Inference will be exposed at `POST /api/v1/analyze` returning calibrated probabilities, classification, confidence, signals, and evidence sufficiency — see §16 of the technical specification.
+Training is fully local and reproducible (fixed seeds, config + data-manifest hashes, artifacts in `ml/models/`). Inference is exposed at `POST /api/v1/analyze`, returning calibrated probabilities, the 5-level label, confidence, gate/abstention state, signals, and the authorship disclaimer — see `docs/api.md`.
 
 ## 13. Architecture
 
@@ -82,6 +91,8 @@ docs/ (spec, dataset, methodology, experiments)   tests/   scripts/
 
 ## Repository status
 
-Phase 0 complete: research, specification, and dataset strategy. Implementation begins only after this plan is reviewed.
+**Phases 0–4 complete** (research/spec/datasets → features → training → locked model selection → inference engine + FastAPI backend). Test suite: 127 passing. Locked artifacts: `ml/models/baseline-v1/` (Phase 1) and `ml/models/final-v1/` (Phase 3, winner `hgb_syn`), each with hashed manifests. Reports: `docs/experiments/phase2-report.md`, `phase3-report.md`, `phase4-report.md`.
+
+**Next:** Phase 5 (frontend + segment-level analysis) — not started.
 
 **License:** project code will be MIT (decided at Phase 1); dataset licenses apply to data, not to this code.
