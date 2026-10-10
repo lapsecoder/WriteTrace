@@ -1,0 +1,22 @@
+---
+/**
+ * The required authorship disclaimer. Rendered unconditionally in the footer
+ * and again beside any result.
+ */
+interface Props {
+  class?: string;
+  disclaimer?: string;
+}
+
+const {
+  class: className = "",
+  disclaimer = "WriteTrace does not establish authorship. It estimates how strongly observed writing patterns resemble machine-generated or human-written text under the model's training and evaluation conditions.",
+} = Astro.props;
+---
+
+<p
+  class={`annotation text-[0.875rem] leading-relaxed ${className}`}
+  data-testid="disclaimer"
+>
+  {disclaimer}
+</p>

@@ -1,0 +1,335 @@
+{
+ "ok_response": {
+  "status": "ok",
+  "label": "likely_human",
+  "decision": "human",
+  "machine_probability": 0.153251,
+  "human_probability": 0.846749,
+  "confidence": 0.8467,
+  "word_count": 103,
+  "text_length": {
+   "characters": 525,
+   "words": 103,
+   "sentences": 1,
+   "paragraphs": 1
+  },
+  "evidence_sufficient": true,
+  "mixed_low_confidence": false,
+  "signals": [
+   {
+    "signal": "first_sent_len",
+    "label": "first-sentence length",
+    "family": "structure",
+    "value": 103.0,
+    "reference_median": 17.0,
+    "contribution": -0.0977,
+    "direction": "human",
+    "interpretation": "observed value 103.0 vs train median 17 moved the estimate toward human by -0.0977",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "pron_i",
+    "label": "first-person singular pronouns",
+    "family": "stylometric",
+    "value": 29.1262,
+    "reference_median": 0.0,
+    "contribution": -0.0892,
+    "direction": "human",
+    "interpretation": "observed value 29.1262 vs train median 0 moved the estimate toward human by -0.0892",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "syn_pos_adv_ratio",
+    "label": "adverb density (spaCy)",
+    "family": "syntactic_spacy",
+    "value": 93.2203,
+    "reference_median": 41.709637,
+    "contribution": -0.084,
+    "direction": "human",
+    "interpretation": "observed value 93.2203 vs train median 41.7096 moved the estimate toward human by -0.0840",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   }
+  ],
+  "segments": [],
+  "gate": {
+   "min_words": 50,
+   "mixed_band": [
+    0.4,
+    0.6
+   ]
+  },
+  "model_version": "final-v1",
+  "model_name": "hgb_syn",
+  "calibrator": "platt",
+  "threshold": 0.5,
+  "warnings": [],
+  "disclaimer": "WriteTrace does not establish authorship. It estimates how strongly observed writing patterns resemble machine-generated or human-written text under the model's training and evaluation conditions."
+ },
+ "abstain_response": {
+  "status": "insufficient_evidence",
+  "label": "insufficient_evidence",
+  "decision": "abstain",
+  "machine_probability": 0.17858,
+  "human_probability": 0.82142,
+  "confidence": null,
+  "word_count": 2,
+  "text_length": {
+   "characters": 10,
+   "words": 2,
+   "sentences": 1,
+   "paragraphs": 1
+  },
+  "evidence_sufficient": false,
+  "mixed_low_confidence": false,
+  "signals": [
+   {
+    "signal": "root_ttr",
+    "label": "root type-token ratio",
+    "family": "lexical",
+    "value": 1.4142,
+    "reference_median": 7.793275,
+    "contribution": -0.4909,
+    "direction": "human",
+    "interpretation": "observed value 1.4142 vs train median 7.79328 moved the estimate toward human by -0.4909",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "log_ttr",
+    "label": "log type-token ratio",
+    "family": "lexical",
+    "value": 1.0,
+    "reference_median": 0.920206,
+    "contribution": -0.2254,
+    "direction": "human",
+    "interpretation": "observed value 1.0 vs train median 0.920206 moved the estimate toward human by -0.2254",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "n_words",
+    "label": "document length in words",
+    "family": "structure",
+    "value": 2.0,
+    "reference_median": 144.0,
+    "contribution": -0.2046,
+    "direction": "human",
+    "interpretation": "observed value 2.0 vs train median 144 moved the estimate toward human by -0.2046",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "syn_pos_adv_ratio",
+    "label": "adverb density (spaCy)",
+    "family": "syntactic_spacy",
+    "value": 333.3333,
+    "reference_median": 41.709637,
+    "contribution": -0.1747,
+    "direction": "human",
+    "interpretation": "observed value 333.3333 vs train median 41.7096 moved the estimate toward human by -0.1747",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "unique_bigram_ratio",
+    "label": "bigram uniqueness",
+    "family": "repetition",
+    "value": 1.0,
+    "reference_median": 0.956522,
+    "contribution": -0.1526,
+    "direction": "human",
+    "interpretation": "observed value 1.0 vs train median 0.956522 moved the estimate toward human by -0.1526",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "max_sent_len",
+    "label": "longest sentence length",
+    "family": "structure",
+    "value": 2.0,
+    "reference_median": 33.0,
+    "contribution": -0.151,
+    "direction": "human",
+    "interpretation": "observed value 2.0 vs train median 33 moved the estimate toward human by -0.1510",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "avg_sent_len",
+    "label": "average sentence length",
+    "family": "structure",
+    "value": 2.0,
+    "reference_median": 19.333333,
+    "contribution": -0.1393,
+    "direction": "human",
+    "interpretation": "observed value 2.0 vs train median 19.3333 moved the estimate toward human by -0.1393",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "syn_pos_adj_ratio",
+    "label": "adjective density (spaCy)",
+    "family": "syntactic_spacy",
+    "value": 333.3333,
+    "reference_median": 66.489362,
+    "contribution": -0.1099,
+    "direction": "human",
+    "interpretation": "observed value 333.3333 vs train median 66.4894 moved the estimate toward human by -0.1099",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   }
+  ],
+  "segments": [],
+  "gate": {
+   "min_words": 50,
+   "mixed_band": [
+    0.4,
+    0.6
+   ]
+  },
+  "model_version": "final-v1",
+  "model_name": "hgb_syn",
+  "calibrator": "platt",
+  "threshold": 0.5,
+  "warnings": [
+   "insufficient evidence: the input has 2 words, below the 50-word threshold selected in Phase 3; the probability is shown for transparency and must not support an authorship conclusion"
+  ],
+  "disclaimer": "WriteTrace does not establish authorship. It estimates how strongly observed writing patterns resemble machine-generated or human-written text under the model's training and evaluation conditions."
+ },
+ "mixed_response": {
+  "status": "ok",
+  "label": "mixed",
+  "decision": "human",
+  "machine_probability": 0.48354,
+  "human_probability": 0.51646,
+  "confidence": 0.5165,
+  "word_count": 50,
+  "text_length": {
+   "characters": 284,
+   "words": 50,
+   "sentences": 4,
+   "paragraphs": 1
+  },
+  "evidence_sufficient": true,
+  "mixed_low_confidence": true,
+  "signals": [
+   {
+    "signal": "root_ttr",
+    "label": "root type-token ratio",
+    "family": "lexical",
+    "value": 5.9397,
+    "reference_median": 7.793275,
+    "contribution": -0.2372,
+    "direction": "human",
+    "interpretation": "observed value 5.9397 vs train median 7.79328 moved the estimate toward human by -0.2372",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "digit_word_ratio",
+    "label": "numeric-word share",
+    "family": "lexical",
+    "value": 0.04,
+    "reference_median": 0.0,
+    "contribution": -0.1277,
+    "direction": "human",
+    "interpretation": "observed value 0.04 vs train median 0 moved the estimate toward human by -0.1277",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "last_sent_len",
+    "label": "last-sentence length",
+    "family": "structure",
+    "value": 7.0,
+    "reference_median": 18.0,
+    "contribution": -0.1269,
+    "direction": "human",
+    "interpretation": "observed value 7.0 vs train median 18 moved the estimate toward human by -0.1269",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "syn_pos_adv_ratio",
+    "label": "adverb density (spaCy)",
+    "family": "syntactic_spacy",
+    "value": 0.0,
+    "reference_median": 41.709637,
+    "contribution": 0.1096,
+    "direction": "machine",
+    "interpretation": "observed value 0.0 vs train median 41.7096 moved the estimate toward machine by +0.1096",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "avg_sent_len",
+    "label": "average sentence length",
+    "family": "structure",
+    "value": 12.5,
+    "reference_median": 19.333333,
+    "contribution": -0.1055,
+    "direction": "human",
+    "interpretation": "observed value 12.5 vs train median 19.3333 moved the estimate toward human by -0.1055",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "syn_depth_std",
+    "label": "parse depth variation",
+    "family": "syntactic_spacy",
+    "value": 1.5575,
+    "reference_median": 1.825933,
+    "contribution": -0.1051,
+    "direction": "human",
+    "interpretation": "observed value 1.5575 vs train median 1.82593 moved the estimate toward human by -0.1051",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "mean_log_df",
+    "label": "mean word document frequency in training corpus",
+    "family": "lexical",
+    "value": 4.1972,
+    "reference_median": 4.04002,
+    "contribution": 0.0769,
+    "direction": "machine",
+    "interpretation": "observed value 4.1972 vs train median 4.04002 moved the estimate toward machine by +0.0769",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   },
+   {
+    "signal": "syn_clause_rate",
+    "label": "parsed clause rate",
+    "family": "syntactic_spacy",
+    "value": 0.75,
+    "reference_median": 1.3,
+    "contribution": -0.066,
+    "direction": "human",
+    "interpretation": "observed value 0.75 vs train median 1.3 moved the estimate toward human by -0.0660",
+    "caveat": "Statistical stylistic signal measured by the model; not proof of authorship."
+   }
+  ],
+  "segments": [],
+  "gate": {
+   "min_words": 50,
+   "mixed_band": [
+    0.4,
+    0.6
+   ]
+  },
+  "model_version": "final-v1",
+  "model_name": "hgb_syn",
+  "calibrator": "platt",
+  "threshold": 0.5,
+  "warnings": [
+   "mixed/low confidence: p(machine) lies inside the Phase-3 mixed band [0.4, 0.6] where observed validation accuracy was only 0.5342"
+  ],
+  "disclaimer": "WriteTrace does not establish authorship. It estimates how strongly observed writing patterns resemble machine-generated or human-written text under the model's training and evaluation conditions."
+ },
+ "error_422": {
+  "status": "error",
+  "error": {
+   "code": "validation_error",
+   "message": "Request validation failed. See details.",
+   "details": [
+    {
+     "field": "text",
+     "message": "String should have at least 1 character",
+     "type": "string_too_short"
+    }
+   ]
+  }
+ },
+ "health": {
+  "status": "ok",
+  "api_version": "v1",
+  "model_version": "final-v1",
+  "model_name": "hgb_syn",
+  "loaded": true
+ }
+}

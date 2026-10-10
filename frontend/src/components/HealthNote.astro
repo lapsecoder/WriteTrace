@@ -1,0 +1,44 @@
+---
+/** Quiet availability note driven by GET /api/v1/health. */
+interface Props {
+  modelVersion?: string | null;
+}
+
+const { modelVersion = null } = Astro.props;
+---
+
+<div class="flex items-baseline gap-3" data-health-note>
+  <span class="micro">backend</span>
+  <span
+    class="micro"
+    id="health-status"
+    data-state="checking"
+    aria-live="polite"
+    >checking…</span
+  >
+  {
+    modelVersion ? (
+      <span class="micro text-graphite/70">· {modelVersion}</span>
+    ) : null
+  }
+</div>
+
+<script>
+  import { health } from "../lib/api";
+
+  const el = document.getElementById("health-status");
+  if (el) {
+    const controller = new AbortController();
+    health(controller.signal)
+      .then((h) => {
+        el.dataset.state = "online";
+        el.textContent = h.loaded
+          ? `online · ${h.model_name}`
+          : `online · ${h.model_version}`;
+      })
+      .catch(() => {
+        el.dataset.state = "offline";
+        el.textContent = "unreachable";
+      });
+  }
+</script>

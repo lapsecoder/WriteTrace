@@ -1,0 +1,17 @@
+---
+import HealthNote from "./HealthNote.astro";
+---
+
+<header class="relative border-b border-rule bg-paper/80 backdrop-blur-[2px]">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8">
+    <a href="/" class="group flex items-baseline gap-3 no-underline">
+      <span
+        class="font-display text-[1.65rem] leading-none tracking-tight text-ink transition-colors group-hover:text-seal"
+        >WriteTrace</span
+      >
+      <span class="micro hidden sm:inline">writing forensics</span>
+    </a>
+    <HealthNote />
+  </div>
+  <div class="rule-double"></div>
+</header>

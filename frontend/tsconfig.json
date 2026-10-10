@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*.ts", "**/*.astro"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "types": ["vitest/globals", "node"],
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": false,
+    "strictNullChecks": true
+  }
+}

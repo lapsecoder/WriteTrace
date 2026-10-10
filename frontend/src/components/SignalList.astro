@@ -1,0 +1,59 @@
+---
+/**
+ * Renders the signals the API actually returned.
+ *
+ * Signal rows are statistics from a local perturbation explainer. The copy
+ * here is deliberately non-causal: it says what moved the estimate, never
+ * that something "proves" authorship.
+ */
+import type { Signal } from "../lib/types";
+import { formatFeatureValue, formatSigned } from "../lib/format";
+
+interface Props {
+  signals: Signal[];
+}
+
+const { signals } = Astro.props;
+
+const directionLabel: Record<Signal["direction"], string> = {
+  machine: "toward machine",
+  human: "toward human",
+  neutral: "no measurable shift",
+};
+---
+
+{
+  signals.length === 0 ? (
+    <p class="text-[0.9375rem] text-graphite" data-testid="signals-empty">
+      The backend returned no signals for this analysis.
+    </p>
+  ) : (
+    <ol class="divide-y divide-rule/70 border-y border-rule/70" data-testid="signals">
+      {signals.map((s) => (
+        <li class="py-4" data-signal={s.signal} data-direction={s.direction}>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <p class="font-display text-[1.0625rem] text-ink">{s.label}</p>
+            <p
+              class={`micro ${s.direction === "machine" ? "text-seal" : s.direction === "human" ? "text-verdigris" : "text-graphite"}`}
+            >
+              {directionLabel[s.direction]} · {formatSigned(s.contribution)}
+            </p>
+          </div>
+
+          <p class="mt-1 font-mono text-[0.75rem] text-graphite">
+            {s.signal} · {s.family} · observed {formatFeatureValue(s.value)} ·
+            train median {formatFeatureValue(s.reference_median)}
+          </p>
+
+          <p class="mt-2 text-[0.9375rem] leading-relaxed text-ink-soft">
+            {s.interpretation}
+          </p>
+
+          <p class="mt-1.5 text-[0.8125rem] italic leading-relaxed text-graphite">
+            {s.caveat}
+          </p>
+        </li>
+      ))}
+    </ol>
+  )
+}

@@ -1,0 +1,82 @@
+---
+/**
+ * Accessible probability visualization.
+ *
+ * Renders ONLY the two values the API returned. Widths are derived from the
+ * real probabilities; no smoothing, no invented third category. The bar is a
+ * two-segment scale with visible text values and ARIA description, so the
+ * information never depends on colour alone.
+ */
+interface Props {
+  machine: number;
+  human: number;
+  tone?: "human" | "machine" | "mixed" | "neutral";
+}
+
+const {
+  machine,
+  human,
+  tone = "neutral",
+} = Astro.props;
+
+const pct = (v: number) =>
+  Number.isFinite(v) ? `${(Math.max(0, Math.min(1, v)) * 100).toFixed(1)}%` : "n/a";
+
+const humanWidth = Number.isFinite(human) ? human * 100 : 0;
+const machineWidth = Number.isFinite(machine) ? machine * 100 : 0;
+
+const toneFill =
+  tone === "machine"
+    ? "var(--color-seal)"
+    : tone === "human"
+      ? "var(--color-verdigris)"
+      : tone === "mixed"
+        ? "var(--color-seal-soft)"
+        : "var(--color-graphite-light)";
+---
+
+<div class="w-full" data-testid="probability-bar">
+  <div
+    class="relative flex h-3 w-full overflow-hidden border border-rule-strong bg-paper"
+    role="img"
+    aria-label={`Human-written ${pct(human)}, machine-generated ${pct(machine)}`}
+  >
+    <div
+      class="h-full transition-[width] duration-700 ease-out"
+      style={`width:${humanWidth.toFixed(2)}%; background-color: var(--color-verdigris); opacity: 0.55;`}
+      data-segment="human"
+    >
+    </div>
+    <div
+      class="animate-ink h-full transition-[width] duration-700 ease-out"
+      style={`width:${machineWidth.toFixed(2)}%; background-color: ${toneFill};`}
+      data-segment="machine"
+    >
+    </div>
+  </div>
+
+  <div class="mt-3 flex items-baseline justify-between gap-4">
+    <div class="min-w-0">
+      <p class="micro">human-written</p>
+      <p
+        class="font-display text-2xl tabular-nums text-verdigris"
+        data-testid="probability-human"
+      >
+        {pct(human)}
+      </p>
+    </div>
+    <div class="min-w-0 text-right">
+      <p class="micro">machine-generated</p>
+      <p
+        class="font-display text-2xl tabular-nums text-seal"
+        data-testid="probability-machine"
+      >
+        {pct(machine)}
+      </p>
+    </div>
+  </div>
+
+  <p class="mt-2 text-[0.8125rem] text-graphite">
+    Probabilities are calibrated model estimates, not authorship percentages.
+  </p>
+</div>

@@ -1,0 +1,338 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Masthead from "../components/Masthead.astro";
+import Disclaimer from "../components/Disclaimer.astro";
+---
+
+<BaseLayout
+  title="WriteTrace — probabilistic writing forensics"
+  description="WriteTrace estimates how strongly a text's writing patterns resemble machine-generated or human-written text. It does not establish authorship."
+>
+  <Masthead />
+
+  <main class="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+    <!-- ============================ editorial opener ==================== -->
+    <section class="grid gap-10 py-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16 lg:py-20">
+      <div class="animate-rise">
+        <p class="micro">probabilistic writing forensics</p>
+        <h1 class="mt-5 max-w-[18ch] text-[3.25rem] leading-[0.98] text-balance sm:text-[4.25rem]">
+          Reading the statistical traces of how a text was written.
+        </h1>
+        <p class="mt-7 max-w-prose text-[1.125rem] leading-relaxed text-ink-soft text-pretty">
+          WriteTrace measures ninety-odd linguistic and stylometric features of
+          the text you submit — lexical variety, sentence rhythm, repetition,
+          punctuation habits, syntactic shape — and reports how strongly those
+          patterns resemble machine-generated writing in the corpora the model
+          was trained and evaluated on.
+        </p>
+        <p class="mt-5 max-w-prose text-[1.0625rem] leading-relaxed text-graphite text-pretty">
+          It is an instrument for investigation and teaching, not an
+          accusation. Every number is an estimate with documented failure modes,
+          and the model abstains when the evidence is too thin to support a
+          reading.
+        </p>
+      </div>
+
+      <aside class="sheet grain p-6 self-start sm:p-7">
+        <p class="micro">what a result means</p>
+        <ul class="mt-4 space-y-4 text-[0.9375rem] leading-relaxed text-ink-soft">
+          <li>
+            <strong class="font-medium text-ink">A probability, not a verdict.</strong>
+            Two calibrated estimates of the same text. They are complementary by
+            construction and always sum to one.
+          </li>
+          <li>
+            <strong class="font-medium text-ink">Abstention is a feature.</strong>
+            Below fifty words the model returns
+            <em>insufficient evidence</em> and declines to classify.
+          </li>
+          <li>
+            <strong class="font-medium text-ink">Uncertainty is visible.</strong>
+            Estimates inside the mixed band were close to a coin flip during
+            validation and are flagged as undecided.
+          </li>
+          <li>
+            <strong class="font-medium text-ink">Out of distribution, it fails.</strong>
+            Paraphrased text, newer generators and unfamiliar registers score
+            poorly. Read the limitations before relying on any output.
+          </li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- ============================== workspace ======================== -->
+    <section id="workspace" class="scroll-mt-8">
+      <div class="rule-double"></div>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 pt-6">
+        <h2 class="font-display text-[1.75rem]">The analysis desk</h2>
+        <p class="micro">paste or compose · then analyse</p>
+      </div>
+
+      <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-12">
+        <form
+          id="analyze-form"
+          class="sheet grain p-5 sm:p-7"
+          novalidate
+          data-testid="analyze-form"
+        >
+          <label class="micro micro--ink" for="text-input">
+            text under examination
+          </label>
+          <p class="mt-2 text-[0.875rem] leading-relaxed text-graphite">
+            Up to 30,000 characters. Multi-paragraph text is fine; WriteTrace
+            submits it exactly as written, without rewriting it.
+          </p>
+
+          <textarea
+            id="text-input"
+            name="text"
+            class="field mt-4 min-h-[19rem]"
+            placeholder="Paste or write the text you want to examine…"
+            spellcheck="false"
+            autocomplete="off"
+            aria-describedby="validation-message counter-label"
+            data-testid="text-input"></textarea>
+
+          <div class="mt-3 flex flex-wrap items-baseline justify-between gap-3">
+            <p
+              id="counter-label"
+              class="micro"
+              data-counter
+              data-testid="counter"
+              aria-live="polite"
+            >
+              0 words · 0 characters
+            </p>
+            <p
+              id="validation-message"
+              class="text-[0.8125rem] text-seal"
+              role="status"
+              data-validation
+              data-testid="validation"
+              hidden
+            >
+            </p>
+          </div>
+
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <button
+              type="submit"
+              class="btn"
+              id="analyze-submit"
+              data-testid="submit"
+            >
+              Analyse text
+            </button>
+            <button
+              type="button"
+              class="btn btn--ghost"
+              id="load-example"
+              data-testid="example"
+            >
+              Load an example
+            </button>
+            <button
+              type="button"
+              class="btn btn--ghost"
+              id="clear-text"
+              data-testid="clear"
+            >
+              Clear
+            </button>
+          </div>
+
+          <p
+            class="mt-4 min-h-[1.25rem] text-[0.875rem] text-graphite"
+            role="status"
+            aria-live="polite"
+            data-status
+            data-testid="status"
+          >
+          </p>
+        </form>
+
+        <aside class="sheet p-5 sm:p-6" aria-labelledby="privacy-heading">
+          <h3 id="privacy-heading" class="micro">handling of your text</h3>
+          <p class="mt-4 text-[0.9375rem] leading-relaxed text-ink-soft">
+            This page keeps your text in memory only. It is not written to
+            browser storage, not added to the URL, and not sent to analytics or
+            any third-party service.
+          </p>
+          <p class="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+            It is sent to the WriteTrace backend configured for this build
+            (<code class="font-mono text-[0.8125rem]">PUBLIC_WRITETRACE_API_BASE</code>,
+            defaulting to the local server at <code class="font-mono text-[0.8125rem]">127.0.0.1:8000</code>)
+            for analysis. WriteTrace's backend is stateless and does not
+            intentionally persist submitted text.
+          </p>
+          <p class="mt-3 text-[0.9375rem] leading-relaxed text-graphite">
+            If you point this build at a remote backend, your text goes to that
+            machine — review the configured URL before submitting anything
+            sensitive.
+          </p>
+
+          <div class="mt-6 rule-top pt-5">
+            <h3 class="micro">not available yet</h3>
+            <p class="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+              Paragraph-level readings are deliberately absent. A dedicated
+              segment model was trained and evaluated, and it did not prove
+              reliable enough outside the training distribution to justify
+              showing per-paragraph verdicts.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- results mount -->
+      <div class="mt-10" data-testid="results-root">
+        <div id="results" data-results hidden></div>
+        <div
+          id="error"
+          data-error
+          hidden
+          role="alert"
+          class="sheet grain border-seal/40 p-6 sm:p-7"
+        >
+          <p class="micro text-seal">analysis could not be completed</p>
+          <p class="mt-3 text-[1.0625rem] leading-relaxed text-ink" data-error-message></p>
+          <p
+            class="mt-2 text-[0.875rem] leading-relaxed text-graphite"
+            data-error-detail
+          >
+          </p>
+          <p class="mt-4 text-[0.875rem] italic text-graphite">
+            Your text is still in the editor — edit it and try again.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== closing ========================== -->
+    <section class="mt-20 grid gap-10 border-t border-rule pt-12 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-[1.5rem]">Limitations, stated plainly</h2>
+        <ul class="mt-5 space-y-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+          <li>
+            Detection accuracy does not survive domain shift. On out-of-distribution
+            generators and paraphrased text the model performs far worse than
+            its headline numbers suggest.
+          </li>
+          <li>
+            Repetition inflates machine-likeness. Boilerplate, templates and
+            deliberately repetitive text are flagged as machine-like
+            regardless of who wrote them.
+          </li>
+          <li>
+            Informal and non-native registers look more regular than their
+            authors intended, which inflates false positives.
+          </li>
+          <li>
+            The model was trained on English text. Other languages are outside
+            its evidence base.
+          </li>
+          <li>
+            Text under fifty words is too short to judge and the model abstains.
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="font-display text-[1.5rem]">Ethics of the instrument</h2>
+        <p class="mt-5 text-[0.9375rem] leading-relaxed text-ink-soft">
+          A statistical estimate attached to a person's writing can do real
+          harm to real people — students, employees, writers working in a second
+          language. Treat any output as a prompt to think, not a finding about a
+          person. Do not use it as sole evidence in an academic, employment or
+          legal proceeding.
+        </p>
+        <Disclaimer class="mt-6" />
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-rule bg-paper-deep/60">
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-8 text-[0.8125rem] text-graphite sm:flex-row sm:items-center sm:justify-between sm:px-8"
+    >
+      <p class="font-mono">writetrace · local-first · no tracking</p>
+      <p>
+        Read the API contract in <code class="font-mono">docs/api.md</code> ·
+        research reports in <code class="font-mono">docs/experiments/</code>
+      </p>
+    </div>
+  </footer>
+</BaseLayout>
+
+<script>
+  import { AnalyzeWorkspace } from "../lib/workspace";
+  import { renderResult } from "../lib/render-result";
+
+  const form = document.getElementById("analyze-form") as HTMLFormElement | null;
+  const textarea = document.getElementById("text-input") as HTMLTextAreaElement | null;
+  const submit = document.getElementById("analyze-submit") as HTMLButtonElement | null;
+  const counter = document.querySelector<HTMLElement>("[data-counter]");
+  const validation = document.querySelector<HTMLElement>("[data-validation]");
+  const status = document.querySelector<HTMLElement>("[data-status]");
+  const results = document.getElementById("results");
+  const errorBox = document.getElementById("error");
+  const errorMessage = document.querySelector<HTMLElement>("[data-error-message]");
+  const errorDetail = document.querySelector<HTMLElement>("[data-error-detail]");
+
+  if (
+    form &&
+    textarea &&
+    submit &&
+    counter &&
+    validation &&
+    status &&
+    results &&
+    errorBox &&
+    errorMessage &&
+    errorDetail
+  ) {
+    const workspace = new AnalyzeWorkspace(
+      {
+        form,
+        textarea,
+        submit,
+        counter,
+        validation,
+        status,
+        results,
+        error: errorBox,
+        example: document.getElementById("load-example") as HTMLButtonElement,
+        clear: document.getElementById("clear-text") as HTMLButtonElement,
+      },
+      {
+        // Renderer keeps the markup identical to the Astro component output.
+        send: async (payload, signal) => {
+          const { analyze } = await import("../lib/api");
+          return analyze(payload, signal);
+        },
+      },
+    );
+
+    // Render into the mount point whenever the controller reaches a terminal
+    // state; failure states surface the backend's own message.
+    const render = () => {
+      const state = workspace.currentState;
+      if (state.kind === "done") {
+        results.innerHTML = "";
+        results.appendChild(renderResult(state.result));
+      } else if (state.kind === "failed") {
+        errorMessage.textContent = state.message;
+        errorDetail.textContent = state.detail ?? "";
+        errorDetail.hidden = !state.detail;
+      }
+    };
+
+    const originalSubmit = workspace.submit.bind(workspace);
+    workspace.submit = async () => {
+      const state = await originalSubmit();
+      render();
+      return state;
+    };
+
+    // Submit via the form event already bound inside the controller.
+    void workspace;
+  }
+</script>
