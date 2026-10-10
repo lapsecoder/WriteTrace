@@ -1,0 +1,24 @@
+{
+ "spec_key": "hgb_seg",
+ "spec": {
+  "type": "hist_gradient_boosting",
+  "learning_rate": 0.1,
+  "max_leaf_nodes": 63,
+  "max_iter": 300,
+  "random_state": 42
+ },
+ "calibrator": "isotonic",
+ "threshold": 0.5,
+ "label_policy": "canonical y=1 MACHINE; p = cal(model(x))",
+ "pipeline_version": "phase5a_segments_v1",
+ "selection_order": [
+  "ood_auc_mean",
+  "calibration_brier",
+  "false_positive_behavior",
+  "pr_auc",
+  "in_distribution_performance"
+ ],
+ "trained_at": "2026-10-10T07:24:58.714292+00:00",
+ "seed": 42,
+ "note": "segment-level artifact; final-v1 remains the document model"
+}

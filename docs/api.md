@@ -16,6 +16,11 @@ evaluation conditions.
   transport, validation, and presentation mapping.
 - Model artifact: `ml/models/final-v1/` (`hgb_syn`, 89 features, Platt
   calibrator, threshold 0.5, gate 50 words).
+- **Segment-level analysis (Phase 5A) is NOT exposed.** A segment model was
+  trained and evaluated (`ml/models/segments-v1/`, `Predictor.analyze_segments`)
+  but neither it nor final-v1 cleared the declared bar for user-facing segment
+  verdicts (out-of-distribution segment AUC stays near chance). `segments[]` is
+  therefore always empty; see `docs/experiments/phase5a-report.md`.
 
 ## Quick start
 

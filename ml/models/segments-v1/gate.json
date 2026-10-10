@@ -1,0 +1,14 @@
+{
+ "status": "active",
+ "kind": "segment_evidence_gate",
+ "min_words": 120,
+ "threshold": 0.5,
+ "mixed_band": [
+  0.4,
+  0.6
+ ],
+ "mixed_band_rule": "inherited from the Phase-3 document gate; segments inside it are flagged low-confidence",
+ "decision_rule": "a segment shorter than min_words yields 'insufficient evidence' (no label, no confidence); chosen from the Phase-5A gate sweep as the largest coverage with lowest kept human-FPR while genuine whole-text composite AUC stays healthy",
+ "written_at": "2026-10-10T07:24:58.714997+00:00",
+ "document_gate_note": "this artifact is for SEGMENTS; document-level prediction continues to use final-v1 (min_words 50, same mixed band)"
+}

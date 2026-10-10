@@ -1,0 +1,135 @@
+{
+ "generated_at": "2026-10-10T07:24:58.817792+00:00",
+ "pipeline_version": "phase5a_segments_v1",
+ "artifact_kind": "segments",
+ "winner": "hgb_seg",
+ "calibrator": "isotonic",
+ "threshold": 0.5,
+ "segment_gate_min_words": 120,
+ "selection_order": [
+  "ood_auc_mean",
+  "calibration_brier",
+  "false_positive_behavior",
+  "pr_auc",
+  "in_distribution_performance"
+ ],
+ "tie_bands": {
+  "ood_auc_mean": 0.02,
+  "calibration_brier": 0.005,
+  "false_positive_behavior": 0.01,
+  "pr_auc": 0.005
+ },
+ "status": "research_only_not_adopted_for_production",
+ "eval_summary": {
+  "mage_test": {
+   "n": 8438,
+   "roc_auc": 0.937,
+   "pr_auc": 0.9691,
+   "accuracy": 0.8664,
+   "f1_macro": 0.8449,
+   "human_fpr": 0.2234,
+   "brier": 0.094,
+   "ece_10": 0.0102
+  },
+  "hc3": {
+   "n": 3501,
+   "roc_auc": 0.8531,
+   "pr_auc": 0.8118,
+   "accuracy": 0.7515,
+   "f1_macro": 0.7478,
+   "human_fpr": 0.3899,
+   "brier": 0.1699,
+   "ece_10": 0.1145
+  },
+  "raid": {
+   "n": 4615,
+   "roc_auc": 0.7675,
+   "pr_auc": 0.8497,
+   "accuracy": 0.7402,
+   "f1_macro": 0.7006,
+   "human_fpr": 0.4364,
+   "brier": 0.1832,
+   "ece_10": 0.0803
+  },
+  "ood_gpt": {
+   "n": 3045,
+   "roc_auc": 0.6181,
+   "pr_auc": 0.5696,
+   "accuracy": 0.5885,
+   "f1_macro": 0.5885,
+   "human_fpr": 0.4023,
+   "brier": 0.2762,
+   "ece_10": 0.1731
+  },
+  "ood_gpt_para": {
+   "n": 4902,
+   "roc_auc": 0.5918,
+   "pr_auc": 0.7199,
+   "accuracy": 0.5449,
+   "f1_macro": 0.5295,
+   "human_fpr": 0.4023,
+   "brier": 0.296,
+   "ece_10": 0.2728
+  },
+  "composite": {
+   "n": 1600,
+   "roc_auc": 0.9024,
+   "pr_auc": 0.9124,
+   "accuracy": 0.785,
+   "f1_macro": 0.7837,
+   "human_fpr": 0.2938,
+   "brier": 0.1346,
+   "ece_10": 0.0773
+  }
+ },
+ "data_policy": {
+  "train": "MAGE-train windows/paragraphs (INHERITED document label)",
+  "selection": "val_tune (group-disjoint 60% of MAGE-val)",
+  "calibration": "val_cal (group-disjoint 40% of MAGE-val)",
+  "eval_only": [
+   "MAGE-test",
+   "HC3",
+   "RAID",
+   "OOD-GPT",
+   "OOD-GPT-para",
+   "composite (genuine)"
+  ],
+  "feature_state": "refit on TRAINING segments only"
+ },
+ "label_semantics": {
+  "training": "inherited_from_document",
+  "note": "training segments carry the document's label; this is NOT an independent authorship determination per segment",
+  "genuine_evaluation": "genuine_whole_text"
+ },
+ "files": {
+  "model.joblib": {
+   "sha256": "d14f487b7e2188c46ac2b8da8871318cf616de349e2286ca906dd74cd5a5e4d0",
+   "bytes": 2282152
+  },
+  "calibrator.joblib": {
+   "sha256": "ba14227eb775b97d76f44de282309c16e8259df6049d5b3e651454debcc1f247",
+   "bytes": 2713
+  },
+  "feature_state.joblib": {
+   "sha256": "c4b328ba4efe78cd739afd06145e5485ddbbfaf73b0581cfda3728ed391e0aec",
+   "bytes": 2008382
+  },
+  "features.json": {
+   "sha256": "e9a1642545cb3da3c7f77f5960d1555926391406e583083516b41c6e5ed7a3fe",
+   "bytes": 2048
+  },
+  "config.json": {
+   "sha256": "b04dedd3c64696695e763b4598da3eeb797e05461081e40d5076417436dd0d46",
+   "bytes": 617
+  },
+  "gate.json": {
+   "sha256": "fa4d48e31701d77b16b5b7fb4465180b602cf526507ba46d915aff628cd94117",
+   "bytes": 699
+  },
+  "calibration.json": {
+   "sha256": "294def075a5777eecec4f175757e0c8131e160964b26ccab3f33c01ba8425b70",
+   "bytes": 290
+  }
+ },
+ "note": "Segment-level research artifact. final-v1 and baseline-v1 are untouched. Segment-level display is NOT cleared for production (see segments-v1-results.json display_check): OOD segment AUC remains below the declared bar."
+}

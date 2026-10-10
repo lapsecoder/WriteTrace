@@ -31,12 +31,15 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from .explain import format_explanation, load_reference, local_contributions, phrase
 from .experiments.phase3 import FINAL_DIR, load_final
 from .features.extract import FEATURE_FAMILIES, extract_many, split_sentences
 from .preprocessing.normalize import looks_english, normalize_text, word_count
+from .segmentation import (DEFAULT_POLICY, SegmentationPolicy, Segment,
+                           coverage_report, segment_text)
 
 MODEL_VERSION_FALLBACK = "final-v1"
 
@@ -56,6 +59,17 @@ SIGNAL_CAVEAT = (
 # symmetric presentation convention - documented, never fitted or tuned, and
 # never used for the binary decision (which stays at threshold 0.5).
 OUTER_CUT = 0.2
+
+# --- Phase-5A segment-level policy (research only; NOT exposed by the API) --
+#
+# The document-level gate (50 words, selected in Phase 3) is NOT assumed to
+# transfer to segments: `ml/experiments/phase5a.py` measures segment evidence
+# per length bucket and this constant is the value that study justified (see
+# docs/experiments/phase5a-report.md, Section 5). Until that study exists the
+# constant equals the document gate and is flagged provisional.
+SEGMENT_EVIDENCE_MIN_WORDS = 50
+SEGMENT_EVIDENCE_PROVISIONAL = True
+SEGMENT_MAX_WORDS = DEFAULT_POLICY.max_segment_words
 
 FAMILY_OF: dict[str, str] = {
     f: fam for fam, names in FEATURE_FAMILIES.items() for f in names
@@ -109,6 +123,58 @@ class SegmentAnalysis:
     note: str = ("segment-level analysis is not implemented in this version; "
                  "the same preprocessing/feature/model/calibration path will "
                  "be reused when it is")
+
+
+@dataclass(frozen=True)
+class SegmentPrediction:
+    """One segment scored through the SAME path as a document (Phase 5A).
+
+    `evidence_sufficient` uses the segment evidence gate (SEGMENT_EVIDENCE_MIN_WORDS),
+    NOT the document gate. Segments below it return status
+    "insufficient_evidence" with a warning; no label is presented as a finding
+    and no explanation is emitted unless explicitly requested.
+    """
+    segment: Segment
+    status: str                       # "ok" | "insufficient_evidence"
+    machine_probability: float        # full precision (even when abstaining)
+    human_probability: float
+    confidence: float | None
+    decision: str                     # "machine" | "human" | "abstain"
+    label: str                        # 5-level label or insufficient_evidence
+    evidence_sufficient: bool
+    mixed_low_confidence: bool
+    signals: list[FeatureEvidence] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    threshold: float = 0.5
+    gate_min_words: int | None = None
+    disclaimer: str = DISCLAIMER
+
+    @property
+    def word_count(self) -> int:
+        return self.segment.word_count
+
+
+@dataclass(frozen=True)
+class DocumentSegments:
+    """Document-level result plus per-segment results and aggregations.
+
+    The document-level `PredictionResult` stays authoritative: segments are
+    research-grade evidence, never a replacement verdict (Phase-5A report).
+    """
+    document: PredictionResult | None
+    segments: list[SegmentPrediction]
+    aggregation: dict[str, float]      # mean/median/weighted/max/min/std
+    segmentation: dict                 # policy + coverage counts
+    summary: SegmentAnalysis
+    warnings: list[str] = field(default_factory=list)
+
+    @property
+    def n_segments(self) -> int:
+        return len(self.segments)
+
+    @property
+    def n_with_evidence(self) -> int:
+        return sum(1 for s in self.segments if s.evidence_sufficient)
 
 
 @dataclass(frozen=True)
@@ -253,6 +319,40 @@ class Predictor:
             raise RuntimeError("model produced a non-finite probability")
         return p
 
+    def _extract_rows(self, texts: list[str]) -> pd.DataFrame:
+        """Batch form of `_extract_row` - identical extraction, one spaCy pipe.
+
+        Deterministic and numerically equal to per-text extraction; used by
+        segment scoring so a document with N segments needs one spaCy pass.
+        """
+        feats = extract_many(texts, self.final["state"], workers=0)
+        if self.needs_syn:
+            from .features.syntactic import extract_syntactic
+            feats = pd.concat([feats.reset_index(drop=True),
+                               extract_syntactic(list(texts))], axis=1)
+        missing = [f for f in self.features if f not in feats.columns]
+        if missing:
+            raise RuntimeError(f"missing feature columns: {missing[:5]}")
+        return feats
+
+    def _score_rows(self, rows: pd.DataFrame) -> list[float]:
+        raw = self.final["model"].predict_proba(
+            rows[self.features].to_numpy())[:, 1]
+        p = np.asarray(self.final["calibrator"].predict(raw)).ravel()
+        if not np.all(np.isfinite(p)):
+            raise RuntimeError("model produced a non-finite probability")
+        return [float(x) for x in p]
+
+    def score_texts(self, texts: list[str]) -> list[float]:
+        """Full-precision p(machine) for many raw texts (shared path)."""
+        norm = []
+        for t in texts:
+            nt = self._normalize(t)
+            norm.append(nt)
+        if not norm:
+            return []
+        return self._score_rows(self._extract_rows(norm))
+
     def score(self, text: str) -> float:
         """Full-precision p(machine) for one raw text (no rounding, no gate)."""
         nt = self._normalize(text)
@@ -373,6 +473,124 @@ class Predictor:
             mixed_band=band,
         )
 
+    # -- segment level (Phase 5A: research, NOT exposed by the API) ---------
+
+    def analyze_segments(self, text: str, *, policy: SegmentationPolicy | None = None,
+                         min_words: int | None = None,
+                         include_signals: bool = False, max_signals: int = 6,
+                         include_document: bool = True) -> DocumentSegments:
+        """Score every segment of `text` through the document-level path.
+
+        Research surface for Phase 5A. The public API contract is unchanged
+        (`AnalyzeResponse.segments` stays empty): the segment study has to
+        justify exposure first, and until then segment results are internal.
+
+        Semantics: segments are normalized and featurized exactly like
+        documents (same state, same order, same model, same calibrator), the
+        segment evidence gate is `min_words` (default
+        SEGMENT_EVIDENCE_MIN_WORDS, validated by the Phase-5A study), and
+        segments below the gate abstain with `confidence=None` and a warning -
+        they are never presented as findings.
+        """
+        pol = policy or DEFAULT_POLICY
+        # An artifact that declares a segment evidence gate (segments-v1) owns
+        # the gate; otherwise fall back to the module policy constant.
+        artifact_gate = self.gate.get("min_words")
+        gate_words = (int(artifact_gate) if self.gate.get(
+            "kind") == "segment_evidence_gate" and artifact_gate is not None
+            else (SEGMENT_EVIDENCE_MIN_WORDS if min_words is None
+                  else int(min_words)))
+        # validate + normalize the document exactly as analyze() does
+        self._normalize(text)
+        document = self.analyze(text, include_signals=False,
+                                max_signals=0) if include_document else None
+
+        segs = segment_text(text, pol)
+        norm: list[str | None] = []
+        for s in segs:
+            nt = normalize_text(s.text)
+            norm.append(nt)
+        usable = [i for i, nt in enumerate(norm) if nt]
+        probs: dict[int, float] = {}
+        if usable:
+            rows = self._extract_rows([norm[i] for i in usable])  # type: ignore[list-item]
+            for i, p in zip(usable, self._score_rows(rows)):
+                probs[i] = p
+
+        threshold = self.threshold
+        band = self.mixed_band
+        results: list[SegmentPrediction] = []
+        for i, s in enumerate(segs):
+            p = probs.get(i)
+            warnings: list[str] = []
+            if p is None:
+                warnings.append(
+                    "segment has no usable text after normalization; no "
+                    "estimate produced")
+                results.append(SegmentPrediction(
+                    segment=s, status="insufficient_evidence",
+                    machine_probability=float("nan"),
+                    human_probability=float("nan"), confidence=None,
+                    decision="abstain", label="insufficient_evidence",
+                    evidence_sufficient=False, mixed_low_confidence=False,
+                    warnings=warnings, threshold=threshold,
+                    gate_min_words=gate_words))
+                continue
+            sufficient = s.word_count >= gate_words
+            mixed = bool(band and band[0] <= p <= band[1])
+            if not sufficient:
+                warnings.append(
+                    f"insufficient segment evidence: {s.word_count} words < "
+                    f"segment gate {gate_words}; shown for research transparency "
+                    "only and must not support an authorship conclusion")
+            if mixed:
+                acc = self.gate.get("mixed_band_accuracy")
+                warnings.append(
+                    "mixed/low confidence: segment probability lies inside the "
+                    f"Phase-3 mixed band [{band[0]}, {band[1]}]"
+                    + (f" where observed validation accuracy was only {acc}"
+                       if acc is not None else ""))
+            signals: list[FeatureEvidence] = []
+            if include_signals and sufficient:
+                rows = self._extract_rows([norm[i]])  # type: ignore[list-item]
+                signals = self._signals(rows, p, max_signals)
+            results.append(SegmentPrediction(
+                segment=s,
+                status="ok" if sufficient else "insufficient_evidence",
+                machine_probability=float(p),
+                human_probability=float(1.0 - p),
+                confidence=(None if not sufficient
+                            else round(max(p, 1.0 - p), 4)),
+                decision=("abstain" if not sufficient
+                          else ("machine" if p >= threshold else "human")),
+                label=presentation_label(p, sufficient, band),
+                evidence_sufficient=sufficient, mixed_low_confidence=mixed,
+                signals=signals, warnings=warnings, threshold=threshold,
+                gate_min_words=gate_words))
+
+        aggregation = aggregate_segment_probabilities(results)
+        cov = coverage_report(text, segs)
+        n_ok = sum(1 for r in results if r.evidence_sufficient)
+        doc_warnings: list[str] = []
+        if segs and n_ok == 0:
+            doc_warnings.append(
+                "no segment reached the segment evidence gate; segment-level "
+                "estimates are unavailable for this document")
+        summary = SegmentAnalysis(
+            status=("indicative" if n_ok else "not_available"),
+            count=len(results),
+            note=("segment-level results are research evidence produced by the "
+                  "same final-v1 path; the document-level prediction remains "
+                  "authoritative"))
+        return DocumentSegments(
+            document=document, segments=results, aggregation=aggregation,
+            segmentation={**pol.as_dict(), **cov,
+                          "n_with_evidence": n_ok,
+                          "segment_gate_min_words": gate_words,
+                          "evidence_policy_provisional":
+                              SEGMENT_EVIDENCE_PROVISIONAL},
+            summary=summary, warnings=doc_warnings)
+
     def _legacy(self, r: "PredictionResult") -> dict:
         """Compact decision record (Phase-3 test-suite contract): the label
         stays binary even when the gate abstains; `decision` carries the gate."""
@@ -421,6 +639,49 @@ class Predictor:
 
 
 _default: Predictor | None = None
+
+
+# --------------------------------------------------------------------------
+# segment aggregation (descriptive only - no method is privileged)
+# --------------------------------------------------------------------------
+
+def aggregate_segment_probabilities(results: list["SegmentPrediction"],
+                                    include_insufficient: bool = True
+                                    ) -> dict[str, float]:
+    """Summary statistics of segment probabilities (Phase 5A Section 6/8).
+
+    Deliberately reports EVERY candidate aggregation side by side (mean,
+    median, word-weighted mean, max, min, std) instead of picking one: the
+    Phase-5A study compares them empirically and the document-level
+    prediction stays authoritative either way. Segments without a usable
+    probability are excluded; `include_insufficient=False` additionally
+    restricts to segments that passed the segment evidence gate.
+    """
+    vals: list[float] = []
+    weights: list[float] = []
+    for r in results:
+        p = r.machine_probability
+        if p is None or not math.isfinite(p):
+            continue
+        if not include_insufficient and not r.evidence_sufficient:
+            continue
+        vals.append(float(p))
+        weights.append(max(int(r.word_count), 1))
+    if not vals:
+        return {"n": 0}
+    arr = np.asarray(vals, dtype=float)
+    w = np.asarray(weights, dtype=float)
+    total = float(w.sum())
+    return {
+        "n": int(arr.size),
+        "mean": round(float(arr.mean()), 6),
+        "median": round(float(np.median(arr)), 6),
+        "weighted_mean": round(float((arr * w).sum() / total), 6),
+        "max": round(float(arr.max()), 6),
+        "min": round(float(arr.min()), 6),
+        "std": round(float(arr.std(ddof=0)), 6),
+        "words_total": int(total),
+    }
 
 
 def get_predictor(artifact_dir: Path | None = None) -> Predictor:

@@ -1,0 +1,9 @@
+{
+ "calibrator": "isotonic",
+ "fit_on": "val_cal segments (group-disjoint 40% of MAGE-val)",
+ "type_comparison_brier": {
+  "platt": 0.095,
+  "isotonic": 0.0945
+ },
+ "note": "isotonic/platt fitted on SEGMENT val_cal; segment calibration is independent of the document calibrator"
+}

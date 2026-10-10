@@ -91,8 +91,10 @@ docs/ (spec, dataset, methodology, experiments)   tests/   scripts/
 
 ## Repository status
 
-**Phases 0–4 complete** (research/spec/datasets → features → training → locked model selection → inference engine + FastAPI backend). Test suite: 127 passing. Locked artifacts: `ml/models/baseline-v1/` (Phase 1) and `ml/models/final-v1/` (Phase 3, winner `hgb_syn`), each with hashed manifests. Reports: `docs/experiments/phase2-report.md`, `phase3-report.md`, `phase4-report.md`.
+**Phases 0–5A complete** (research/spec/datasets → features → training → locked model selection → inference engine + FastAPI backend → segment-level research + validation). Test suite: 157 passing. Locked artifacts: `ml/models/baseline-v1/` (Phase 1), `ml/models/final-v1/` (Phase 3, winner `hgb_syn`), and a research-only `ml/models/segments-v1/` (Phase 5A). Reports: `docs/experiments/phase2-report.md`, `phase3-report.md`, `phase4-report.md`, `phase5a-report.md`.
 
-**Next:** Phase 5 (frontend + segment-level analysis) — not started.
+**Segment-level analysis (Phase 5A):** trained and evaluated on real corpora; the honest verdict is that it is **not defensible for user-facing display** (out-of-distribution segment AUC stays near chance; short segments are over-confident). The API therefore keeps `segments[]` empty and the document-level prediction authoritative.
+
+**Next:** Phase 5B (frontend) — build on the document-level contract in `docs/api.md`.
 
 **License:** project code will be MIT (decided at Phase 1); dataset licenses apply to data, not to this code.
