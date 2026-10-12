@@ -16,6 +16,7 @@ Run (from the repository root):
 """
 from __future__ import annotations
 
+import os
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -38,6 +39,35 @@ from .schemas import (  # noqa: E402
 )
 
 SERVICE_NAME = "WriteTrace"
+
+# --------------------------------------------------------------------------
+# CORS (Phase 6A: public exposure)
+# --------------------------------------------------------------------------
+# WriteTrace ships NO CORS policy by default: a same-origin deployment needs
+# none, and a wildcard would let any website call the API from a visitor's
+# browser. For a split-origin deployment (static frontend on one host, this
+# API on another) set WRITETRACE_ALLOWED_ORIGINS to an explicit, comma-separated
+# allowlist of EXACT origins, e.g.
+#
+#     WRITETRACE_ALLOWED_ORIGINS=https://writetrace.example
+#
+# Behaviour:
+#   * unset / empty  -> no CORS headers at all (current, default behaviour)
+#   * set            -> only listed origins receive Access-Control-Allow-Origin
+#   * "*" is refused -> a wildcard is never honoured, even if configured: the
+#                       server fails CLOSED (no CORS headers at all) rather
+#                       than emitting a permissive policy or crashing.
+#   * credentials are NEVER enabled (allow_credentials stays False): the API is
+#     unauthenticated and cookie-based credentialing is not used.
+ALLOWED_ORIGINS_ENV = "WRITETRACE_ALLOWED_ORIGINS"
+
+
+def _allowed_origins() -> list[str]:
+    raw = os.environ.get(ALLOWED_ORIGINS_ENV, "")
+    origins = [o.strip().rstrip("/") for o in raw.split(",") if o.strip()]
+    if "*" in origins:                      # refuse a wildcard, fail CLOSED:
+        return []                           # never emit a permissive policy
+    return origins
 
 
 # --------------------------------------------------------------------------
@@ -71,6 +101,30 @@ EXPECTED_4XX = {
     413: "payload_too_large", 415: "unsupported_media_type",
     422: "validation_error",
 }
+
+
+@app.middleware("http")
+async def cors_headers(request: Request, call_next):
+    """Emit CORS headers ONLY for explicitly allowlisted exact origins.
+
+    No wildcard is ever emitted and credentials are never enabled. When
+    WRITETRACE_ALLOWED_ORIGINS is unset the request is passed through with no
+    CORS headers at all, preserving the same-origin default.
+    """
+    allowed = _allowed_origins()
+    origin = request.headers.get("origin")
+    if allowed and origin and origin.rstrip("/") in allowed:
+        response = await call_next(request)
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Vary"] = "Origin"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "content-type"
+        response.headers["Access-Control-Max-Age"] = "600"
+        return response
+    # Unset allowlist, no Origin header, or a non-allowlisted origin (including
+    # the OPTIONS preflight from such an origin): pass through untouched so the
+    # browser blocks the cross-origin read.
+    return await call_next(request)
 
 
 def _predictor(request: Request):

@@ -20,6 +20,16 @@ function asResponse(value: unknown): AnalyzeResponse {
 export const okResponse = asResponse(raw.ok_response);
 export const abstainResponse = asResponse(raw.abstain_response);
 export const mixedResponse = asResponse(raw.mixed_response);
+/**
+ * Real abstentions whose RAW estimate leans strongly machine-like. The UI must
+ * present an abstention identically in both directions and never as a verdict:
+ * a 23-word casual human note still produces a raw 0.9856 "machine" estimate,
+ * which is exactly why the prominent probability bar must be suppressed.
+ */
+export const abstainHighMachineResponse = asResponse(raw.abstain_high_machine);
+export const abstainExtremeMachineResponse = asResponse(
+  raw.abstain_extreme_machine,
+);
 export const error422 = raw.error_422 as unknown as ErrorResponse;
 export const healthResponse = raw.health as unknown as HealthResponse;
 

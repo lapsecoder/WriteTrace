@@ -15,6 +15,7 @@ import {
   formatProbability,
   labelCopy,
 } from "../lib/format";
+import { isAbstention } from "../lib/render-result";
 import ProbabilityBar from "./ProbabilityBar.astro";
 import SignalList from "./SignalList.astro";
 
@@ -24,9 +25,12 @@ interface Props {
 
 const { result } = Astro.props;
 const copy = labelCopy(result.label);
-const abstained = !result.evidence_sufficient || result.decision === "abstain";
+const abstained = isAbstention(result);
 const mixed = result.mixed_low_confidence;
 const band = result.gate.mixed_band;
+
+const pct = (v: number) =>
+  Number.isFinite(v) ? `${(Math.max(0, Math.min(1, v)) * 100).toFixed(1)}%` : "n/a";
 ---
 
 <article
@@ -93,18 +97,47 @@ const band = result.gate.mixed_band;
   }
 
   <div class="mt-8 grid gap-8 border-t border-rule pt-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
-    <section aria-label="Probability estimate">
-      <ProbabilityBar
-        machine={result.machine_probability}
-        human={result.human_probability}
-        tone={copy.tone}
-      />
+    <section
+      aria-label={abstained
+        ? "Raw model output (not interpretable)"
+        : "Probability estimate"}
+    >
+      {
+        abstained ? (
+          <div class="w-full" data-testid="raw-estimate">
+            <p class="micro">raw model output · not interpretable</p>
+            <p
+              class="mt-1.5 font-display text-[1.75rem] tabular-nums text-graphite"
+              data-testid="raw-machine-output"
+            >
+              {pct(result.machine_probability)}
+            </p>
+            <p class="mt-2 max-w-prose text-[0.8125rem] leading-relaxed text-graphite">
+              This is the model&rsquo;s raw machine-likeness score, reported
+              unchanged for transparency. For an input this short it is not
+              reliable enough to interpret: it is not the probability that the
+              text was machine-generated, and no human-versus-machine comparison
+              is offered here.
+            </p>
+          </div>
+        ) : (
+          <ProbabilityBar
+            machine={result.machine_probability}
+            human={result.human_probability}
+            tone={copy.tone}
+          />
+        )
+      }
 
       <dl class="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3">
         <div>
           <dt class="micro">decision</dt>
           <dd class="mt-1 text-[0.9375rem]" data-testid="decision">
-            {DECISION_COPY[result.decision] ?? result.decision}
+            {
+              abstained
+                ? "No verdict — abstained (below the evidence threshold)"
+                : (DECISION_COPY[result.decision] ?? result.decision)
+            }
           </dd>
         </div>
         <div>

@@ -1,0 +1,35 @@
+# WriteTrace runtime dependencies for Vercel (Phase 6B).
+#
+# Vercel resolves a root `requirements.txt` for the FastAPI function. This file
+# is intentionally MINIMAL: it contains only the packages a cold start must be
+# able to import, verified by AST analysis of the deployed module closure
+# (see docs/experiments/phase6b-vercel-preparation-report.md).
+#
+# Deliberately ABSENT:
+#   pytest, httpx, uvicorn  - dev / local-server only, never imported by the app
+#   torch, transformers     - used ONLY by Phase 2 perplexity training code,
+#                             which is lazily imported inside functions and is
+#                             never reached by the deployed final-v1 model.
+#                             Including them would add multiple GB and breach
+#                             the 500 MB Python bundle limit on its own.
+#   pyarrow                 - lazily imported by the dataset builder only.
+#
+# Versions are the exact set validated in Phases 3-6 (Python 3.13).
+
+fastapi==0.141.1
+pydantic==2.13.5
+starlette==1.7.0
+uvicorn==0.54.0
+numpy==2.5.3
+pandas==3.0.5
+scikit-learn==1.9.0
+scipy==1.18.1
+joblib==1.6.0
+spacy==3.8.16
+
+# spaCy `syntactic_syn` features require the English pipeline at runtime.
+# en_core_web_sm is distributed via GitHub releases, NOT PyPI, so it must be
+# installed from its release URL. Pinned to 3.8.0 (the version validated in
+# Phase 3); the URL was verified reachable (HTTP 200, 12,806,118 bytes) on
+# 2026-10-10 during Phase 6B.
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl

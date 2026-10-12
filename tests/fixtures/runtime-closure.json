@@ -1,0 +1,53 @@
+{
+ "_method": "Computed from the live source by AST closure over app.py, including imports inside function bodies, plus package __init__.py files. Regenerate with scripts/p6d2_closure.py logic.",
+ "modules": [
+  "app.py",
+  "backend/__init__.py",
+  "backend/app.py",
+  "backend/schemas.py",
+  "ml/__init__.py",
+  "ml/configs/phase1.py",
+  "ml/data/__init__.py",
+  "ml/data/download.py",
+  "ml/evaluation/__init__.py",
+  "ml/evaluation/calibration.py",
+  "ml/evaluation/metrics.py",
+  "ml/experiments/__init__.py",
+  "ml/experiments/phase2.py",
+  "ml/experiments/phase3.py",
+  "ml/explain.py",
+  "ml/features/__init__.py",
+  "ml/features/extract.py",
+  "ml/features/lexicons.py",
+  "ml/features/syntactic.py",
+  "ml/inference.py",
+  "ml/preprocessing/__init__.py",
+  "ml/preprocessing/build_dataset.py",
+  "ml/preprocessing/dedup.py",
+  "ml/preprocessing/minhash.py",
+  "ml/preprocessing/normalize.py",
+  "ml/preprocessing/split.py",
+  "ml/segmentation.py",
+  "ml/training/__init__.py",
+  "ml/training/train.py"
+ ],
+ "final_v1": [
+  "ml/models/final-v1/calibration.json",
+  "ml/models/final-v1/calibrator.joblib",
+  "ml/models/final-v1/config.json",
+  "ml/models/final-v1/feature_state.joblib",
+  "ml/models/final-v1/features.json",
+  "ml/models/final-v1/gate.json",
+  "ml/models/final-v1/importance.json",
+  "ml/models/final-v1/manifest.json",
+  "ml/models/final-v1/model.joblib",
+  "ml/models/final-v1/reference.json"
+ ],
+ "configs": [
+  "ml/configs/phase1.json",
+  "ml/configs/phase2.json",
+  "ml/configs/phase3.json",
+  "ml/configs/phase5a.json",
+  "ml/configs/phase5a_segments.json"
+ ]
+}

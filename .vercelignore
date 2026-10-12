@@ -1,0 +1,46 @@
+# Files that must NOT be uploaded to Vercel.
+# Vercel CLI respects .gitignore; .vercelignore additionally controls what is
+# uploaded. Datasets and model caches are excluded here so a deployment can
+# never depend on multi-GB local artifacts (and never ships them by mistake).
+
+# --- datasets (multi-GB, license-restricted, reproducible via scripts) ---
+ml/data/raw/
+ml/data/processed/
+ml/data/manifests/
+ml/evaluation/runs/
+
+# --- research-only models (NOT used by the deployed final-v1 model) ---
+ml/models/segments-v1/
+ml/models/baseline-v1/
+ml/experiments/phase2/cache/
+ml/experiments/phase3/cache/
+ml/experiments/phase5a/cache/
+ml/experiments/phase2/models/
+ml/experiments/phase3/models/
+
+# --- caches / build artifacts ---
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+node_modules/
+dist/
+.astro/
+.venv/
+venv/
+
+# --- local secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Vercel CLI local state (holds projectId/orgId link metadata) ---
+.vercel/
+
+# --- local measurement logs and editor/OS noise ---
+logs/
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

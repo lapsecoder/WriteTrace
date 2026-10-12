@@ -102,9 +102,48 @@ function probabilityBlock(r: AnalyzeResponse, tone: string): string {
     </div>`;
 }
 
+/**
+ * True when the backend declined to read the text.
+ *
+ * Covers every signal the v1 contract can use: the explicit flag, an `abstain`
+ * decision, and the response status. Treating an abstention as a verdict is the
+ * failure this guards against, so the check is deliberately broad.
+ */
+export function isAbstention(r: AnalyzeResponse): boolean {
+  return (
+    !r.evidence_sufficient ||
+    r.decision === "abstain" ||
+    r.status === "insufficient_evidence"
+  );
+}
+
+/**
+ * Abstained readings replace the prominent human-vs-machine bar.
+ *
+ * The raw score is still shown — the backend deliberately returns it "for
+ * transparency" — but as an explicitly de-emphasised, non-comparative figure.
+ * A two-segment bar with large coloured percentages reads as a conclusion even
+ * when the stamp says "no verdict", and short inputs can produce extreme raw
+ * values (a 23-word casual note measured 0.9856 machine-like), so presenting it
+ * as a reading would be actively misleading.
+ */
+function rawEstimateBlock(r: AnalyzeResponse): string {
+  return `
+    <div class="w-full" data-testid="raw-estimate">
+      <p class="micro">raw model output · not interpretable</p>
+      <p class="mt-1.5 font-display text-[1.75rem] tabular-nums text-graphite" data-testid="raw-machine-output">${pct(r.machine_probability)}</p>
+      <p class="mt-2 max-w-prose text-[0.8125rem] leading-relaxed text-graphite">
+        This is the model's raw machine-likeness score, reported unchanged for
+        transparency. For an input this short it is not reliable enough to
+        interpret: it is not the probability that the text was machine-generated,
+        and no human-versus-machine comparison is offered here.
+      </p>
+    </div>`;
+}
+
 export function renderResultHtml(r: AnalyzeResponse): string {
   const copy = labelCopy(r.label);
-  const abstained = !r.evidence_sufficient || r.decision === "abstain";
+  const abstained = isAbstention(r);
   const mixed = r.mixed_low_confidence;
 
   const stamp = abstained
@@ -170,10 +209,14 @@ export function renderResultHtml(r: AnalyzeResponse): string {
       ${insufficient}
       ${mixedNote}
       <div class="mt-8 grid gap-8 border-t border-rule pt-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
-        <section aria-label="Probability estimate">
-          ${probabilityBlock(r, copy.tone)}
+        <section aria-label="${abstained ? "Raw model output (not interpretable)" : "Probability estimate"}">
+          ${
+            abstained
+              ? rawEstimateBlock(r)
+              : probabilityBlock(r, copy.tone)
+          }
           <dl class="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3">
-            <div><dt class="micro">decision</dt><dd class="mt-1 text-[0.9375rem]" data-testid="decision">${escapeHtml(DECISION_COPY[r.decision] ?? r.decision)}</dd></div>
+            <div><dt class="micro">decision</dt><dd class="mt-1 text-[0.9375rem]" data-testid="decision">${escapeHtml(abstained ? "No verdict — abstained (below the evidence threshold)" : DECISION_COPY[r.decision] ?? r.decision)}</dd></div>
             <div><dt class="micro">confidence</dt><dd class="mt-1 text-[0.9375rem]" data-testid="confidence">${escapeHtml(confidenceCell)}</dd></div>
             <div><dt class="micro">words</dt><dd class="mt-1 text-[0.9375rem] tabular-nums" data-testid="word-count">${formatCount(r.word_count)}</dd></div>
             <div><dt class="micro">characters</dt><dd class="mt-1 text-[0.9375rem] tabular-nums">${formatCount(r.text_length.characters)}</dd></div>

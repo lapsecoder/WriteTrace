@@ -299,6 +299,8 @@ import Disclaimer from "../components/Disclaimer.astro";
         status,
         results,
         error: errorBox,
+        errorMessage,
+        errorDetail,
         example: document.getElementById("load-example") as HTMLButtonElement,
         clear: document.getElementById("clear-text") as HTMLButtonElement,
       },
@@ -311,17 +313,15 @@ import Disclaimer from "../components/Disclaimer.astro";
       },
     );
 
-    // Render into the mount point whenever the controller reaches a terminal
-    // state; failure states surface the backend's own message.
+    // Render results into the mount point when the controller reaches a
+    // terminal state. The error box is NOT handled here: the controller owns
+    // its message/detail text, and doing it in both places left the page
+    // writing into nodes the controller had already detached (defect D1).
     const render = () => {
       const state = workspace.currentState;
       if (state.kind === "done") {
         results.innerHTML = "";
         results.appendChild(renderResult(state.result));
-      } else if (state.kind === "failed") {
-        errorMessage.textContent = state.message;
-        errorDetail.textContent = state.detail ?? "";
-        errorDetail.hidden = !state.detail;
       }
     };
 

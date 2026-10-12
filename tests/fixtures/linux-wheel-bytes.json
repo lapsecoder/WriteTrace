@@ -1,0 +1,18 @@
+{
+ "_method": "Real `pip download --platform manylinux_2_28_x86_64 --python-version 3.13 --only-binary :all:` of every pin in requirements.txt, measured on disk. Phase 6C/6D.2.",
+ "count": 11,
+ "bytes": 121081817,
+ "per_package_bytes": {
+  "fastapi": 131954,
+  "joblib": 306115,
+  "numpy": 16708577,
+  "pandas": 10938525,
+  "pydantic": 472589,
+  "scikit_learn": 9087723,
+  "scipy": 35312578,
+  "spacy": 35151231,
+  "spacy_model_url": 12806118,
+  "starlette": 78980,
+  "uvicorn": 87427
+ }
+}

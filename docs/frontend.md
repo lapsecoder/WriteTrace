@@ -40,8 +40,28 @@ the backend actually returns.
 
 | Variable | Scope | Default | Meaning |
 | -------- | ----- | ------- | ------- |
-| `PUBLIC_WRITETRACE_API_BASE` | build-time (client-visible) | `/api` | Backend base URL. `/api` uses the same-origin dev/preview proxy; set e.g. `http://127.0.0.1:8000` to call the backend directly. |
+| `PUBLIC_WRITETRACE_API_BASE` | build-time (client-visible) | *(unset → same-origin)* | Backend **origin**. Endpoint paths are always the full `/api/v1/...`, so the default request is `/api/v1/analyze`. A trailing `/api` is accepted and normalised away, so `/api`, `""` and unset are equivalent. Set e.g. `http://127.0.0.1:8000` to call a backend on another origin. |
 | `WRITETRACE_BACKEND_ORIGIN` | dev/preview server only | `http://127.0.0.1:8000` | Target the local `/api` proxy forwards to. |
+
+### URL composition
+
+One rule: **the endpoint path is always the full `/api/v1/...` path and
+`PUBLIC_WRITETRACE_API_BASE` is the origin it is appended to.** A trailing
+`/api` on the base is stripped, so the `/api` segment can never be duplicated
+(this previously produced `/api/api/v1/...`, which 404s).
+
+| `PUBLIC_WRITETRACE_API_BASE` | Resulting request |
+| ---------------------------- | ----------------- |
+| *(unset)*                    | `/api/v1/analyze` |
+| `""`                         | `/api/v1/analyze` |
+| `/api`                       | `/api/v1/analyze` |
+| `http://127.0.0.1:8000`      | `http://127.0.0.1:8000/api/v1/analyze` |
+| `http://127.0.0.1:8000/api`  | `http://127.0.0.1:8000/api/v1/analyze` |
+
+Both supported deployments share these path semantics: the Astro dev/preview
+proxy forwards `/api/v1/x` to the backend **without** stripping the prefix, and
+a same-origin host routes `/api/v1/x` to the API alongside the static site.
+No deployment URL is ever hardcoded in the client bundle.
 
 No secret is required or exposed: the frontend is a static page and the backend
 is local, unauthenticated and stateless.

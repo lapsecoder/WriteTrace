@@ -5,11 +5,28 @@
  * every failure mode into a typed `ApiError`. It performs **no inference of
  * its own** and never fabricates a result.
  *
- * Base URL resolution:
- *  - `PUBLIC_WRITETRACE_API_BASE` at build time (Astro exposes PUBLIC_* to the
- *    client bundle), e.g. "http://127.0.0.1:8000".
- *  - Falls back to the same-origin "/api" path, which `astro.config.mjs`
- *    proxies to the local backend during development.
+ * Base URL resolution
+ * --------------------
+ * One rule, applied everywhere:
+ *
+ *   **endpoint paths are always the full `/api/v1/...` path, and
+ *   `PUBLIC_WRITETRACE_API_BASE` is the ORIGIN they are appended to.**
+ *
+ * The origin defaults to empty, meaning "same origin as this page", so the
+ * default request is `/api/v1/analyze`. An explicitly supplied `/api` suffix
+ * is tolerated and normalised away, so `/api`, `""` and an unset variable all
+ * resolve to the same URLs and the `/api` segment can never be duplicated
+ * (it previously produced `/api/api/v1/...`, which 404s).
+ *
+ * Both supported deployments agree on this path semantics:
+ *   - local dev/preview: `astro.config.mjs` proxies `/api` to the local
+ *     FastAPI server WITHOUT stripping the prefix, so `/api/v1/analyze`
+ *     arrives at the backend as `/api/v1/analyze`;
+ *   - same-origin hosting: the request stays on the page's own origin and is
+ *     routed to the API alongside the static site.
+ *
+ * A separate backend origin (e.g. "http://127.0.0.1:8000") is still supported
+ * and simply prefixes the same paths; no deployment URL is ever hardcoded.
  */
 import {
   ApiError,
@@ -20,12 +37,41 @@ import {
   type InfoResponse,
 } from "./types";
 
-export const API_BASE: string = (
-  import.meta.env?.PUBLIC_WRITETRACE_API_BASE ?? "/api"
-).replace(/\/+$/, "");
+/**
+ * Normalise a configured base into a pure origin prefix.
+ *
+ * Strips trailing slashes and tolerates an explicit trailing `/api`, which is
+ * what makes `/api`, `""` and an unset variable equivalent. Idempotent.
+ */
+export function normalizeApiBase(base: string): string {
+  const trimmed = base.trim();
+  // Preserve the scheme separator ("http://") while collapsing any other
+  // run of slashes, so redundant input like "//api//" normalises cleanly.
+  const scheme = trimmed.match(/^([a-z][a-z0-9+.-]*:\/\/)(.*)$/i);
+  const prefix = scheme ? scheme[1]! : "";
+  const rest = scheme ? scheme[2]! : trimmed;
+  return `${prefix}${rest.replace(/\/{2,}/g, "/").replace(/\/+$/, "")}`
+    .replace(/\/api$/i, "");
+}
 
-function joinUrl(path: string): string {
-  return `${API_BASE}${path}`;
+/**
+ * The configured API origin. Empty by default, meaning same-origin, which
+ * yields `/api/v1/...` requests.
+ */
+export const API_BASE: string = normalizeApiBase(
+  import.meta.env?.PUBLIC_WRITETRACE_API_BASE ?? "",
+);
+
+/**
+ * Compose the final request URL for an endpoint `path`.
+ *
+ * `path` is always a full `/api/v1/...` path. Exported so the composition rule
+ * can be tested directly against every supported configuration, independently
+ * of the build-time value baked into `API_BASE`.
+ */
+export function resolveApiUrl(path: string, base: string = API_BASE): string {
+  const suffix = path.startsWith("/") ? path : `/${path}`;
+  return `${normalizeApiBase(base)}${suffix}`;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -79,7 +125,7 @@ async function request<T>(
 ): Promise<T> {
   let response: Response;
   try {
-    response = await fetch(joinUrl(path), {
+    response = await fetch(resolveApiUrl(path), {
       ...init,
       headers: {
         "content-type": "application/json",
@@ -91,7 +137,7 @@ async function request<T>(
     // Deliberately does NOT include the submitted text in the message.
     throw new ApiError(
       "Could not reach the WriteTrace backend. Make sure it is running " +
-        `(expected ${joinUrl("/api/v1/health")}).`,
+        `(expected ${resolveApiUrl("/api/v1/health")}).`,
       "network",
     );
   }

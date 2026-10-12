@@ -147,12 +147,30 @@
     border-color: var(--color-rule-strong);
   }
 
-  .field:focus {
-    background: #fffdf8;
-    border-color: var(--color-seal);
-    box-shadow: 0 0 0 3px rgba(140, 47, 38, 0.08);
-    outline: none;
-  }
+.field:focus {
+          background: #fffdf8;
+          border-color: var(--color-seal);
+          /*
+           * Phase 6C defect D2: the old indicator was a 3px ring at 8% opacity
+           * with `outline: none`, which is effectively invisible on the paper
+           * background and left the primary editor with no keyboard focus cue.
+           * It now uses the SAME solid 2px seal outline as every other
+           * interactive control (see the global :focus-visible rule), with the
+           * offset so the ring does not sit on the border.
+           */
+          outline: 2px solid var(--color-seal);
+          outline-offset: 2px;
+          box-shadow: none;
+        }
+
+        /*
+         * Keep a strong indicator for pointer focus too, but only when the user
+         * is not driving by keyboard: :focus-visible already covers keyboard,
+         * and an always-on outline would add a ring to every mouse click.
+         */
+        .field:focus:not(:focus-visible) {
+          outline-color: var(--color-rule-strong);
+        }
 
   .field[readonly] {
     background: #f6f2e8;
